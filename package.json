@@ -1,0 +1,20 @@
+{
+  "name": "caminio-rocksol",
+  "description": "static website builder gear for caminio",
+  "version": "0.0.1",
+  "private": true,
+  "author": "quaqua <quaqua@tastenwerk.com>",
+  "keywords": [
+    "caminio",
+    "website builder",
+    "static site",
+    "generator"
+  ],
+  "dependencies": {
+    "caminio": "~1.99.1",
+    "caminio-auth": "~0.0.1",
+    "grunt": "~0.4.2"
+  },
+  "main": "index.js",
+  "license": "MIT"
+}

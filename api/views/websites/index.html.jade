@@ -1,0 +1,32 @@
+extends ../../../../caminio-ui/api/views/layouts/application
+
+append head
+  if env === 'production'
+    link( rel='stylesheet', href='/stylesheets/caminio-rocksol.min.css' )
+  else
+    link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
+
+append foot
+  if env === 'production'
+    script(type='text/javascript', src='/javascripts/caminio-rocksol.min.js')
+  else
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/locales/#{i18n.locale()}.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/router.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/models/webpage.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_controller.js')
+
+block content
+
+  aside#notifications.notifications
+    
+  script(type="text/x-handlebars")
+    include hbs/app.hbs
+    
+  script(type="text/x-handlebars" data-template-name="webpages/index")
+    include hbs/webpages/index.hbs
+
+  // partial
+  script(type="text/x-handlebars" data-template-name="webpages/tree")
+    include hbs/webpages/_tree.hbs
+  script(type="text/x-handlebars" data-template-name="webpages/details")
+    include hbs/webpages/_details.hbs

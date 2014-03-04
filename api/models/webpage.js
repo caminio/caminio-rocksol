@@ -1,14 +1,13 @@
 /**
  *
- * @class Pebble
+ * @class Webpage
  *
  */
  
-module.exports = function Pebble( caminio, mongoose ){
-
-  var Translation = require('./_sub/translation')( caminio, mongoose );
+module.exports = function Webpage( caminio, mongoose ){
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
+  var Translation = require('./_sub/translation')( caminio, mongoose );
 
   var schema = new mongoose.Schema({
 
@@ -23,12 +22,33 @@ module.exports = function Pebble( caminio, mongoose ){
      * @type Array an array of Translation Schema Objects
      */
     translations: [ Translation ],
-    
+
+    /**
+     * @property published
+     * @type Boolean
+     */
+    status: { type: String, default: 'draft' },
+
+    /**
+     * @property requestReviewBy
+     * @type ObjectId
+     */
+    requestReviewBy: { type: ObjectId, ref: 'User' },
+
     /**
      *  @attribute camDomain
      *  @type ObjectId
      */
     camDomain: { type: ObjectId, ref: 'Domain' },
+    
+    layout: { type: String, public: true },
+
+    /**
+     * pebbles are tiny bits with content
+     * which are placed and dispatched all over
+     * the webpage's layout
+     */
+    pebbles: [ { type: ObjectId, ref: 'Pebble' } ],
 
     /**
      * @property createdAt

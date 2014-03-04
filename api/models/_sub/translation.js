@@ -30,10 +30,22 @@ module.exports = function Translation( caminio, mongoose ){
      * @property content
      * @type String
      */  
-    content: String
+    content: String,
+
+    /**
+     * @property metaDescription
+     * @type String
+     */
+    metaDescription: String,
+
+    /**
+     * @property metaKeywords
+     * @type String
+     */
+    metaKeywords: String
 
   });
 
   return schema;
 
-}
+};

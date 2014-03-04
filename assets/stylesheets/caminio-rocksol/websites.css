@@ -1,0 +1,15 @@
+.webpages-tree .locales{
+  visibility: hidden;
+}
+.webpages-tree .item-container:hover .locales{
+  visibility: visible;
+}
+.mini-title .close{
+  float: right;
+  margin: -12px -5px 0 0;
+}
+.mini-title .save{
+  float: right;
+  margin: -12px 5px 0 0; 
+  padding: 5px 15px 6px;
+}

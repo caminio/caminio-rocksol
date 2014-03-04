@@ -1,0 +1,22 @@
+<h4 class="mini-title">{{t 'webpages.list'}}</h4>
+
+<ol class="caminio-tree webpages-tree">
+  {{#each rootWebpages}}
+    <li>
+      <div class="item-container"
+        {{bind-attr data-id='id'}}
+        {{action 'webpageDetails' this}}>
+        <i class="fa fa-file-text webpage-icon"></i>
+        <span class="move">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </span>
+        <span class="title" {{bind-attr title='name'}}>{{name}}</span>
+        <span class="locales desc">
+          {{usedLocales}}
+        </span>
+      </div>
+    </li>
+  {{/each}}
+
+</ol>

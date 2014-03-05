@@ -27,13 +27,19 @@ module.exports = function Webpage( caminio, mongoose ){
      * @property published
      * @type Boolean
      */
-    status: { type: String, default: 'draft' },
+    status: { type: String, default: 'draft', public: true },
 
     /**
      * @property requestReviewBy
      * @type ObjectId
      */
-    requestReviewBy: { type: ObjectId, ref: 'User' },
+    requestReviewBy: { type: ObjectId, ref: 'User', public: true },
+
+    /*
+     * @property requestReviewMsg
+     * @type String
+     */
+    requestReviewMsg: { type: String, public: true },
 
     /**
      *  @attribute camDomain
@@ -41,7 +47,7 @@ module.exports = function Webpage( caminio, mongoose ){
      */
     camDomain: { type: ObjectId, ref: 'Domain' },
     
-    layout: { type: String, public: true },
+    layout: { type: String, public: true, default: 'default' },
 
     /**
      * pebbles are tiny bits with content
@@ -59,8 +65,8 @@ module.exports = function Webpage( caminio, mongoose ){
      * @property createdBy
      * @type ObjectId
      */
-    createdAt: { type: Date, default: Date.now },
-    createdBy: { type: ObjectId, ref: 'User' },
+    createdAt: { type: Date, default: Date.now, public: true },
+    createdBy: { type: ObjectId, ref: 'User', public: true },
 
     /**
      * @property updatedAt
@@ -71,10 +77,12 @@ module.exports = function Webpage( caminio, mongoose ){
      * @property updatedBy
      * @type ObjectId
      */
-    updatedAt: { type: Date, default: Date.now },
-    updatedBy: { type: ObjectId, ref: 'User' }
+    updatedAt: { type: Date, default: Date.now, public: true },
+    updatedBy: { type: ObjectId, ref: 'User', public: true }
 
   });
+  
+  schema.publicAttributes = [ 'translations', 'pebbles' ];
 
   return schema;
 

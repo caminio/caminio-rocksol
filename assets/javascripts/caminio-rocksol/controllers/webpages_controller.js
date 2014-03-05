@@ -17,11 +17,19 @@
     setupController: function( controller, model ){
       if( webpages )
         return;
+      
       this.store.find('webpage').then( function( _webpages ){
         webpages = _webpages;
         controller.set('webpages',webpages);
         controller.set('rootWebpages', webpages);
       });
+
+
+    $.getJSON('/caminio/website/available_layouts', function(response){
+      controller.set('availableLayouts', response);
+    });
+
+
     }
   });
 
@@ -39,11 +47,6 @@
       return ('lang' in this.get('errors'));
     }.property('errors'),
 
-    publishStatuses: [
-      { id: 'published', text: Em.I18n.t('published') },
-      { id: 'draft', text: Em.I18n.t('draft') }
-    ],
-
     isDraft: function(){
       return this.get('curWebpage.status') === 'draft';
     }.property('curWebpage.status'),
@@ -55,6 +58,12 @@
     inReview: function(){
       return this.get('curWebpage.status') === 'review';
     }.property('curWebpage.status'),
+
+    noWebpage: function(){
+      if( this.get('rootWebpages') )
+        return this.get('rootWebpages').content.length < 1;
+      return true;
+    }.property('rootWebpages'),
 
     actions: {
 
@@ -81,9 +90,48 @@
 
       'setState': function( state ){
         this.get('curWebpage').set('status', state );
+        if( this.get('curWebpage.status') !== 'review' ){
+          this.get('curWebpage').set('requestReviewMsg','');
+          this.get('curWebpage').set('requestReviewBy',null);
+        }
+      },
+
+      'cancelClose': function(){
+        var self = this;
+        var webpage = this.get('curWebpage');
+
+        if( this.get('curWebpage.isDirty') )
+          bootbox.confirm( Em.I18n.t('unsaved_data_continue'), function(result){
+            if( result )
+              restoreWebpage( webpage, self );
+          });
+        else
+          restoreWebpage( webpage, this );
+      },
+
+      'removeWebpage': function(){
+        var self = this;
+        var webpage = this.get('curWebpage');
+        bootbox.confirm( Em.I18n.t('webpage.really_delete', {name: webpage.get('name') }), function(result){
+          if( result ){
+            webpage.deleteRecord();
+            webpage.save().then( function(){
+              notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('name') }) );
+              self.set('curWebpage',null);
+            });
+          }
+        });
       }
 
     }
   });
+
+  function restoreWebpage( webpage, controller ){
+
+    $('.webpages-tree .active').removeClass('active');
+    webpage.rollback();
+    controller.set('curWebpage',null);
+
+  }
 
 }).call();

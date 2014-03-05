@@ -13,3 +13,11 @@
   margin: -12px 5px 0 0; 
   padding: 5px 15px 6px;
 }
+.webpages-tree .btn.status-indicator{
+  border: none;
+  float: left;
+  height: 2.3em;
+  margin: -5px 0 0 -5px;
+  padding: 0;
+  width: 5px;
+}

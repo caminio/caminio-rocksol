@@ -1,8 +1,8 @@
 {{#if curWebpage}}
 
   <h4 class="mini-title">
-    <span class="btn pale close"><i class="fa fa-times"></i></span>
-    <button class="save btn primary icon-text"><i class="fa fa-save"></i> {{t 'save'}}</button>
+    <span class="btn pale close" {{action cancelClose}}><i class="fa fa-times"></i></span>
+    <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}><i class="fa fa-save"></i> {{t 'save'}}</button>
     {{t 'webpage.properties_of'}}
     <strong>{{curWebpage.name}}</strong>
   </h4>
@@ -26,6 +26,12 @@
         <label for="example-text-input">{{t 'webpage.status'}}</label>
         <br>
 
+        <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right">
+          <i class="fa fa-trash-o"></i>
+          <span>{{t 'delete'}}</span>
+        </button>
+
+
         <button {{action setState 'published'}} 
                 {{bind-attr class=":btn :pale isPublished:success"}}>{{t 'webpage.published'}}</button>
         <button {{action setState 'draft'}} 
@@ -33,35 +39,44 @@
         <button {{action setState 'review'}} 
                 {{bind-attr class=":btn :pale inReview:warning"}}>{{t 'webpage.review'}}</button>
 
-{{!-- 
-        {{view Ember.Select
-               content=publishStatuses
-               optionValuePath='content.id'
-               optionLabelPath='content.text'
-               value=curWebpage.status
-        }} --}}
-
       </div>
+
+      {{#if inReview}}
+        <fieldset class="with-border">
+          <legend>{{t 'webpage.request_review'}}</legend>
+          <div class="form-group">
+
+            <label for="example-text-input">{{t 'webpage.assign_to'}}</label>
+            <div>
+              {{input valueBinding='curWebpage.requestReviewBy.fullname' class='form-control'}}
+            </div>
+          </div>
+
+          <div class="form-group">        
+            <label for="example-text-input">{{t 'webpage.review_message'}}</label>
+            <div>
+              {{textarea valueBinding='curWebpage.requestReviewMsg' class='form-control'}}
+            </div>
+
+          </div>
+        </fieldset>
+      {{/if}}
 
       <div class="form-group">
 
-        <label for="example-text-input">{{t 'webpage.request_review'}}</label>
-        <div>
-          {{input valueBinding='curWebpage.requestReviewBy.fullname' class='form-control'}}
-        </div>
-        
+        <label for="example-text-input">{{t 'webpage.layout'}}</label>
+        <br>
+
+
+        {{view Ember.Select
+               content=availableLayouts
+               value=curWebpage.layout
+        }}
+
       </div>
       
     </form>
 
-    <div class="form-group">
-
-      <label for="example-text-input">{{t 'webpage.request_review'}}</label>
-      <div>
-        {{input valueBinding='curWebpage.requestReviewBy.fullname' class='form-control'}}
-      </div>
-      
-    </div>
 
   </div>
 
@@ -69,7 +84,13 @@
 
   <div class="empty-exp">
     <i class="fa fa-info-circle large block"></i>
-    {{t webpage.select_webpage_to_show_info}}
+    {{#if noWebpage}}
+      {{t webpage.no_webpage_yet}}
+      <br>
+      <a href="#" {{action promptNewWebpage}}>{{t 'webpage.create_new'}}</a>
+    {{else}}
+      {{t webpage.select_webpage_to_show_info}}
+    {{/if}}
   </div>
 
 {{/if}}

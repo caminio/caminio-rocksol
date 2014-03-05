@@ -17,11 +17,18 @@
     'webpage.select_webpage_to_show_info': 'Select a webpage to show it\'s info',
 
     'webpage.properties_of': 'Properties of',
-    'webpage.request_review': 'Request review',
     'webpage.status': 'Publishing status',
     'webpage.published': 'Published',
     'webpage.draft': 'Draft',
     'webpage.review': 'Review',
+    'webpage.no_webpage_yet': 'There is no webpage here yet. Go ahead and',
+    'webpage.create_new': 'create a new one',
+    'webpage.assign_to': 'Assign to',
+    'webpage.request_review': 'Review request settings',
+    'webpage.review_message': 'Notes for reviewer',
+    'webpage.layout': 'Layout',
+    'webpage.really_delete': 'Really delete {{name}}?',
+    'webpage.deleted': 'Webpage {{name}} has been deleted',
 
     'translation.no': 'No languages',
 

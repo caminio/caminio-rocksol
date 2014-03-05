@@ -6,6 +6,7 @@
       <div class="item-container"
         {{bind-attr data-id='id'}}
         {{action 'webpageDetails' this}}>
+        <span {{bind-attr class=":status-indicator :btn isPublished:success isDraft:primary inReview:warning"}}></span>
         <i class="fa fa-file-text webpage-icon"></i>
         <span class="move">
           <span class="icon-bar"></span>

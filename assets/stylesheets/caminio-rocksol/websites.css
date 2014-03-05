@@ -6,11 +6,11 @@
 }
 .mini-title .close{
   float: right;
-  margin: -12px -5px 0 0;
+  margin: -10px -5px 0 0;
 }
 .mini-title .save{
   float: right;
-  margin: -12px 5px 0 0; 
+  margin: -10px 5px 0 0; 
   padding: 5px 15px 6px;
 }
 .webpages-tree .btn.status-indicator{

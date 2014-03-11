@@ -4,6 +4,7 @@ append head
   if env === 'production'
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol.min.css' )
   else
+    link( rel='stylesheet', href='/stylesheets/3rdparty/ghostdown.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
 
 append foot
@@ -14,6 +15,10 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/router.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/models/webpage.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_controller.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
+    script(type='text/javascript', src='/javascripts/3rdparty/ghostdown.js')
+    script(type='text/javascript', src='/javascripts/3rdparty/jquery.ghostdown.js')
+
 
 block content
 
@@ -24,6 +29,9 @@ block content
     
   script(type="text/x-handlebars" data-template-name="webpages/index")
     include hbs/webpages/index.hbs
+
+  script(type="text/x-handlebars" data-template-name="webpages/edit")
+    include hbs/webpages/edit.hbs
 
   // partial
   script(type="text/x-handlebars" data-template-name="webpages/tree")

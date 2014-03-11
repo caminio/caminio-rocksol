@@ -3,6 +3,7 @@
   <h4 class="mini-title">
     <span class="btn pale close" {{action cancelClose}}><i class="fa fa-times"></i></span>
     <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}><i class="fa fa-save"></i> {{t 'save'}}</button>
+    <button {{bind-attr class=":save :btn :icon-text"}} {{action editWebpage curWebpage}}><i class="fa fa-pencil"></i> {{t 'edit'}}</button>
     {{t 'webpage.properties_of'}}
     <strong>{{curWebpage.name}}</strong>
   </h4>

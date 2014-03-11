@@ -67,6 +67,10 @@
 
     actions: {
 
+      'editWebpage': function( webpage ){
+        this.transitionToRoute( 'webpages.edit', webpage.id );
+      },
+
       'promptNewWebpage': function(){
         var self = this;
         bootbox.prompt( Em.I18n.t('webpage.enter_name'), function(result) { 

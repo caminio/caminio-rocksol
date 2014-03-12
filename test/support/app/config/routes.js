@@ -1,0 +1,8 @@
+/*
+ * routes
+ *
+ */
+
+module.exports.routes = {
+
+}

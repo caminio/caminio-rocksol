@@ -1,10 +1,10 @@
 /*
- * caminio-contacts
+ * caminio-rocksol
  *
  * @author david <david.reinisch@tastenwerk.com>
- * @date 02/2014
+ * @date 03/2014
  * @copyright TASTENWERK http://tastenwerk.com
- * @license comercial
+ * @license MIT
  *
  */
 

@@ -1,10 +1,10 @@
 /*
- * caminio-contacts
+ * caminio-rocksol
  *
  * @author david <david.reinisch@tastenwerk.com>
- * @date 02/2014
+ * @date 03/2014
  * @copyright TASTENWERK http://tastenwerk.com
- * @license comercial
+ * @license MIT
  *
  */
 
@@ -12,12 +12,12 @@
  * caminio test helper
  */
 
-var superagent = require('superagent')
-  , async = require('async');
+var superagent = require('superagent'),
+    async = require('async');
 
 var helper = {};
 
-process.env['NODE_ENV'] = 'test';
+process.env.NODE_ENV = 'test';
 
 helper.fixtures = require('caminio-fixtures');
 helper.fixtures.readFixtures();
@@ -65,6 +65,17 @@ helper.cleanup = function( caminio, done ){
   async.each( Object.keys(caminio.models), function( modelId, next ){
     caminio.models[modelId].remove({}, next);
   }, done );
+};
+
+helper.getDomainAndUser = function( caminio, done ){
+  caminio.models.User.create({ email: 'test@example.com', password: 'test' }, 
+  function( err, u ){ 
+    caminio.models.Domain.create( { name: 'test.com', owner: u, users: u }, 
+    function( err, d ){
+      u.camDomains = d;
+      u.save( done( err, u, d ));
+    });
+  });
 };
 
 module.exports = helper;

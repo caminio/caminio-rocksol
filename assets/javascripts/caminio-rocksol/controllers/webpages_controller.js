@@ -100,6 +100,19 @@
         }
       },
 
+      'saveWebpage': function( webpage ){
+        var controller = this;
+        webpage
+          .save()
+          .then( function(){
+            notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
+            controller.set('curWebpage',null);
+          })
+          .catch( function(err){
+            notify('error',err);
+          });
+      },
+
       'cancelClose': function(){
         var self = this;
         var webpage = this.get('curWebpage');

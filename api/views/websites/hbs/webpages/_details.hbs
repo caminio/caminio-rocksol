@@ -1,85 +1,90 @@
 {{#if curWebpage}}
 
-  <h4 class="mini-title">
-    <span class="btn pale close" {{action cancelClose}}><i class="fa fa-times"></i></span>
-    <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}><i class="fa fa-save"></i> {{t 'save'}}</button>
-    <button {{bind-attr class=":save :btn :icon-text"}} {{action editWebpage curWebpage}}><i class="fa fa-pencil"></i> {{t 'edit'}}</button>
-    {{t 'webpage.properties_of'}}
-    <strong>{{curWebpage.name}}</strong>
-  </h4>
+  <form>
+  
+    <h4 class="mini-title">
+      <span class="btn pale close" {{action cancelClose}}><i class="fa fa-times"></i></span>
+      <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}
+              {{action saveWebpage curWebpage}}><i class="fa fa-save"></i> {{t 'save'}}</button>
+      <button {{bind-attr class=":save :btn :icon-text"}} {{action editWebpage curWebpage}}><i class="fa fa-pencil"></i> {{t 'edit'}}</button>
 
-  <div class="clearfix">
+      {{t 'webpage.properties_of'}}
+      <strong>{{curWebpage.name}}</strong>
+    </h4>
 
-    <form class="caminio col-md-12">
+    <div class="clearfix">
 
-      <div class="form-group">
+      <div class="caminio col-md-12">
 
-        <label for="example-text-input">{{t 'name'}}</label>
-        <div {{bind-attr class="nameError:field-with-error"}}>
-          {{input valueBinding='curWebpage.name' class='form-control'}}
-          {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
+        <div class="form-group">
+
+          <label for="example-text-input">{{t 'name'}}</label>
+          <div {{bind-attr class="nameError:field-with-error"}}>
+            {{input valueBinding='curWebpage.name' class='form-control'}}
+            {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
+          </div>
+
         </div>
 
-      </div>
+        <div class="form-group">
 
-      <div class="form-group">
+          <label for="example-text-input">{{t 'webpage.status'}}</label>
+          <br>
 
-        <label for="example-text-input">{{t 'webpage.status'}}</label>
-        <br>
-
-        <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right">
-          <i class="fa fa-trash-o"></i>
-          <span>{{t 'delete'}}</span>
-        </button>
+          <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right">
+            <i class="fa fa-trash-o"></i>
+            <span>{{t 'delete'}}</span>
+          </button>
 
 
-        <button {{action setState 'published'}} 
-                {{bind-attr class=":btn :pale isPublished:success"}}>{{t 'webpage.published'}}</button>
-        <button {{action setState 'draft'}} 
-                {{bind-attr class=":btn :pale isDraft:primary"}}>{{t 'webpage.draft'}}</button>
-        <button {{action setState 'review'}} 
-                {{bind-attr class=":btn :pale inReview:warning"}}>{{t 'webpage.review'}}</button>
+          <button {{action setState 'published'}} 
+                  {{bind-attr class=":btn :pale isPublished:success"}}>{{t 'webpage.published'}}</button>
+          <button {{action setState 'draft'}} 
+                  {{bind-attr class=":btn :pale isDraft:primary"}}>{{t 'webpage.draft'}}</button>
+          <button {{action setState 'review'}} 
+                  {{bind-attr class=":btn :pale inReview:warning"}}>{{t 'webpage.review'}}</button>
 
-      </div>
+        </div>
 
-      {{#if inReview}}
-        <fieldset class="with-border">
-          <legend>{{t 'webpage.request_review'}}</legend>
-          <div class="form-group">
+        {{#if inReview}}
+          <fieldset class="with-border">
+            <legend>{{t 'webpage.request_review'}}</legend>
+            <div class="form-group">
 
-            <label for="example-text-input">{{t 'webpage.assign_to'}}</label>
-            <div>
-              {{input valueBinding='curWebpage.requestReviewBy.fullname' class='form-control'}}
-            </div>
-          </div>
-
-          <div class="form-group">        
-            <label for="example-text-input">{{t 'webpage.review_message'}}</label>
-            <div>
-              {{textarea valueBinding='curWebpage.requestReviewMsg' class='form-control'}}
+              <label for="example-text-input">{{t 'webpage.assign_to'}}</label>
+              <div>
+                {{input valueBinding='curWebpage.requestReviewBy.fullname' class='form-control'}}
+              </div>
             </div>
 
-          </div>
-        </fieldset>
-      {{/if}}
+            <div class="form-group">        
+              <label for="example-text-input">{{t 'webpage.review_message'}}</label>
+              <div>
+                {{textarea valueBinding='curWebpage.requestReviewMsg' class='form-control'}}
+              </div>
 
-      <div class="form-group">
+            </div>
+          </fieldset>
+        {{/if}}
 
-        <label for="example-text-input">{{t 'webpage.layout'}}</label>
-        <br>
+        <div class="form-group">
+
+          <label for="example-text-input">{{t 'webpage.layout'}}</label>
+          <br>
 
 
-        {{view Ember.Select
-               content=availableLayouts
-               value=curWebpage.layout
-        }}
-
+          {{view Ember.Select
+                 content=availableLayouts
+                 valueBinding='curWebpage.layout'
+          }}
+          
+        </div>
+        
       </div>
-      
-    </form>
 
 
-  </div>
+    </div>
+  </form>
 
 {{else}}
 

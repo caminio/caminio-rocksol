@@ -15,10 +15,4 @@
     }
   });
 
-  window.App.WebpagesEditRoute = Ember.Route.extend({
-    model: function( params ){
-      return this.store.find('webpage', params.id );
-    }
-  });
-
 }).call();

@@ -25,3 +25,19 @@
 .input{
   height: 600px; /* TODO */
 }
+
+.features{
+  position: absolute;
+  top: 104px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+body .features .editor .entry-markdown, 
+body .features .editor .entry-preview{
+  background: #fafafa;
+}
+body .features .editor .entry-preview{
+  border-left-color: #fafafa;
+}

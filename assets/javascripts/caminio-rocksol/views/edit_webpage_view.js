@@ -4,9 +4,8 @@
 
   window.App.WebpagesEditView = Em.View.extend({
     didInsertElement: function(){
-        $(document).ready(function () {
-          $(".editor").ghostDown();
-        });
+      $('#editor-input-content').val( this.get('controller.translation.content') );
+      $(".editor").ghostDown();
     },
   }); 
 }).call();

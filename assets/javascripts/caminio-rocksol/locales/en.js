@@ -30,11 +30,15 @@
     'webpage.really_delete': 'Really delete {{name}}?',
     'webpage.deleted': 'Webpage {{name}} has been deleted',
 
+    'webpage.select_layout': 'Select a layout',
+
+    'webpage.saved': 'Webpage {{name}} has been saved successfully',
+
     'translation.no': 'No languages',
 
     'pebbles.amount': '{{count}} pebbles'
 
-  }
+  };
 
   for( var i in translations )
     Em.I18n.translations[i] = translations[i];

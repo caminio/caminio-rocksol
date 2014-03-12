@@ -52,7 +52,7 @@
             this.html = this.converter.makeHtml(this.markdown);
             preview.html(this.html);
             this._updateWordCount();
-            console.log('content', this.editor.getValue());
+            //console.log('content', this.editor.getValue());
         },
         getHtml: function () {
             return this.html;

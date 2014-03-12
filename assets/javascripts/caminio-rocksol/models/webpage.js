@@ -17,21 +17,6 @@
       return name;
     }.property('firstname', 'lastname')
   });
-
-
-  window.App.Translation = DS.Model.extend({
-    locale: DS.attr(),
-    title: DS.attr(),
-    subtitle: DS.attr(),
-    content: DS.attr(),
-    metaDescription: DS.attr(),
-    metaKeywords: DS.attr()
-  });
-  
-  window.App.Pebble = DS.Model.extend({
-    name: DS.attr(),
-    translations: DS.hasMany( 'translation' )
-  });
   
   window.App.Webpage = DS.Model.extend({
     name: DS.attr('string'),
@@ -39,6 +24,7 @@
     requestReviewMsg: DS.attr(),
     status: DS.attr('string', { defaultValue: 'draft'}),
     translations: DS.hasMany( 'translation' ),
+    layout: DS.attr(),
     pebbles: DS.hasMany( 'pebble' ),
     usedLocales: function(){
       var locales = this.get('translations').map(function(trans){ return trans.locale }).join(',');

@@ -1,3 +1,19 @@
 <div class="main-view">
-  {{outlet}}
+
+  <div class="main-inner-wrap">
+
+    <div class="navbar-container">
+      <ul class="navbar clearfix">
+        <li>{{#link-to 'webpages' activeClass='active'}}{{t 'nav.webpages'}}{{/link-to}}</li>
+        <li>{{#link-to 'blog' activeClass='active'}}{{t 'nav.blog'}}{{/link-to}}</li>
+        <li>{{#link-to 'media' activeClass='active'}}{{t 'nav.media'}}{{/link-to}}</li>
+      </ul>
+    </div>
+
+    <section id="main">
+      {{outlet}}
+    </section>
+    
+  </div>
+
 </div>

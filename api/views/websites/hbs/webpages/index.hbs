@@ -2,7 +2,7 @@
   <header>
     <div class="box title-box website">
       <div class="main-ctrl">
-        <button class="btn success icon-text" {{action 'promptNewWebpage'}}>
+        <button class="btn icon-text" {{action 'promptNewWebpage'}}>
           <i class="fa fa-plus-square"></i>
           {{t webpage.new}}
         </button>
@@ -13,16 +13,16 @@
 
   </header>
 
-  <div class="row span-row">
+  <div class="">
 
     <div class="col-md-6">
-      <div class="box default-padding">
+      <div class="box">
         {{partial 'webpages/tree'}}
       </div>
     </div>
 
     <div class="col-md-6">
-      <div class="box default-padding">
+      <div class="box">
         {{partial 'webpages/details'}}
       </div>
     </div>

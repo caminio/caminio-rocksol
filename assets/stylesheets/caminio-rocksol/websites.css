@@ -1,3 +1,6 @@
+.main-view{
+  border-right-color: #A63744;
+}
 .webpages-tree .locales{
   visibility: hidden;
 }
@@ -13,6 +16,7 @@
   margin: -10px 5px 0 0; 
   padding: 5px 15px 6px;
 }
+
 .webpages-tree .btn.status-indicator{
   border: none;
   float: left;
@@ -28,10 +32,23 @@
 
 .features{
   position: absolute;
-  top: 104px;
+  top: 80px;
   left: 0;
   right: 0;
-  bottom: 0;
+  height: 400px;
+}
+
+body .features .editor .CodeMirror-lines{
+  margin: 15px 15px 0 38px;
+  padding: 5px;
+}
+
+body .features .editor .CodeMirror pre{
+  padding: 0;
+}
+
+body .features .editor .entry-preview-content{
+  padding: 20px 5px 0 0;
 }
 
 body .features .editor .entry-markdown, 
@@ -40,4 +57,12 @@ body .features .editor .entry-preview{
 }
 body .features .editor .entry-preview{
   border-left-color: #fafafa;
+}
+
+body .features .editor .CodeMirror{
+  top: 20px;
+}
+
+body .features .editor .entry-markdown .floatingheader{
+  padding: 0;
 }

@@ -1,16 +1,21 @@
 {{#if curWebpage}}
 
-  <form>
-  
-    <h4 class="mini-title">
-      <span class="btn pale close" {{action cancelClose}}><i class="fa fa-times"></i></span>
-      <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}
-              {{action saveWebpage curWebpage}}><i class="fa fa-save"></i> {{t 'save'}}</button>
-      <button {{bind-attr class=":save :btn :icon-text"}} {{action editWebpage curWebpage}}><i class="fa fa-pencil"></i> {{t 'edit'}}</button>
+  <div class="box-title">
+    <span class="btn close" {{action cancelClose}}><i class="fa fa-times"></i></span>
 
-      {{t 'webpage.properties_of'}}
-      <strong>{{curWebpage.name}}</strong>
-    </h4>
+    <div class="btn-group pull-right">
+      <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}
+              {{action saveWebpage curWebpage}}>
+        <i class="fa fa-save"></i> {{t 'save'}}
+      </button>
+    </div>
+
+    {{t 'webpage.properties_of'}}
+    <strong>{{curWebpage.name}}</strong>
+
+  </div>
+
+  <form>
 
     <div class="clearfix">
 
@@ -34,6 +39,10 @@
           <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right">
             <i class="fa fa-trash-o"></i>
             <span>{{t 'delete'}}</span>
+          </button>
+
+          <button class="pull-right btn icon-text" {{action editWebpage curWebpage}}>
+            <i class="fa fa-align-left"></i> {{t 'edit_content'}}
           </button>
 
 

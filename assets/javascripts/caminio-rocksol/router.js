@@ -7,6 +7,8 @@
       this.route('new', { path: '/new' });
       this.resource('webpages.edit', { path: '/:id/edit' });
     });
+    this.resource('media');
+    this.resource('blog');
   });
 
   window.App.IndexRoute = Ember.Route.extend({

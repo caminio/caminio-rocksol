@@ -4,6 +4,15 @@
 
   var translations = {
     
+    'nav.webpages': 'Webpages',
+    'nav.media': 'Media',
+    'nav.blog': 'Blog',
+
+    'edit_content': 'Edit content',
+
+    'markdown_code': 'Markdown editor',
+    'preview': 'Preview',
+
     'website.subtitle': 'Your website',
     
     'webpages.title': 'Webpages',
@@ -35,6 +44,7 @@
     'webpage.saved': 'Webpage {{name}} has been saved successfully',
 
     'translation.no': 'No languages',
+    'translation.title': 'Language',
 
     'pebbles.amount': '{{count}} pebbles'
 

@@ -10,7 +10,12 @@
         var tr = this.get('model.translations').findBy('id', this.get('translation').id);
         tr.set('content', $('.editor').ghostDown('getMarkdown') );
         this.get('model').save();
-      }
+      },
+
+      'cancelEdit': function( webpage ){
+        webpage.rollback();
+        this.transitionToRoute('webpages');
+      },
 
     }
 

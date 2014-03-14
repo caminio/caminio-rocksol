@@ -8,7 +8,7 @@ module.exports = function(grunt) {
   
   var uglifyFiles = {};
   uglifyFiles['build/javascripts/'+gearName+'.min.js'] = [
-    'assets/javascripts/'+gearName+'/**/*.js'
+              'assets/javascripts/'+gearName+'/**/*.js'
   ];
 
   // Project configuration.

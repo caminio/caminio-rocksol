@@ -2,16 +2,22 @@ extends ../../../../caminio-ui/api/views/layouts/application
 
 append head
   if env === 'production'
+    link( rel='stylesheet', href='/stylesheets/caminio-media.min.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol.min.css' )
   else
     link( rel='stylesheet', href='/stylesheets/3rdparty/ghostdown.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
+    link( rel='stylesheet', href='/stylesheets/caminio-media/3rdparty/dropzone.css' )
 
 append foot
   if env === 'production'
     script(type='text/javascript', src='/javascripts/caminio-rocksol.min.js')
+    script(type='text/javascript', src='/javascripts/caminio-media.min.js')
   else
-    script(type='text/javascript', src='/javascripts/caminio-rocksol/locales/#{i18n.locale()}.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/ghostdown.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js')
+
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/locales/#{currentLang}.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/router.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/models/translation.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/models/pebble.js')
@@ -19,8 +25,12 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
-    script(type='text/javascript', src='/javascripts/3rdparty/ghostdown.js')
-    script(type='text/javascript', src='/javascripts/3rdparty/jquery.ghostdown.js')
+
+    script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/dropzone.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/locales/#{currentLang}.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/models/mediafile.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/controllers/media_manager_controller.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/views/media_manager_view.js')
 
 
 block content
@@ -35,6 +45,9 @@ block content
 
   script(type="text/x-handlebars" data-template-name="webpages/edit")
     include hbs/webpages/edit.hbs
+
+  script(type="text/x-handlebars" data-template-name="media_manager")
+    include ../../../../caminio-media/api/views/media_manager/hbs/index.hbs
 
   // partial
   script(type="text/x-handlebars" data-template-name="webpages/tree")

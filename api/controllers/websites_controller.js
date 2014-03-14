@@ -31,9 +31,11 @@ module.exports = function( caminio, policies, middleware ){
     },
 
     'available_layouts': function( req, res ){
+
       if( !res.locals.currentDomain )
         return res.json(403, { details: 'no_domain_found' });
-      var domainTmplPath = join( getDomainPath(res.locals.currentDomain), 'layouts' );
+
+      var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'layouts' );
 
       if( !fs.existsSync( domainTmplPath ) )
         mkdirp.sync( domainTmplPath );
@@ -53,9 +55,5 @@ module.exports = function( caminio, policies, middleware ){
     }
 
   };
-
-  function getDomainPath( domain ){
-    return join(process.cwd(), 'content', domain.name.replace(/\./g,'_').toLowerCase());
-  }
 
 };

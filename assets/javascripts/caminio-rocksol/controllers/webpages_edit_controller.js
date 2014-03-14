@@ -7,8 +7,6 @@
     actions: {
 
       saveTranslation: function(){
-        var tr = this.get('model.translations').findBy('id', this.get('translation').id);
-        tr.set('content', $('.editor').ghostDown('getMarkdown') );
         this.get('model').save();
       },
 
@@ -16,6 +14,12 @@
         webpage.rollback();
         this.transitionToRoute('webpages');
       },
+
+      // ---------------------------------------- EDITOR COMMANDS
+      'replaceText': function( cmd ){
+        $('#editor').ghostDown('replaceText', cmd);
+      },
+
 
     }
 

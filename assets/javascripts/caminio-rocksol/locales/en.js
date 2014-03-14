@@ -2,6 +2,8 @@
 
   'use strict';
 
+  if( currentLang !== 'en' ) return;
+
   var translations = {
     
     'nav.webpages': 'Webpages',
@@ -9,6 +11,14 @@
     'nav.blog': 'Blog',
 
     'edit_content': 'Edit content',
+
+    'editor.heading': 'Heading',
+    'editor.bold': 'Bold',
+    'editor.italic': 'Italic',
+    'editor.underline': 'Underline',
+
+    'editor.image': 'Open Media Library',
+    'editor.link': 'Link with other webpage',
 
     'markdown_code': 'Markdown editor',
     'preview': 'Preview',

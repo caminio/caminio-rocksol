@@ -66,3 +66,10 @@ body .features .editor .CodeMirror{
 body .features .editor .entry-markdown .floatingheader{
   padding: 0;
 }
+
+body .features .editor .entry-markdown.active .markdown, 
+body .features .editor .entry-markdown.active .entry-preview-content, 
+body .features .editor .entry-preview.active .markdown, 
+body .features .editor .entry-preview.active .entry-preview-content{
+  outline: none;
+}

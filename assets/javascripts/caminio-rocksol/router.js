@@ -7,7 +7,7 @@
       this.route('new', { path: '/new' });
       this.resource('webpages.edit', { path: '/:id/edit' });
     });
-    this.resource('media');
+    this.resource('media_manager');
     this.resource('blog');
   });
 

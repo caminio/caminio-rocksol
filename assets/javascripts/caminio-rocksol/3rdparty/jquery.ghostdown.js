@@ -6,7 +6,8 @@
         markdown: null,
         html: null,
         converter: null,
-        _create: function() {
+        _create: function( options ){
+
             this.converter = new ShowDown.converter();
             this.editor = CodeMirror.fromTextArea(this.element.find('textarea')[0], {
                 mode: 'markdown',
@@ -59,6 +60,18 @@
         },
         getMarkdown: function () {
             return this.markdown;
+        },
+        replaceText: function( cmd ){
+          var val = this.editor.getSelection();
+          switch( cmd ){
+            case 'bold':
+              val = '**'+val+'**';
+              break;
+            case 'heading':
+              val = '# '+val;
+              break;
+          }
+          this.editor.replaceSelection( val );
         },
         _syncScroll: function (e) {
             // vars

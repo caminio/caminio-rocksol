@@ -20,6 +20,10 @@
         $('#editor').ghostDown('replaceText', cmd);
       },
 
+      'openMediaLibrary': function( webpage ){
+        $('#media-library').modal('show');
+      }
+
 
     }
 
@@ -32,6 +36,14 @@
     setupController: function( controller, model ){
       controller.set('model', model);
       controller.set('translation', model.get('translations').content[0] );
+
+      // media library
+      controller.set('labels', []);
+      controller.set('currentLabel', null);
+      controller.set('unlabeledFiles', this.store.find('mediafile'));
+      controller.set('curFile', null);
+      this.store.find('user');
+
     }
   });
 

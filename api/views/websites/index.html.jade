@@ -7,7 +7,7 @@ append head
   else
     link( rel='stylesheet', href='/stylesheets/3rdparty/ghostdown.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
-    link( rel='stylesheet', href='/stylesheets/caminio-media/3rdparty/dropzone.css' )
+    link( rel='stylesheet', href='/stylesheets/caminio-media/media_manager.css' )
 
 append foot
   if env === 'production'
@@ -26,11 +26,15 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
 
-    script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/dropzone.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/filesize.min.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.fileupload.js')
     script(type='text/javascript', src='/javascripts/caminio-media/locales/#{currentLang}.js')
     script(type='text/javascript', src='/javascripts/caminio-media/models/mediafile.js')
     script(type='text/javascript', src='/javascripts/caminio-media/controllers/media_manager_controller.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/controllers/mediafile_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-media/views/media_manager_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/views/mediafile_view.js')
 
 
 block content
@@ -48,6 +52,19 @@ block content
 
   script(type="text/x-handlebars" data-template-name="media_manager")
     include ../../../../caminio-media/api/views/media_manager/hbs/index.hbs
+
+  script(type="text/x-handlebars" data-template-name="media_manager/browser")
+    include ../../../../caminio-media/api/views/media_manager/hbs/browser.hbs
+
+  script(type="text/x-handlebars" data-template-name="media_manager/file")
+    include ../../../../caminio-media/api/views/media_manager/hbs/file.hbs
+  
+  script(type="text/x-handlebars" data-template-name="media_manager/upload-container")
+    include ../../../../caminio-media/api/views/media_manager/hbs/upload_container.hbs
+
+  script(type="text/x-handlebars" data-template-name="media_manager/details")
+    include ../../../../caminio-media/api/views/media_manager/hbs/details.hbs
+
 
   // partial
   script(type="text/x-handlebars" data-template-name="webpages/tree")

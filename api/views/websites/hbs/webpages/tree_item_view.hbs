@@ -1,0 +1,14 @@
+<div
+  {{bind-attr class="view.isSelected:selected :item-container"}}
+  {{bind-attr data-id='view.content.id'}}>
+  <span {{bind-attr class=":status-indicator :btn view.content.isPublished:success view.content.isDraft:primary view.content.inReview:warning"}}></span>
+  <i class="fa fa-file-text webpage-icon"></i>
+  <span class="move">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </span>
+  <span class="title" {{bind-attr title='name'}}>{{view.content.name}}</span>
+  <span class="locales desc">
+    {{view.content.usedLocales}}
+  </span>
+</div>

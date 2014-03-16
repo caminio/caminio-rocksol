@@ -25,6 +25,7 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpage_tree_view.js')
 
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/filesize.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')
@@ -65,6 +66,9 @@ append foot
 
   script(type="text/x-handlebars" data-template-name="media_manager/webpage-item")
     include ../../../../caminio-media/api/views/media_manager/hbs/webpage_item.hbs
+
+  script(type="text/x-handlebars" data-template-name="webpage/tree-item")
+    include hbs/webpages/tree_item_view.hbs
 
   // partial
   script(type="text/x-handlebars" data-template-name="webpages/tree")

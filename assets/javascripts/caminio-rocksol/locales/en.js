@@ -28,6 +28,9 @@
     'webpages.title': 'Webpages',
     'webpages.list': 'Listing webpages',
 
+    'webpage.new_subpage_of': 'Enter name for new subpage of &raquo;{{name}}&laquo;',
+    'webpage.new_name': 'Enter name for new webpage on root level',
+
     'blogs.title': 'Blog',
 
     'webpage.new': 'New webpage',
@@ -48,6 +51,7 @@
     'webpage.layout': 'Layout',
     'webpage.really_delete': 'Really delete {{name}}?',
     'webpage.deleted': 'Webpage {{name}} has been deleted',
+    'webpage.moved_to': 'Webpage {{name}} has been moved to {{to}}',
 
     'webpage.select_layout': 'Select a layout',
 

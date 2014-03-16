@@ -7,7 +7,13 @@
     actions: {
 
       saveTranslation: function(){
-        this.get('model').save();
+        var webpage = this.get('model');
+        webpage.save().then(function(){
+          notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
+        })
+        .catch( function(err){
+          notify('error',err);
+        });
       },
 
       'cancelEdit': function( webpage ){
@@ -40,7 +46,7 @@
     setupController: function( controller, model ){
       controller.set('model', model);
       controller.set('translation', model.get('translations').content[0] );
-      controller.set('webpages', controller.store.find('webpage'));
+      controller.set('webpages', controller.store.find('webpage', {parent: 'null'}));
       controller.set('labels', controller.store.find('label'));
       this.store.find('user');
     }

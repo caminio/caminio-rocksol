@@ -4,21 +4,13 @@
 
   var webpages;
 
-  window.App.WebpagesIndexView = Ember.View.extend({
-    didInsertElement: function(){
-      this.$().find('.caminio-tree').nestedSortable({
-        handle: '.move',
-        items: 'li'
-      });
-    }
-  })
   window.App.WebpagesIndexRoute = Ember.Route.extend({
 
     setupController: function( controller, model ){
       if( webpages )
         return;
       
-      this.store.find('webpage').then( function( _webpages ){
+      this.store.find('webpage', { parent: 'null' }).then( function( _webpages ){
         webpages = _webpages;
         controller.set('webpages',webpages);
         controller.set('rootWebpages', webpages);
@@ -73,10 +65,14 @@
 
       'promptNewWebpage': function(){
         var self = this;
-        bootbox.prompt( Em.I18n.t('webpage.enter_name'), function(result) { 
+        var title = Em.I18n.t('webpage.new_name');
+        if( this.get('curWebpage') )
+          title = Em.I18n.t('webpage.new_subpage_of', {name: this.get('curWebpage.name')});
+        bootbox.prompt( title, function(result) { 
           if( !result || result.length < 1 )
             return;
           var model = self.store.createRecord('webpage', { name: result });
+          model.set('parent', self.get('curWebpage') );
           model.save().then( function(){
             notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
           }).catch(function(err){
@@ -86,7 +82,7 @@
 
       },
 
-      'webpageDetails': function( webpage ){
+      'treeItemSelected': function( webpage ){
         this.set('curWebpage', webpage);
         $('.webpages-tree .active').removeClass('active');
         $('.webpages-tree [data-id='+this.get('curWebpage.id')+']').addClass('active');

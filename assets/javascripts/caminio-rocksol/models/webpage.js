@@ -25,6 +25,7 @@
     status: DS.attr('string', { defaultValue: 'draft'}),
     translations: DS.hasMany( 'translation' ),
     layout: DS.attr(),
+    parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble' ),
     usedLocales: function(){
       var locales = this.get('translations').map(function(trans){ return trans.locale }).join(',');

@@ -22,6 +22,10 @@
 
       'openMediaLibrary': function( webpage ){
         $('#media-library').modal('show');
+      },
+
+      'insertImage': function( mediafile ){
+        $('#editor').ghostDown('insertImage', mediafile);
       }
 
 
@@ -36,14 +40,9 @@
     setupController: function( controller, model ){
       controller.set('model', model);
       controller.set('translation', model.get('translations').content[0] );
-
-      // media library
-      controller.set('labels', []);
-      controller.set('currentLabel', null);
-      controller.set('unlabeledFiles', this.store.find('mediafile'));
-      controller.set('curFile', null);
+      controller.set('webpages', controller.store.find('webpage'));
+      controller.set('labels', controller.store.find('label'));
       this.store.find('user');
-
     }
   });
 

@@ -28,6 +28,12 @@ module.exports = function Webpage( caminio, mongoose ){
      * @type Boolean
      */
     status: { type: String, default: 'draft', public: true },
+    
+    /**
+     * @property parent
+     * @type ObjectId
+     */
+    parent: { type: ObjectId, public: true },
 
     /**
      * @property requestReviewBy

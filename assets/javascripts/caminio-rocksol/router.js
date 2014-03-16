@@ -3,11 +3,12 @@
   'use strict';
 
   window.App.Router.map( function(){
+    this.route('index', { path: '/' });
     this.resource('webpages', { path: '/webpages' }, function(){
       this.route('new', { path: '/new' });
       this.resource('webpages.edit', { path: '/:id/edit' });
     });
-    this.resource('media_manager');
+    this.resource('media.index');
     this.resource('blog');
   });
 

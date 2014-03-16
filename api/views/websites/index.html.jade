@@ -31,16 +31,11 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.fileupload.js')
     script(type='text/javascript', src='/javascripts/caminio-media/locales/#{currentLang}.js')
     script(type='text/javascript', src='/javascripts/caminio-media/models/mediafile.js')
-    script(type='text/javascript', src='/javascripts/caminio-media/controllers/media_manager_controller.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/controllers/media_index_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-media/controllers/mediafile_controller.js')
-    script(type='text/javascript', src='/javascripts/caminio-media/views/media_manager_view.js')
-    script(type='text/javascript', src='/javascripts/caminio-media/views/mediafile_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/controllers/media_label_item_controller.js')
+    script(type='text/javascript', src='/javascripts/caminio-media/components/media_manager_component.js')
 
-
-block content
-
-  aside#notifications.notifications
-    
   script(type="text/x-handlebars")
     include hbs/app.hbs
     
@@ -50,11 +45,11 @@ block content
   script(type="text/x-handlebars" data-template-name="webpages/edit")
     include hbs/webpages/edit.hbs
 
-  script(type="text/x-handlebars" data-template-name="media_manager")
+  script(type="text/x-handlebars" data-template-name="media/index")
     include ../../../../caminio-media/api/views/media_manager/hbs/index.hbs
 
-  script(type="text/x-handlebars" data-template-name="media_manager/browser")
-    include ../../../../caminio-media/api/views/media_manager/hbs/browser.hbs
+  script(type="text/x-handlebars" data-template-name="components/media-manager")
+    include ../../../../caminio-media/api/views/media_manager/hbs/media_manager_component.hbs
 
   script(type="text/x-handlebars" data-template-name="media_manager/file")
     include ../../../../caminio-media/api/views/media_manager/hbs/file.hbs
@@ -65,9 +60,18 @@ block content
   script(type="text/x-handlebars" data-template-name="media_manager/details")
     include ../../../../caminio-media/api/views/media_manager/hbs/details.hbs
 
+  script(type="text/x-handlebars" data-template-name="media_manager/label-item")
+    include ../../../../caminio-media/api/views/media_manager/hbs/label_item.hbs
+
+  script(type="text/x-handlebars" data-template-name="media_manager/webpage-item")
+    include ../../../../caminio-media/api/views/media_manager/hbs/webpage_item.hbs
 
   // partial
   script(type="text/x-handlebars" data-template-name="webpages/tree")
     include hbs/webpages/_tree.hbs
   script(type="text/x-handlebars" data-template-name="webpages/details")
     include hbs/webpages/_details.hbs
+
+block content
+
+  aside#notifications.notifications

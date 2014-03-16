@@ -73,6 +73,11 @@
           }
           this.editor.replaceSelection( val );
         },
+        insertImage: function( mediafile ){
+          var val = this.editor.getSelection();
+          val = '!['+mediafile.get('name')+']('+mediafile.get('url')+')';
+          this.editor.replaceSelection( val );
+        },
         _syncScroll: function (e) {
             // vars
             var $codeViewport = $(e.target),

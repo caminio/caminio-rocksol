@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       test: {
         options: {
           globals: ['should'],
-          timeout: 3000,
+          timeout: 4000,
           bail: true,
           ignoreLeaks: false,
           ui: 'bdd',

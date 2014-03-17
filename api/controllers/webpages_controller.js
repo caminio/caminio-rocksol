@@ -12,6 +12,7 @@ var fs      = require('fs');
 var join    = require('path').join;
 var mkdirp  = require('mkdirp');
 var util    = require('caminio/util');
+var async   = require('async');
 
 /**
  *  @class WebpagesController
@@ -27,13 +28,16 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ getWebpage, updateWebpage ]
+      'update': [ getWebpage, updateWebpage ],
+      'destroy': [ getWebpage, getChildren, removeChildren ]
     },
 
     'update': function updateWebpage(req, res ){
 
-      // SITE COMPILER
-      SiteGen.compilePage( res, req.webpage, finalResponse );
+      if( req.webpage.status === 'published' )
+        SiteGen.compilePage( res, req.webpage, finalResponse );
+      else
+        finalResponse();
       
       function finalResponse( err ){
         if( err )
@@ -75,6 +79,25 @@ module.exports = function( caminio, policies, middleware ){
         return res.json( 500, { error: 'server_error', details: err });
       next();
     });
+  }
+
+  function getChildren( req, res, next ){
+    Webpage.find({ parent: req.webpage._id }).exec( function( err, children ){
+      if( err )
+        return res.json( 500, { error: 'server_error', details: err });
+      req.children = children;
+      next();
+    });
+  }
+
+  function removeChildren( req, res, next ){
+    async.each( req.children, function( child, done ){
+      child.remove(function( err ){
+        if( err )
+          return res.json( 500, { error: 'server_error', details: err });
+        done();
+      });
+    }, next );
   }
 
 

@@ -7,7 +7,8 @@
 module.exports = function Webpage( caminio, mongoose ){
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
-  var Translation = require('./_sub/translation')( caminio, mongoose );
+  var TranslationSchema = require('./_sub/translation')( caminio, mongoose );
+  var ActivitySchema = require('./_sub/activity')( caminio, mongoose );
 
   var schema = new mongoose.Schema({
 
@@ -21,7 +22,7 @@ module.exports = function Webpage( caminio, mongoose ){
      * @property translations
      * @type Array an array of Translation Schema Objects
      */
-    translations: [ Translation ],
+    translations: [ TranslationSchema ],
 
     /**
      * @property published
@@ -63,6 +64,15 @@ module.exports = function Webpage( caminio, mongoose ){
     pebbles: [ { type: ObjectId, ref: 'Pebble' } ],
 
     /**
+     * activities are dates with meta information
+     * sticked to the webpage
+     * @property activities
+     * @type [ ActivitySchema ]
+     *
+     */
+    activities: [ ActivitySchema ],
+
+    /**
      * @property createdAt
      * @type Date
      */
@@ -89,6 +99,7 @@ module.exports = function Webpage( caminio, mongoose ){
   });
   
   schema.publicAttributes = [ 'translations', 'pebbles' ];
+  schema.trash = true;
 
   return schema;
 

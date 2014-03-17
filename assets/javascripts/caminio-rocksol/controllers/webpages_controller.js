@@ -75,7 +75,10 @@
           model.set('parent', self.get('curWebpage') );
           model.save().then( function(){
             notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
+            self.set('curWebpage', model);
+            self.set('addedWebpage', model);
           }).catch(function(err){
+            console.error( err );
             notify.processError( err.responseJSON );
           });
         });
@@ -131,6 +134,7 @@
             webpage.save().then( function(){
               notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('name') }) );
               self.set('curWebpage',null);
+
             });
           }
         });

@@ -12,6 +12,13 @@
         // Ember had some issues with finding the treenode template when the branch view is dynamically added to
         // the parent collection view in the click event. Had to compile the template here instead
         templateName: 'webpage/tree-item',
+        curWebpageChanged: function(){
+          if( this.get('controller.addedWebpage.parent') && this.get('controller.addedWebpage.parent.id') === this.get('content.id') ){
+            console.log('added', this.get('controller.addedWebpage'));
+            this.get('subBranch.content').pushObject( this.get('controller.addedWebpage') );
+            this.get('controller').set('addedWebpage',null);
+          }
+        }.observes('controller.addedWebpage'),
         isSelected: function(){
           if( this.get('controller.curWebpage') )
             return this.get('content.id') === this.get('controller.curWebpage.id');
@@ -73,6 +80,12 @@
       tagName: 'ol',
       classNames: ['caminio-tree webpages-tree'],
       itemViewClass: 'App.WebpageTreeNodeView',
+      curWebpageChanged: function(){
+        if( this.get('controller.addedWebpage') && !this.get('controller.addedWebpage.parent') ){
+          this.get('content').pushObject( this.get('controller.addedWebpage') );
+          this.get('controller').set('addedWebpage',null);
+        }
+      }.observes('controller.addedWebpage'),
       didInsertElement: function(){
         var self = this;
         if( !(this.get('controller.curItem.parent') && !(this.get('parentView') instanceof App.WebpageTreeBranchView)) )

@@ -7,6 +7,9 @@ html(lang=en)
     meta(name="description", content=translation.metaDescription)
     meta(name='author', content=user.fullname)
   body
-    .main
+    .main    
+      .ul 
+      each sibling in siblings
+        li= sibling
       h1 Welcome to your website
       !=markdownContent

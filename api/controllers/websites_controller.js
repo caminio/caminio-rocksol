@@ -42,6 +42,8 @@ module.exports = function( caminio, policies, middleware ){
 
       if( !fs.existsSync( join(domainTmplPath,'index.jade') ) )
         fs.writeFileSync( join(domainTmplPath,'index.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
+      if( !fs.existsSync( join(domainTmplPath,'default.jade') ) )
+        fs.writeFileSync( join(domainTmplPath,'default.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
 
       var tmpls = [];
 

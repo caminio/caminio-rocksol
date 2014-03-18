@@ -17,9 +17,13 @@
       });
 
 
-    $.getJSON('/caminio/website/available_layouts', function(response){
-      controller.set('availableLayouts', response);
-    });
+      if( typeof(availableWebpageLayouts) === 'undefined' )
+        $.getJSON('/caminio/website/available_layouts', function(response){
+          window.availableWebpageLayouts = response;
+          controller.set('availableLayouts', availableWebpageLayouts);
+        });
+      else
+        controller.set('availableLayouts', availableWebpageLayouts);
 
 
     }
@@ -63,6 +67,10 @@
         this.transitionToRoute( 'webpages.edit', webpage.id );
       },
 
+      'toggleContainer': function( prop ){
+        this.toggleProperty( prop );
+      },
+
       'promptNewWebpage': function(){
         var self = this;
         var title = Em.I18n.t('webpage.new_name');
@@ -86,8 +94,10 @@
       },
 
       'treeItemSelected': function( webpage ){
-        this.set('curWebpage', webpage);
         $('.webpages-tree .active').removeClass('active');
+        if( this.get('curWebpage.id') === webpage.get('id') )
+          return this.set('curWebpage',null);
+        this.set('curWebpage', webpage);
         $('.webpages-tree [data-id='+this.get('curWebpage.id')+']').addClass('active');
       },
 

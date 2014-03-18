@@ -55,6 +55,9 @@
             this._updateWordCount();
             //console.log('content', this.editor.getValue());
         },
+        setValue: function( val ){
+          this.editor.setValue( val );
+        },
         getHtml: function () {
             return this.html;
         },

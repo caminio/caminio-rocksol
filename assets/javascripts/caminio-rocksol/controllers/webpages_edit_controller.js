@@ -21,6 +21,27 @@
         this.transitionToRoute('webpages');
       },
 
+      'changeLayout': function( layout ){
+        this.get('model').set('layout', layout);
+      },
+
+      'changeLang': function( lang ){
+        var webpage = this.get('model');
+        var curTr = this.get('translation');
+        var tr = webpage.get('translations').find( function( tr ){
+          return tr.get('locale') === lang;
+        });
+        if( !tr ){
+          tr = this.store.createRecord('translation', { locale: lang,
+                                                        title: curTr.get('title'),
+                                                        subtitle: curTr.get('subtitle'),
+                                                        content: curTr.get('content') });
+          webpage.get('translations').pushObject( tr );
+        }
+        this.set('translation', tr );
+        $('#editor').ghostDown('setValue', this.get('translation.content') );
+      },
+
       // ---------------------------------------- EDITOR COMMANDS
       'replaceText': function( cmd ){
         $('#editor').ghostDown('replaceText', cmd);
@@ -49,6 +70,15 @@
       controller.set('webpages', controller.store.find('webpage', {parent: 'null'}));
       controller.set('labels', controller.store.find('label'));
       this.store.find('user');
+
+      if( typeof(availableWebpageLayouts) === 'undefined' )
+        $.getJSON('/caminio/website/available_layouts', function(response){
+          window.availableWebpageLayouts = response;
+          controller.set('availableLayouts', availableWebpageLayouts);
+        });
+      else
+        controller.set('availableLayouts', availableWebpageLayouts);
+
     }
   });
 

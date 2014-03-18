@@ -28,7 +28,7 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ getWebpage, updateWebpage ],
+      'update': [ cleanNewActivities, cleanNewTranslations, getWebpage, updateWebpage ],
       'destroy': [ getWebpage, getChildren, removeChildren ]
     },
 
@@ -100,5 +100,22 @@ module.exports = function( caminio, policies, middleware ){
     }, next );
   }
 
+  function cleanNewTranslations( req, res, next ){
+    req.body.webpage.translations.forEach(function(tr){
+      if( tr._id === null )
+        delete tr._id;
+    });
+    next();
+  }
+
+  function cleanNewActivities( req, res, next ){
+    if( !( 'activities' in req.body.webpage ) )
+      return next();
+    req.body.webpage.activities.forEach(function(act){
+      if( act._id === null )
+        delete act._id;
+    });
+    next();
+  }
 
 };

@@ -1,0 +1,90 @@
+<div class="activities-tab settings-tab">
+
+  <div class="btn-toolbar pull-right">
+    <div class="btn-group">
+      <button class="btn" id="new-activity" {{action 'newActivityDialog'}}>
+        <i class="fa fa-plus"></i>
+        {{t 'activity.new'}}
+      </button>
+    </div>
+  </div>
+
+  <h4 class="mini-title">
+    <a href="#" class="toggle-container"
+      {{action 'toggleContainer' 'showActivities'}}>
+      <i {{bind-attr class=":toggle-container :fa showActivities:fa-angle-down:fa-angle-right"}}></i>
+      {{t 'activities.title'}}
+    </a>
+  </h4>
+
+  {{#if showActivities}}
+
+    <ul class="activities">
+      {{#each activity in webpage.activities}}
+        <li>
+          <i class="fa fa-clock-o"></i>
+          {{formatDate activity.startsAt format='dd, DD. MMM HH:mm'}}
+        </li>
+      {{/each}}
+    </ul>
+
+  {{/if}}
+
+</div>
+
+<div class="modal fade" id="activity-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{t 'activity.new'}}</h4>
+      </div>
+
+      <div class="modal-body clearfix">
+
+        <div class="form-group">
+          <label>{{t 'activity.starts_at'}}</label>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="input-group date">
+                <input id="dp-start" type="text" class="form-control datepicker">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <div class="input-group bootstrap-timepicker"/>
+                <input id="tp-start" data-show-meridian="false" data-minute-step="15" type="text" class="form-control timepicker" />
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>{{t 'activity.note'}}</label>
+          {{textarea
+                  value=activity.note
+                  class="form-control"}}
+        </div>
+
+        <div class="form-group clearfix">
+          <label>{{t 'activity.seats'}}</label>
+          {{input type="text"
+                  value=activity.seats
+                  class="form-control"}}
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <input type="checkbox" class="keep-open">
+        <label class="desc">{{t 'activity.keep_open'}}</label>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'close'}}</button>
+        <button type="button" {{bind-attr class=":btn curFile:primary"}} {{action 'pushActivity'}}>{{t 'activity.create'}}</button>
+      </div>
+
+    </div>
+  </div>
+</div>

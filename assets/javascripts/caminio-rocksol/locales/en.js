@@ -10,6 +10,8 @@
     'nav.media': 'Media',
     'nav.blog': 'Blog',
 
+    'will_be_filename': 'will be the document\'s filename',
+
     'edit_content': 'Edit content',
 
     'editor.heading': 'Heading',
@@ -60,7 +62,17 @@
     'translation.no': 'No languages',
     'translation.title': 'Language',
 
-    'pebbles.amount': '{{count}} pebbles'
+    'pebbles.amount': '{{count}} pebbles',
+
+    'activities.title': 'Actvities',
+    'activity.keep_open': 'keep open',
+    'activity.new': 'New activity',
+    'activity.create': 'Create activity',
+    'activity.seats': 'Seats',
+    'activity.note': 'Note',
+    'activity.starts_at': 'Starts',
+
+    'activity.saved': 'Activity from {{starts}} has been saved successfully'
 
   };
 

@@ -23,7 +23,7 @@
 
         <div class="form-group">
 
-          <label for="example-text-input">{{t 'name'}}</label>
+          <label for="example-text-input">{{t 'name'}} <span class="desc">&nbsp;{{t 'will_be_filename'}}</span></label>
           <div {{bind-attr class="nameError:field-with-error"}}>
             {{input valueBinding='curWebpage.name' class='form-control'}}
             {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
@@ -89,6 +89,10 @@
           
         </div>
         
+        {{#if curWebpage.isActivityPage}}
+          {{webpage-activities webpage=curWebpage}}
+        {{/if}}
+
       </div>
 
 

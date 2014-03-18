@@ -1,22 +1,6 @@
 ( function(){
 
   'use strict';
-
-  window.App.User = DS.Model.extend({
-    firstname: DS.attr('string'),
-    lastname: DS.attr('string'),
-    email: DS.attr('string'),
-    fullname: function(){
-      var name = '';
-      if( this.get('firstname') && this.get('firstname').length > 0 )
-        name += this.get('firstname');
-      if( name.length > 0 && this.get('lastname') && this.get('lastname').length > 0 )
-        name += ' ';
-      if( this.get('lastname') && this.get('lastname').length > 0 )
-        name += this.get('lastname');
-      return name;
-    }.property('firstname', 'lastname')
-  });
   
   window.App.Webpage = DS.Model.extend({
     name: DS.attr('string'),
@@ -27,6 +11,10 @@
     layout: DS.attr(),
     parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble' ),
+    activities: DS.hasMany( 'activity' ),
+    isActivityPage: function(){
+      return this.get('layout') === 'activity';
+    }.property('layout'),
     usedLocales: function(){
       var locales = this.get('translations').map(function(trans){ return trans.locale }).join(',');
       if( locales.length < 1 )

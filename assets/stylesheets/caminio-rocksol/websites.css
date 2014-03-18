@@ -124,3 +124,36 @@ body .features .editor .entry-preview.active .markdown,
 body .features .editor .entry-preview.active .entry-preview-content{
   outline: none;
 }
+
+.toggle-container{
+  padding: 3px 0;
+  color: #999;
+}
+.toggle-container:hover,
+.toggle-container:active{
+  text-decoration: none;
+  color: #777;
+}
+.toggle-container .fa{
+  float: left;
+  margin: -3px 5px 0 0;
+}
+.toggle-container:hover{
+  color: #555;
+}
+.activities-tab .mini-title{
+  padding-top: 8px;
+}
+ul.activities{
+  list-style: none;
+  padding: 0;
+}
+ul.activities li{
+  padding: 5px;
+  border: 1px solid #ddd;
+  margin: 3px 5px;
+}
+ul.activities .fa-clock-o{
+  float: left;
+  margin: 3px 5px 0 0;
+}

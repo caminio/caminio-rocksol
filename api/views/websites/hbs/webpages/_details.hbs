@@ -1,21 +1,22 @@
-{{#if curWebpage}}
-
-  <div class="box-title">
-    <span class="btn close" {{action cancelClose}}><i class="fa fa-times"></i></span>
-
-    <div class="btn-group pull-right">
-      <button {{bind-attr class=":save :btn :icon-text curWebpage.isDirty:primary:disabled"}}
-              {{action saveWebpage curWebpage}}>
-        <i class="fa fa-save"></i> {{t 'save'}}
-      </button>
-    </div>
-
-    <strong>{{curWebpage.name}}</strong>
-    {{t 'properties'}}
-
-  </div>
+{{#if curSelectedItem}}
 
   <form>
+
+    <div class="box-title">
+      <span class="btn close" {{action cancelClose}}><i class="fa fa-times"></i></span>
+
+      <div class="btn-group pull-right">
+        <button {{bind-attr class=":save :btn :icon-text curSelectedItem.isDirty:primary:disabled"}}
+                {{action saveWebpage curSelectedItem}}
+                tabindex="1">
+          <i class="fa fa-save"></i> {{t 'save'}}
+        </button>
+      </div>
+
+      <strong>{{curSelectedItem.name}}</strong>
+      {{t 'properties'}}
+
+    </div>
 
     <div class="clearfix">
 
@@ -25,7 +26,7 @@
 
           <label for="example-text-input">{{t 'name'}} <span class="desc">&nbsp;{{t 'will_be_filename'}}</span></label>
           <div {{bind-attr class="nameError:field-with-error"}}>
-            {{input valueBinding='curWebpage.name' class='form-control'}}
+            {{input valueBinding='curSelectedItem.name' class='form-control'}}
             {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
           </div>
 
@@ -36,12 +37,12 @@
           <label for="example-text-input">{{t 'webpage.status'}}</label>
           <br>
 
-          <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right">
+          <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right" tabindex="-1">
             <i class="fa fa-trash-o"></i>
             <span>{{t 'delete'}}</span>
           </button>
 
-          <button class="pull-right btn icon-text" {{action editWebpage curWebpage}}>
+          <button class="pull-right btn icon-text" {{action editWebpage curSelectedItem}}>
             <i class="fa fa-align-left"></i> {{t 'edit_content'}}
           </button>
 
@@ -62,14 +63,14 @@
 
               <label for="example-text-input">{{t 'webpage.assign_to'}}</label>
               <div>
-                {{input valueBinding='curWebpage.requestReviewBy.fullname' class='form-control'}}
+                {{input valueBinding='curSelectedItem.requestReviewBy.fullname' class='form-control'}}
               </div>
             </div>
 
             <div class="form-group">        
               <label for="example-text-input">{{t 'webpage.review_message'}}</label>
               <div>
-                {{textarea valueBinding='curWebpage.requestReviewMsg' class='form-control'}}
+                {{textarea valueBinding='curSelectedItem.requestReviewMsg' class='form-control'}}
               </div>
 
             </div>
@@ -84,13 +85,13 @@
 
           {{view Ember.Select
                  content=availableLayouts
-                 valueBinding='curWebpage.layout'
+                 valueBinding='curSelectedItem.layout'
           }}
           
         </div>
         
-        {{#if curWebpage.isActivityPage}}
-          {{webpage-activities webpage=curWebpage}}
+        {{#if curSelectedItem.isActivityPage}}
+          {{webpage-activities webpage=curSelectedItem}}
         {{/if}}
 
       </div>

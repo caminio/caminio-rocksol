@@ -10,12 +10,7 @@
       if( webpages )
         return;
       
-      this.store.find('webpage', { parent: 'null' }).then( function( _webpages ){
-        webpages = _webpages;
-        controller.set('webpages',webpages);
-        controller.set('rootWebpages', webpages);
-      });
-
+      controller.set('webpages', this.store.find('webpage', { parent: 'null' }));
 
       if( typeof(availableWebpageLayouts) === 'undefined' )
         $.getJSON('/caminio/website/available_layouts', function(response){
@@ -44,22 +39,20 @@
     }.property('errors'),
 
     isDraft: function(){
-      return this.get('curWebpage.status') === 'draft';
-    }.property('curWebpage.status'),
+      return this.get('curSelectedItem.status') === 'draft';
+    }.property('curSelectedItem.status'),
 
     isPublished: function(){
-      return this.get('curWebpage.status') === 'published';
-    }.property('curWebpage.status'),
+      return this.get('curSelectedItem.status') === 'published';
+    }.property('curSelectedItem.status'),
 
     inReview: function(){
-      return this.get('curWebpage.status') === 'review';
-    }.property('curWebpage.status'),
+      return this.get('curSelectedItem.status') === 'review';
+    }.property('curSelectedItem.status'),
 
     noWebpage: function(){
-      if( this.get('rootWebpages') )
-        return this.get('rootWebpages').content.length < 1;
-      return true;
-    }.property('rootWebpages'),
+      return !(this.get('webpages.content') && this.get('webpages.content').content && this.get('webpages.content').content.length > 1);
+    }.property('webpages.content'),
 
     actions: {
 
@@ -74,16 +67,16 @@
       'promptNewWebpage': function(){
         var self = this;
         var title = Em.I18n.t('webpage.new_name');
-        if( this.get('curWebpage') )
-          title = Em.I18n.t('webpage.new_subpage_of', {name: this.get('curWebpage.name')});
+        if( this.get('curSelectedItem') )
+          title = Em.I18n.t('webpage.new_subpage_of', {name: this.get('curSelectedItem.name')});
         bootbox.prompt( title, function(result) { 
           if( !result || result.length < 1 )
             return;
           var model = self.store.createRecord('webpage', { name: result });
-          model.set('parent', self.get('curWebpage') );
+          model.set('parent', self.get('curSelectedItem') );
           model.save().then( function(){
             notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
-            self.set('curWebpage', model);
+            self.set('curSelectedItem', model);
             self.set('addedWebpage', model);
           }).catch(function(err){
             console.error( err );
@@ -93,19 +86,19 @@
 
       },
 
-      'treeItemSelected': function( webpage ){
+      'treeItemSelected': function( webpage, select ){
         $('.webpages-tree .active').removeClass('active');
-        if( this.get('curWebpage.id') === webpage.get('id') )
-          return this.set('curWebpage',null);
-        this.set('curWebpage', webpage);
-        $('.webpages-tree [data-id='+this.get('curWebpage.id')+']').addClass('active');
+        if( this.get('curSelectedItem.id') === webpage.get('id') && !select )
+          return this.set('curSelectedItem',null);
+        this.set('curSelectedItem', webpage);
+        $('.webpages-tree [data-id='+this.get('curSelectedItem.id')+']').addClass('active');
       },
 
       'setState': function( state ){
-        this.get('curWebpage').set('status', state );
-        if( this.get('curWebpage.status') !== 'review' ){
-          this.get('curWebpage').set('requestReviewMsg','');
-          this.get('curWebpage').set('requestReviewBy',null);
+        this.get('curSelectedItem').set('status', state );
+        if( this.get('curSelectedItem.status') !== 'review' ){
+          this.get('curSelectedItem').set('requestReviewMsg','');
+          this.get('curSelectedItem').set('requestReviewBy',null);
         }
       },
 
@@ -115,7 +108,7 @@
           .save()
           .then( function(){
             notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
-            controller.set('curWebpage',null);
+            controller.set('curSelectedItem',null);
           })
           .catch( function(err){
             notify('error',err);
@@ -124,9 +117,9 @@
 
       'cancelClose': function(){
         var self = this;
-        var webpage = this.get('curWebpage');
+        var webpage = this.get('curSelectedItem');
 
-        if( this.get('curWebpage.isDirty') )
+        if( this.get('curSelectedItem.isDirty') )
           bootbox.confirm( Em.I18n.t('unsaved_data_continue'), function(result){
             if( result )
               restoreWebpage( webpage, self );
@@ -137,13 +130,13 @@
 
       'removeWebpage': function(){
         var self = this;
-        var webpage = this.get('curWebpage');
+        var webpage = this.get('curSelectedItem');
         bootbox.confirm( Em.I18n.t('webpage.really_delete', {name: webpage.get('name') }), function(result){
           if( result ){
             webpage.deleteRecord();
             webpage.save().then( function(){
               notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('name') }) );
-              self.set('curWebpage',null);
+              self.set('curSelectedItem',null);
 
             });
           }
@@ -157,7 +150,7 @@
 
     $('.webpages-tree .active').removeClass('active');
     webpage.rollback();
-    controller.set('curWebpage',null);
+    controller.set('curSelectedItem',null);
 
   }
 

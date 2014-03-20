@@ -2,7 +2,7 @@
 
   'use strict';
 
-  App.WebpageActivitiesComponent = Ember.Component.extend({
+  App.WebpageActivitiesComponent = App.WebpageComponent.extend({
 
     actions: {
 
@@ -24,10 +24,6 @@
         });
         if( !$('#activity-modal .keep-open').is(':checked') )
           $('#activity-modal').modal('hide');
-      },
-
-      'toggleContainer': function( prop ){
-        this.toggleProperty( prop );
       }
 
     },

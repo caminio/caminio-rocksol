@@ -32,7 +32,9 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpage_tree_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/components/webpage_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/activities_component.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/components/meta_component.js')
 
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/filesize.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')
@@ -52,6 +54,9 @@ append foot
 
   script(type="text/x-handlebars" data-template-name="components/webpage-activities")
     include hbs/webpages/activities_component.hbs
+
+  script(type="text/x-handlebars" data-template-name="components/webpage-meta")
+    include hbs/webpages/meta_component.hbs
 
   script(type="text/x-handlebars" data-template-name="webpages/edit")
     include hbs/webpages/edit.hbs

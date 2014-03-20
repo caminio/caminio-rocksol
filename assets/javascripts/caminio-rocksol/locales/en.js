@@ -10,7 +10,7 @@
     'nav.media': 'Media',
     'nav.blog': 'Blog',
 
-    'will_be_filename': 'will be the document\'s filename',
+    'will_be_filename': 'will become part of the document\'s url',
 
     'edit_content': 'Edit content',
 
@@ -72,7 +72,13 @@
     'activity.note': 'Note',
     'activity.starts_at': 'Starts',
 
-    'activity.saved': 'Activity from {{starts}} has been saved successfully'
+    'activity.saved': 'Activity from {{starts}} has been saved successfully',
+
+    'meta.title': 'Webpage Meta Information',
+    'meta.description': 'Meta Description',
+    'meta.description_desc': 'this text may appear as short description in google search results',
+    'meta.keywords': 'Meta Keywords',
+    'meta.keywords_desc': 'help search engines to categorize your webpage'
 
   };
 

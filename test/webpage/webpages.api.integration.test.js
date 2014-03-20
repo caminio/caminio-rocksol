@@ -31,15 +31,15 @@ describe( 'Contact authentifikation API - '+URL, function(){
   }
 
   before( function(done){
-    var akku = this;
-    helper.initApp( this, function( test ){ 
+    var test = this;
+    helper.initApp( this, function(){ 
       caminio = helper.caminio;
       Webpage = caminio.models.Webpage;
       helper.cleanup( caminio, function(){
         helper.getDomainAndUser( caminio, function( err, u, d ){
           user = u;
           domain = d;
-          akku.agent.post( helper.url+'/login' )
+          test.agent.post( helper.url+'/login' )
           .send({ username: user.email, password: user.password })
           .end(function(err,res){
             addWebpage( done );

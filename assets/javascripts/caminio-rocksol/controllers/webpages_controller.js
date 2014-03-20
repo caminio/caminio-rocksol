@@ -77,7 +77,7 @@
           model.save().then( function(){
             notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
             self.set('curSelectedItem', model);
-            self.set('addedWebpage', model);
+            self.set('addedItem', model);
 
           }).catch(function(err){
             console.error( err );

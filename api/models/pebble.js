@@ -1,3 +1,20 @@
+/** 
+ * @Author: David Reinisch
+ * @Company: TASTENWERK e.U.
+ * @Copyright: 2014 by TASTENWERK
+ * @License: Commercial
+ *
+ * @Date:   2014-03-21 00:30:53
+ *
+ * @Last Modified by:   David Reinisch
+ * @Last Modified time: 2014-03-21 00:30:59
+ *
+ * This source code is not part of the public domain
+ * If server side nodejs, it is intendet to be read by
+ * authorized staff, collaborator or legal partner of
+ * TASTENWERK only
+ */
+
 /**
  *
  * @class Pebble
@@ -17,6 +34,12 @@ module.exports = function Pebble( caminio, mongoose ){
      * @type String
      */  
     name: { type: String, public: true },
+
+    /**
+     * @property type
+     * @type String
+     */
+    type: { type: String, enum: [ 'table', 'gallery', 'page' ], public: true },
 
     /**
      * @property translations

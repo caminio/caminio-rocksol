@@ -11,6 +11,9 @@
     metaKeywords: DS.attr(),
     availableLangs: function(){
       return currentDomain.preferences.availableLangs;
+    }.property('locale'),
+    hasMultiLang: function(){
+      return currentDomain.preferences.availableLangs.length > 1;
     }.property('locale')
   });
 

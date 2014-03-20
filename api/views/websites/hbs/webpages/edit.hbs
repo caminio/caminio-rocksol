@@ -33,18 +33,20 @@
               {{/each}}
             </ul>
           </div>
-          <div class="dropdown btn-group">
-            <button class="btn text-icon dropdown-toggle" data-toggle="dropdown">
-              {{t 'translation.title'}}:
-              <strong>{{translation.locale}}</strong>
-              <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right">
-              {{#each lang in translation.availableLangs}}
-                <li {{action 'changeLang' lang}}><a href="#">{{lang}}</a></li>
-              {{/each}}
-            </ul>
-          </div>
+          {{#if translation.hasMultiLang}}
+            <div class="dropdown btn-group">
+              <button class="btn text-icon dropdown-toggle" data-toggle="dropdown">
+                {{t 'translation.title'}}:
+                <strong>{{translation.locale}}</strong>
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <ul class="dropdown-menu pull-right">
+                {{#each lang in translation.availableLangs}}
+                  <li {{action 'changeLang' lang}}><a href="#">{{lang}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
         </div>
       </div>
 

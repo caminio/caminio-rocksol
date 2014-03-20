@@ -24,7 +24,7 @@
 
         <div class="form-group">
 
-          <label for="example-text-input">{{t 'name'}} <span class="desc">&nbsp;{{t 'will_be_filename'}}</span></label>
+          <label>{{t 'name'}} <span class="desc">&nbsp;{{t 'will_be_filename'}}</span></label>
           <div {{bind-attr class="nameError:field-with-error"}}>
             {{input valueBinding='curSelectedItem.name' class='form-control'}}
             {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
@@ -34,7 +34,7 @@
 
         <div class="form-group">
 
-          <label for="example-text-input">{{t 'webpage.status'}}</label>
+          <label>{{t 'webpage.status'}}</label>
           <br>
 
           <button {{action removeWebpage}} class="btn highlight-danger icon-text pull-right" tabindex="-1">
@@ -61,14 +61,14 @@
             <legend>{{t 'webpage.request_review'}}</legend>
             <div class="form-group">
 
-              <label for="example-text-input">{{t 'webpage.assign_to'}}</label>
+              <label>{{t 'webpage.assign_to'}}</label>
               <div>
                 {{input valueBinding='curSelectedItem.requestReviewBy.fullname' class='form-control'}}
               </div>
             </div>
 
             <div class="form-group">        
-              <label for="example-text-input">{{t 'webpage.review_message'}}</label>
+              <label>{{t 'webpage.review_message'}}</label>
               <div>
                 {{textarea valueBinding='curSelectedItem.requestReviewMsg' class='form-control'}}
               </div>
@@ -77,18 +77,37 @@
           </fieldset>
         {{/if}}
 
-        <div class="form-group">
+        <div class="form-group clearfix">
 
-          <label for="example-text-input">{{t 'webpage.layout'}}</label>
-          <br>
+          <div class="pull-left">
+            <label>{{t 'webpage.layout'}}</label>
+            <br>
 
 
-          {{view Ember.Select
-                 content=availableLayouts
-                 valueBinding='curSelectedItem.layout'
-          }}
-          
+            {{view Ember.Select
+                   content=availableLayouts
+                   valueBinding='curSelectedItem.layout'
+            }}
+            
+          </div>
+
+          {{#if curTranslation.hasMultiLang}}
+            <div class="pull-right align-right">
+              <label>{{t 'translation.title'}}</label>
+              <br>
+
+
+              {{view Ember.Select
+                     content=curTranslation.availableLangs
+                     valueBinding='curLang'
+              }}
+              
+            </div>
+          {{/if}}
+
         </div>
+
+        {{webpage-meta webpage=curSelectedItem translation=curTranslation curLang=curLang}}
         
         {{#if curSelectedItem.isActivityPage}}
           {{webpage-activities webpage=curSelectedItem}}

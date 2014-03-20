@@ -12,6 +12,6 @@
     {{view.content.usedLocales}}
   </span>
 </div>
-<ul class="ember-tree-children">
+<ul {{bind-attr class=":ember-tree-children view.isOpen::hide"}}>
   {{view App.WebpageTreeView content=view.children}}
 </ul>

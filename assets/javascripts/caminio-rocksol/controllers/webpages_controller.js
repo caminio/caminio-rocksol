@@ -79,7 +79,6 @@
                                                     content: oldTr ? oldTr.get('content') : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a neque vel felis iaculis pulvinar ut sed erat. Aliquam accumsan diam diam, ac facilisis massa blandit vel. Morbi sollicitudin est non bibendum consequat. Maecenas pretium lobortis neque, eu luctus lectus pharetra id. Phasellus sem libero, viverra ut purus id, accumsan interdum orci. Donec sed mauris ullamcorper, luctus ligula ac, euismod erat. Maecenas faucibus eros justo. Aliquam tempor ipsum augue, tempus tempus lorem porttitor at. Nullam nulla tortor, facilisis nec consectetur eu, interdum sed elit. Praesent at iaculis odio.' });
       this.get('curSelectedItem.translations').pushObject( tr );
       this.set('curTranslation', tr);
-      console.log('curlang changed', this.get('curTranslation.locale'));
     }.observes('curSelectedItem', 'curLang'),
 
     updateWebpageDirty: function(){
@@ -111,7 +110,6 @@
             notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
             self.set('curSelectedItem', model);
             self.set('addedItem', model);
-
           }).catch(function(err){
             console.error( err );
             notify.processError( err.responseJSON );
@@ -136,7 +134,6 @@
 
       'saveWebpage': function( webpage ){
         var controller = this;
-        console.log( this.get('curTranslation.metaDescription'))
         webpage
           .save()
           .then( function(){
@@ -161,13 +158,14 @@
           restoreWebpage( webpage, this );
       },
 
-      'removeWebpage': function(){
+      'removeSelectedItem': function(){
         var self = this;
         var webpage = this.get('curSelectedItem');
         bootbox.confirm( Em.I18n.t('webpage.really_delete', {name: webpage.get('name') }), function(result){
           if( result ){
             webpage.deleteRecord();
             webpage.save().then( function(){
+              self.set('removedItem', webpage);
               notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('name') }) );
               self.set('curSelectedItem',null);
 

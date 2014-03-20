@@ -33,7 +33,6 @@ module.exports = function( caminio, policies, middleware ){
     },
 
     'update': function updateWebpage(req, res ){
-
       if( req.webpage.status === 'published' )
         SiteGen.compilePage( res, req.webpage, finalResponse );
       else
@@ -104,10 +103,11 @@ module.exports = function( caminio, policies, middleware ){
   }
 
   function cleanNewTranslations( req, res, next ){
-    req.body.webpage.translations.forEach(function(tr){
-      if( tr._id === null )
-        delete tr._id;
-    });
+    if( req.body.webpage.translations )
+      req.body.webpage.translations.forEach(function(tr){
+        if( tr._id === null )
+          delete tr._id;
+      });
     next();
   }
 

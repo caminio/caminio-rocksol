@@ -91,7 +91,7 @@ module.exports = function Webpage( caminio, mongoose ){
 
   });
   
-  schema.publicAttributes = [ 'translations', 'pebbles', 'activities' ];
+  schema.publicAttributes = [ 'translations', 'pebbles', 'activities', 'parent' ];
   schema.trash = true;
 
   return schema;

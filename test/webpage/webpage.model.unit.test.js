@@ -75,10 +75,6 @@ describe( 'Webpage', function(){
         expect( this.webpage.layout ).to.eq( 'default' );
       });
 
-      it('.pebbles', function(){
-        expect( this.webpage.pebbles ).to.have.length(0);
-      });
-
     });
 
   });

@@ -34,7 +34,7 @@ module.exports = function Webpage( caminio, mongoose ){
      * @property parent
      * @type ObjectId
      */
-    parent: { type: ObjectId, public: true },
+    parent: { type: ObjectId, default: null, public: true },
 
     /**
      * @property requestReviewBy
@@ -55,13 +55,6 @@ module.exports = function Webpage( caminio, mongoose ){
     camDomain: { type: ObjectId, ref: 'Domain' },
     
     layout: { type: String, public: true, default: 'default' },
-
-    /**
-     * pebbles are tiny bits with content
-     * which are placed and dispatched all over
-     * the webpage's layout
-     */
-    pebbles: [ { type: ObjectId, ref: 'Pebble' } ],
 
     /**
      * activities are dates with meta information

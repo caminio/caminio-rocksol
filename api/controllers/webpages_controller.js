@@ -28,7 +28,7 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ cleanNewActivities, cleanNewTranslations, getWebpage, updateWebpage ],
+      'update': [ cleanNewActivities, cleanNewTranslations, getWebpage, saveWebpage ],
       'destroy': [ getWebpage, getChildren, removeChildren ]
     },
 
@@ -42,6 +42,9 @@ module.exports = function( caminio, policies, middleware ){
       function finalResponse( err ){
         if( err )
           return res.json( 500, { error: 'compile_error', details: err });
+        if( req.webpage.parent && typeof( req.webpage.parent) === 'object' )
+          req.webpage.parent = req.webpage.parent._id;
+        
         res.json( util.transformJSON( { webpage: JSON.parse(JSON.stringify(req.webpage)) }, req.header('namespaced') ) );
       }
     }
@@ -116,6 +119,19 @@ module.exports = function( caminio, policies, middleware ){
         delete act._id;
     });
     next();
+  }
+
+  function saveWebpage( req, res, next ){
+    req.webpage.update( req.body.webpage, function(err){
+      if( err )
+        return res.json( 500, { error: 'server_error', details: err });
+      Webpage.findOne({_id: req.param('id')}, function( err, webpage ){
+        if( err )
+          return res.json( 500, { error: 'server_error', details: err });
+        req.webpage = webpage;
+        return next();
+      });
+    });
   }
 
 };

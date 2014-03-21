@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 00:30:53
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-21 00:30:59
+ * @Last Modified time: 2014-03-21 09:45:54
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -45,13 +45,13 @@ module.exports = function Pebble( caminio, mongoose ){
      * @property translations
      * @type Array an array of Translation Schema Objects
      */
-    translations: [ Translation ],
+    translations: { type: [ Translation ], public: true },
     
     /**
      *  @attribute camDomain
      *  @type ObjectId
      */
-    camDomain: { type: ObjectId, ref: 'Domain' },
+    camDomain: { type: ObjectId, ref: 'Domain', public: true },
 
     /**
      * @property createdAt
@@ -62,8 +62,8 @@ module.exports = function Pebble( caminio, mongoose ){
      * @property createdBy
      * @type ObjectId
      */
-    createdAt: { type: Date, default: Date.now },
-    createdBy: { type: ObjectId, ref: 'User' },
+    createdAt: { type: Date, default: Date.now, public: true },
+    createdBy: { type: ObjectId, ref: 'User', public: true },
 
     /**
      * @property updatedAt
@@ -74,8 +74,8 @@ module.exports = function Pebble( caminio, mongoose ){
      * @property updatedBy
      * @type ObjectId
      */
-    updatedAt: { type: Date, default: Date.now },
-    updatedBy: { type: ObjectId, ref: 'User' }
+    updatedAt: { type: Date, default: Date.now, public: true },
+    updatedBy: { type: ObjectId, ref: 'User', public: true }
 
   });
 

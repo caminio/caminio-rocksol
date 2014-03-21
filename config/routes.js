@@ -4,5 +4,5 @@ module.exports.routes = {
   '/caminio/websites': 'WebsitesController#index',
   '/caminio/website/available_layouts': 'WebsitesController#available_layouts',
   'autorest /caminio/webpages': 'Webpage',
-  'autorest /caminio/pebbles': 'Pebble',
+  'autorest /caminio/pebbles': 'Pebble'
 };

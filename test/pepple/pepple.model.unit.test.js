@@ -7,22 +7,12 @@
  * @Date:   2014-03-21 00:31:23
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-21 10:23:02
+ * @Last Modified time: 2014-03-21 10:57:14
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
  * authorized staff, collaborator or legal partner of
  * TASTENWERK only
- */
-
-/*
- * caminio-rocksol
- *
- * @author david <david.reinisch@tastenwerk.com>
- * @date 03/2014
- * @copyright TASTENWERK http://tastenwerk.com
- * @license MIT
- *
  */
 
 var helper = require('../helper'),

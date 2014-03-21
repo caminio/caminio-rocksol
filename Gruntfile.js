@@ -8,8 +8,24 @@ module.exports = function(grunt) {
   
   var uglifyFiles = {};
   uglifyFiles['build/javascripts/'+gearName+'.min.js'] = [
-              'assets/javascripts/'+gearName+'/**/*.js'
-  ];
+              'assets/javascripts/caminio/ember-tree.js',
+              'assets/javascripts/caminio-rocksol/3rdparty/ghostdown.js',
+              'assets/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js',
+              'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-datepicker.js',
+              'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-timepicker.js',
+              'assets/javascripts/caminio-rocksol/locales/*.js',
+              'assets/javascripts/caminio-rocksol/router.js',
+              'assets/javascripts/caminio-rocksol/models/translation.js',
+              'assets/javascripts/caminio-rocksol/models/pebble.js',
+              'assets/javascripts/caminio-rocksol/models/webpage.js',
+              'assets/javascripts/caminio-rocksol/models/activity.js',
+              'assets/javascripts/caminio-rocksol/controllers/webpages_controller.js',
+              'assets/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js',
+              'assets/javascripts/caminio-rocksol/views/edit_webpage_view.js',
+              'assets/javascripts/caminio-rocksol/views/webpage_tree_view.js',
+              'assets/javascripts/caminio-rocksol/components/webpage_component.js',
+              'assets/javascripts/caminio-rocksol/components/activities_component.js',
+              'assets/javascripts/caminio-rocksol/components/meta_component.js' ];
 
   // Project configuration.
   grunt.initConfig({

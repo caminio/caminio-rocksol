@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-22 12:13:32
+ * @Last Modified time: 2014-03-22 17:53:50
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -21,7 +21,7 @@ var helper = require('../helper'),
     expect = helper.chai.expect,
     request = require('superagent'),
     async = require('async'),
-    names = [ 'parent', 'sibling1', 'sibling2', 'child', 'grandchild' ],
+    names = [ 'parent', 'sibling1', 'sibling2', 'child', 'grandchild' ]
     ids = {};
   
 var user,
@@ -29,7 +29,8 @@ var user,
     caminio,
     test;
 
-var Webpage;
+var Webpage,
+    Pebble;
 
 var URL='http://localhost:4004/caminio/webpages';
 
@@ -54,6 +55,7 @@ describe( 'Site Generator variables test', function(){
     helper.initApp( this, function( test ){ 
       caminio = helper.caminio;
       Webpage = caminio.models.Webpage;
+      Pebble = caminio.models.Pebble;
       helper.cleanup( caminio, function(){
         helper.getDomainAndUser( caminio, function( err, u, d ){
           user = u;
@@ -83,6 +85,17 @@ describe( 'Site Generator variables test', function(){
   });
 
   describe('Ancestors', function(){
+
+    before( function( done ){
+      this.pebble = new Pebble( { 
+        name: 'test', 
+        camDomain: domain.id,
+        translations: [{content: 'pebblecontent', locale: 'en'}] 
+      } );
+      this.pebble.save( function( err ){
+        done();
+      });
+    });
 
     it('can be set at the param "parent"', function( done ){
       this.agent

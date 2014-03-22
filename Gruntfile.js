@@ -100,8 +100,12 @@ module.exports = function(grunt) {
       },
       combine: {
         files: {
-          'build/stylesheets/<%= gearName %>.min.css': [ 'assets/stylesheets/<%= gearName %>/*.css' ],
-          'build/stylesheets/caminio-auth.min.css': [ 'assets/stylesheets/<%= gearName %>/authorization.css' ]
+          'build/stylesheets/<%= gearName %>.min.css': [ 
+            'assets/stylesheets/<%= gearName %>/3rdparty/ghostdown.css',
+            'assets/stylesheets/<%= gearName %>/3rdparty/datepicker.css',
+            'assets/stylesheets/<%= gearName %>/3rdparty/timepicker.css',
+            'assets/stylesheets/<%= gearName %>/websites.css'
+            ]
         }
       }
     },

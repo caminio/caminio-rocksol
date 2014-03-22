@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-21 11:23:48
+ * @Last Modified time: 2014-03-22 12:13:32
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -41,7 +41,7 @@ describe( 'Site Generator variables test', function(){
       camDomain: domain.id, 
       status: 'published',
       layout: 'testing',
-      translations: [{content: 'testcontent with {{ name }}', locale: 'en'}] 
+      translations: [{content: 'testcontent with {{ pebble: test, heigh=123, width=123 }}', locale: 'en'}] 
     } );
     webpage.save( function( err ){
       ids[name] = webpage._id;

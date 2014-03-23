@@ -139,7 +139,7 @@
           .save()
           .then( function(){
             notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
-            controller.set('curSelectedItem',null);
+            //controller.set('curSelectedItem',null);
           })
           .catch( function(err){
             notify('error',err);

@@ -4,11 +4,10 @@
  * @Copyright: 2014 by TASTENWERK
  * @License: Commercial
  *
- * @Date:   2014-03-21 00:30:53
+ * @Date:   2014-03-23 20:27:00
  *
-
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-23 20:31:35
+ * @Last Modified time: 2014-03-23 20:27:28
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -18,7 +17,7 @@
 
 /**
  *
- * @class Pebble
+ * @class Cobble
  *
  */
  
@@ -34,37 +33,13 @@ module.exports = function Pebble( caminio, mongoose ){
      * @property name
      * @type String
      */  
-    name: { type: String, index: true, public: true },
-
-    /**
-     * @property description
-     * @type String
-     */  
-    description: { type: String, public: true },
+    name: { type: String, public: true },
 
     /**
      * @property type
      * @type String
      */
-    type: { type: String, public: true },
-
-    /**
-     * @property webpage
-     * @type [ObjectId]
-     */
-    webpage: { type: ObjectId, ref: 'Webpage', public: true },
-
-    /**
-     * @property mediafiles
-     * @type [ObjectId]
-     */
-    mediafiles: { type: [ObjectId], ref: 'Mediafile', public: true },
-
-    /**
-     * @property teaser
-     * @type [ObjectId]
-     */
-    teaser: { type: ObjectId, ref: 'Mediafile', public: true },
+    type: { type: String, enum: [ 'table', 'gallery', 'page' ], public: true },
 
     /**
      * @property translations

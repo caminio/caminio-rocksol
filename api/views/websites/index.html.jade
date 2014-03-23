@@ -10,6 +10,7 @@ append head
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/3rdparty/timepicker.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-media/media_manager.css' )
+    link( rel='stylesheet', href='/stylesheets/caminio-media/3rdparty/jcrop.min.css' )
 
 append foot
   if env === 'production'
@@ -42,6 +43,7 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/meta_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/pebbles_library_component.js')
 
+    script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jcrop.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/filesize.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.fileupload.js')
@@ -103,6 +105,8 @@ append foot
     include hbs/webpages/_tree.hbs
   script(type="text/x-handlebars" data-template-name="webpages/details")
     include hbs/webpages/_details.hbs
+  script(type="text/x-handlebars" data-template-name="_pebble_type_teaser")
+    include hbs/pebbles/_pebble_type_teaser.hbs
 
 block content
 

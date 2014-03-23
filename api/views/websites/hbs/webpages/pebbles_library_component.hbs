@@ -17,39 +17,17 @@
               <div class="col-md-6">
 
                 <div class="box">
-                  <div class="box-title">
-                    <div class="btn-toolbox">
-
-                      <div class="btn-group">
-                        <button class="btn">
-                          <i class="fa fa-square-o" {{translateAttr title='select_all'}}></i>
-                        </button>
-                      </div>
-
-                      <div class="btn-group">
-                        <button class="btn">
-                          <i class="fa fa-trash-o" {{translateAttr title='delete_selected'}}></i>
-                        </button>
-                      </div>
-
-                      <div class="btn-group">
-                        <button class="btn">
-                          <i class="fa fa-cut" {{translateAttr title='cut'}}></i>
-                        </button>
-                        <button class="btn">
-                          <i class="fa fa-copy" {{translateAttr title='copy'}}></i>
-                        </button>
-                        <button class="btn">
-                          <i class="fa fa-paste" {{translateAttr title='paste'}}></i>
-                        </button>
-                      </div>
-
-                    </div>
-                  </div>
 
                   <div class="row default-padding">
                   
-                    <h1>pebbles</h1>
+                    <ul class="pebbles-list">
+                      {{#each associatedPebbles}}
+                        <li {{action showPebble this}}>
+                          <i {{bind-attr class=":fa getIcon"}}></i>
+                          {{name}}
+                        </li>
+                      {{/each}}
+                    </ul>
 
                   </div>
 
@@ -58,7 +36,59 @@
 
               <div class="col-md-6">
 
-                <h1>settings</h1>
+                {{#if curPebble}}
+                  <div class="box pebble-box clearfix">
+
+                    <div class="box-title">
+                      <span class="btn close" {{action cancelClosePebble}}><i class="fa fa-times"></i></span>
+
+                      <div class="btn-group pull-right">
+                        <button {{bind-attr class=":save :btn :icon-text curPebble.isDirty:primary:disabled"}}
+                                {{action savePebble}}>
+                          <i class="fa fa-save"></i> {{t 'save'}}
+                        </button>
+                      </div>
+
+                      <strong>{{curFile.name}}</strong>
+                      {{t 'properties'}}
+                    </div>
+
+                    <form class="caminio clearfix" {{action savePebble on='submit'}}>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3">{{t 'pebble.name'}}</label>
+                        <div class="col-md-9">
+                          {{input type='text' valueBinding='curPebble.name' class='form-control'}}
+                          <div class="desc row">
+                            <div class="col-md-6">
+                              <span>{{t 'created'}}:</span>
+                              <strong>{{curPebble.createdBy.fullname}}</strong>
+                            </div>
+                            <div class="col-md-6">
+                              <span>{{t 'date'}}:</span>
+                              <strong>{{formatDate curPebble.createdAt format='DD MM YYYY HH:mm'}}</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3">{{t 'pebble.description'}}</label>
+                        <div class="col-md-9">
+                          {{input type='text' valueBinding='curPebble.description' class='form-control'}}
+                        </div>
+                      </div>
+
+                    </form>
+
+                    {{#equal 'teaser' curPebble.type }}
+                      {{partial 'pebble_type_teaser'}}
+                    {{/equal}}
+
+                    <p>&nbsp;</p>
+
+                  </div>
+                {{/if}}
 
               </div>
 
@@ -69,7 +99,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'close'}}</button>
-        <button type="button" {{bind-attr class=":btn curFile:primary"}} {{action insertPebble}}>{{t 'media.insert_selected'}}</button>
+        <button type="button" {{bind-attr class=":btn curFile:primary"}} {{action insertPebble}}>{{t 'pebble.insert_selected'}}</button>
       </div>
     </div>
   </div><!-- /.modal-dialog -->

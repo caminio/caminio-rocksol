@@ -49,6 +49,12 @@ module.exports = function Webpage( caminio, mongoose ){
     requestReviewMsg: { type: String, public: true },
 
     /**
+     * @property initialSetupCompleted
+     * @type Boolean
+     */
+    initialSetupCompleted: { type: Boolean, default: false },
+
+    /**
      *  @attribute camDomain
      *  @type ObjectId
      */

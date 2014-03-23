@@ -73,7 +73,9 @@
       controller.set('translation', model.get('translations').content[0] );
       controller.set('webpages', controller.store.find('webpage', {parent: 'null'}));
       controller.set('labels', controller.store.find('label'));
+      controller.set('associatedPebbles', controller.store.find('pebble', { webpage: model.id}));
       controller.set('pebbles', controller.store.find('pebble'));
+      controller.store.find('mediafile',{parent: model.id});
       this.store.find('user');
 
       if( typeof(availableWebpageLayouts) === 'undefined' )

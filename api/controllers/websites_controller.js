@@ -10,6 +10,7 @@
 
 var fs      = require('fs');
 var join    = require('path').join;
+var extname = require('path').extname;
 var mkdirp  = require('mkdirp');
 
 /**
@@ -49,6 +50,9 @@ module.exports = function( caminio, policies, middleware ){
 
       fs
         .readdirSync( domainTmplPath )
+        .filter( function( filename ){
+          return extname(filename).indexOf('.jade') === 0;
+        })
         .forEach( function( file ){
           tmpls.push( file.split('.')[0] );
         });

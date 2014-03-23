@@ -8,7 +8,6 @@ module.exports = function(grunt) {
   
   var uglifyFiles = {};
   uglifyFiles['build/javascripts/'+gearName+'.min.js'] = [
-              'assets/javascripts/caminio/ember-tree.js',
               'assets/javascripts/caminio-rocksol/3rdparty/ghostdown.js',
               'assets/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js',
               'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-datepicker.js',

@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-22 17:53:50
+ * @Last Modified time: 2014-03-23 10:09:15
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -41,8 +41,8 @@ describe( 'Site Generator variables test', function(){
       name: name, 
       camDomain: domain.id, 
       status: 'published',
-      layout: 'testing',
-      translations: [{content: 'testcontent with {{ pebble: test, heigh=123, width=123 }}', locale: 'en'}] 
+      //layout: 'nopebble',
+      translations: [{content: 'testcontent with no pebble, but has siblings', locale: 'en'}] 
     } );
     webpage.save( function( err ){
       ids[name] = webpage._id;
@@ -65,7 +65,7 @@ describe( 'Site Generator variables test', function(){
           .end(function(err,res){
             akku.agent.get( helper.url+'/website/available_layouts')
             .end( function( err, res ){
-              async.forEach( names, addWebpage, done )
+              async.forEach( names, addWebpage, done );
             });
           });
         });
@@ -100,6 +100,16 @@ describe( 'Site Generator variables test', function(){
     it('can be set at the param "parent"', function( done ){
       this.agent
       .put(URL+'/'+ids[names[1]])
+      .send( { 'webpage': { parent: ids[names[0]] } } )
+      .end(function(err, res){
+        expect(res.status).to.eq(200);
+        done();
+      });
+    });
+
+    it('have the same anchastor, means the same "parent" param', function( done ){
+      this.agent
+      .put(URL+'/'+ids[names[2]])
       .send( { 'webpage': { parent: ids[names[0]] } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);

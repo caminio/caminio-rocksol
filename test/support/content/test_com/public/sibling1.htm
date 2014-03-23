@@ -1,3 +1,17 @@
-{"ancestors":[{"translations":[{"content":"testcontent with 
-<h1>content in jade file<p>pebblecontent</p>
-</h1>","locale":"en","_id":"532dcc1159389cb41a6c2bfd","id":"532dcc1159389cb41a6c2bfd"}],"activities":[],"parent":null,"name":"parent","status":"published","layout":"testing","createdAt":"2014-03-22T17:44:49.606Z","updatedAt":"2014-03-22T17:44:49.606Z","_id":"532dcc1159389cb41a6c2bfc"}],"siblings":[{"translations":[{"content":"testcontent with {{ pebble: test, heigh=123, width=123 }}","locale":"en","_id":"532dcc1159389cb41a6c2bff","id":"532dcc1159389cb41a6c2bff"}],"activities":[],"parent":"532dcc1159389cb41a6c2bfc","name":"sibling1","status":"published","layout":"testing","createdAt":"2014-03-22T17:44:49.607Z","updatedAt":"2014-03-22T17:44:49.607Z","_id":"532dcc1159389cb41a6c2bfe"}],"children":[]}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>test.com</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description">
+    <meta name="author" content="test@example.com">
+  </head>
+  <body>
+    <div class="main">   
+      <div class="ul"></div>
+      <li>sibling1</li>
+      <h1>Welcome to your website</h1><p>testcontent with no pebble, but has siblings</p>
+    </div>
+  </body>
+</html>

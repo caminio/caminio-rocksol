@@ -7,7 +7,8 @@ html(lang=en)
     meta(name="description", content=translation.metaDescription)
     meta(name='author', content=currentUser.fullname)
   body
-    .main    
+    .main  
+      h1 {{ pebble: test }}  
       .ul 
       each sibling in siblings
         li= sibling.name

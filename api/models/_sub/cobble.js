@@ -7,7 +7,7 @@
  * @Date:   2014-03-23 20:27:00
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-23 20:27:28
+ * @Last Modified time: 2014-03-23 23:34:06
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -21,9 +21,9 @@
  *
  */
  
-module.exports = function Pebble( caminio, mongoose ){
+module.exports = function Cobble( caminio, mongoose ){
 
-  var Translation = require('./_sub/translation')( caminio, mongoose );
+  var Translation = require('./translation')( caminio, mongoose );
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
 

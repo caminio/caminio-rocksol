@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-23 14:46:45
+ * @Last Modified time: 2014-03-23 23:49:21
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -41,7 +41,7 @@ describe( 'Site Generator variables test', function(){
       name: name, 
       camDomain: domain.id, 
       status: 'published',
-      //layout: 'nopebble',
+      layout: 'default',
       translations: [{content: 'testcontent with pebble {{ pebble: test }}', locale: 'en'}] 
     } );
     webpage.save( function( err ){
@@ -100,7 +100,7 @@ describe( 'Site Generator variables test', function(){
     it('can be set at the param "parent"', function( done ){
       this.agent
       .put(URL+'/'+ids[names[1]])
-      .send( { 'webpage': { parent: ids[names[0]] } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'default' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();
@@ -110,7 +110,7 @@ describe( 'Site Generator variables test', function(){
     it('have the same anchastor, means the same "parent" param', function( done ){
       this.agent
       .put(URL+'/'+ids[names[2]])
-      .send( { 'webpage': { parent: ids[names[0]] } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'default' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();

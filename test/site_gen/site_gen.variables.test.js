@@ -56,7 +56,7 @@ describe( 'Site Generator variables test', function(){
           .end(function(err,res){
             akku.agent.get( helper.url+'/website/available_layouts')
             .end( function( err, res ){
-              async.forEach( names, addWebpage, done )
+              async.forEach( names, addWebpage, done );
             });
           });
         });
@@ -80,8 +80,9 @@ describe( 'Site Generator variables test', function(){
     it('can be set at the param "parent"', function( done ){
       this.agent
       .put(URL+'/'+ids[names[1]])
-      .send( { 'webpage': { parent: ids[names[0]] } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'testing' } } )
       .end(function(err, res){
+        console.log(res.text, 'll');
         expect(res.status).to.eq(200);
         done();
       });
@@ -101,7 +102,7 @@ describe( 'Site Generator variables test', function(){
     it('the array holds all known ancestors', function( done ){
       this.agent
       .put(URL+'/'+ids[names[3]])
-      .send( { 'webpage': { parent: ids[names[1]] } } )
+      .send( { 'webpage': { parent: ids[names[1]], layout: 'testing' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();
@@ -126,7 +127,7 @@ describe( 'Site Generator variables test', function(){
     it('have the same anchastor, means the same "parent" param', function( done ){
       this.agent
       .put(URL+'/'+ids[names[2]])
-      .send( { 'webpage': { parent: ids[names[0]] } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'testing' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();
@@ -158,7 +159,7 @@ describe( 'Site Generator variables test', function(){
     it('have the current webpage as "parent" param', function( done ){
       this.agent
       .put(URL+'/'+ids[names[0]])
-      .send( { 'webpage': { createdAt: Date.now } } )
+      .send( { 'webpage': { createdAt: Date.now, layout: 'testing' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();

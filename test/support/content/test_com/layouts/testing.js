@@ -2,9 +2,9 @@
 
   return {
     run: function( options, next ){
-      console.log('in the run function');
-      next();
+      console.log('in the run fusadfsdafasdfnction');
+      next( true );
     }
-  }
+  };
 
-}
+};

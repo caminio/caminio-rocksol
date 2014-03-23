@@ -36,6 +36,8 @@ helper.initApp = function( test, done ){
 
   // require auth gear
   require('caminio-auth');
+  // require media gear
+  require('caminio-media');
   // require this gear
   require('../');
 

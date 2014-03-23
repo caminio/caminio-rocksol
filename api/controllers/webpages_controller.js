@@ -28,13 +28,13 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ cleanNewActivities, cleanNewTranslations, getWebpage, saveWebpage ],
+      'update': [ cleanNewActivities, cleanNewTranslations, getWebpage, autoCreatePebbles, saveWebpage ],
       'destroy': [ getWebpage, getChildren, removeChildren ]
     },
 
     'update': function updateWebpage(req, res ){
       if( req.webpage.status === 'published' )
-        SiteGen.compilePage( res, req.webpage, finalResponse );
+        finalResponse(); //SiteGen.compilePage( res, req.webpage, finalResponse );
       else
         finalResponse();
       
@@ -121,7 +121,30 @@ module.exports = function( caminio, policies, middleware ){
     next();
   }
 
+  function autoCreatePebbles( req, res, next ){
+
+    if( req.webpage.initialSetupCompleted )
+      return next();
+
+    var layoutFile = join( res.locals.currentDomain.getContentPath(), 'layouts', req.body.webpage.layout, req.body.webpage.layout );
+
+    if( fs.existsSync( layoutFile+'.js' ) )
+      require( layoutFile )( caminio ).initialSetup( req.webpage, res, markCompleted );
+    else
+      next();
+
+    function markCompleted( err ){
+      req.body.webpage.initialSetupCompleted = true;
+      next();
+    }
+
+  }
+
   function saveWebpage( req, res, next ){
+
+    req.body.webpage.updatedBy = res.locals.currentUser;
+    req.body.webpage.camDomain = res.locals.currentDomain;
+
     req.webpage.update( req.body.webpage, function(err){
       if( err )
         return res.json( 500, { error: 'server_error', details: err });

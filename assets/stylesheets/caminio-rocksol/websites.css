@@ -92,3 +92,48 @@ ul.activities .fa-clock-o{
   float: left;
   margin: 3px 5px 0 0;
 }
+ul.pebbles-list{
+  margin: 5px;
+  padding: 0;
+  list-style: none;
+}
+ul.pebbles-list li{
+  margin: 3px 0;
+  padding: 5px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  color: #555;
+  cursor: pointer;
+}
+ul.pebbles-list li .fa{
+  float: left;
+  margin: 3px 5px 0 0;
+  color: #777;
+}
+.pebble-box{
+  background: #fafafa;
+}
+
+.details-container.teaser-preview{
+  margin: 40px 20px;
+  position: relative;
+  height: 100px;
+  min-height: 100px;
+}
+.details-container.teaser-preview .title{
+  margin: auto;
+}
+
+.teaser-preview #crop-img{
+  width: 100%;
+}
+
+.previews{
+  margin: 20px 0;
+}
+
+.preview-thumb{
+  overflow: hidden;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 3px #aaa;
+}

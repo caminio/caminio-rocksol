@@ -24,6 +24,11 @@
     'editor.link': 'Link with other webpage',
 
     'pebbles.title': 'Pebbles',
+    'pebble.name': 'Name',
+    'pebble.description': 'Description',
+    'pebble.saved': 'Pebble {{name}} has been saved',
+    'pebble.teaser.drop_image_here': 'Drop your teaser image or click here to upload',
+    'pebble.insert_selected': 'Insert selected pebble',
 
     'markdown_code': 'Markdown editor',
     'preview': 'Preview',

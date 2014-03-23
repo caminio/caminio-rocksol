@@ -20,7 +20,10 @@
     'editor.underline': 'Underline',
 
     'editor.image': 'Open Media Library',
+    'editor.pebbles': 'Open Pebbles Library',
     'editor.link': 'Link with other webpage',
+
+    'pebbles.title': 'Pebbles',
 
     'markdown_code': 'Markdown editor',
     'preview': 'Preview',

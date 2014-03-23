@@ -11,10 +11,6 @@
     layout: DS.attr(),
     parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble' ),
-    activities: DS.hasMany( 'activity' ),
-    isActivityPage: function(){
-      return this.get('layout') === 'activity';
-    }.property('layout'),
     usedLocales: function(){
       var locales = this.get('translations').map(function(trans){ return trans.locale }).join(',');
       if( locales.length < 1 )

@@ -22,6 +22,12 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/bootstrap-datepicker.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/bootstrap-timepicker.js')
 
+    script(type='text/javascript').
+      var siteComponents = [];
+    each siteComp in siteComponents
+      script(type='text/javascript').
+        siteComponents.push( { name: '!{siteComp.name}' } );
+
     script(type='text/javascript', src='/javascripts/caminio-rocksol/locales/#{currentLang}.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/router.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/models/translation.js')
@@ -33,8 +39,8 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpage_tree_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/webpage_component.js')
-    script(type='text/javascript', src='/javascripts/caminio-rocksol/components/activities_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/meta_component.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/components/pebbles_library_component.js')
 
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/filesize.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')
@@ -52,11 +58,18 @@ append foot
   script(type="text/x-handlebars" data-template-name="webpages/index")
     include hbs/webpages/index.hbs
 
-  script(type="text/x-handlebars" data-template-name="components/webpage-activities")
-    include hbs/webpages/activities_component.hbs
-
   script(type="text/x-handlebars" data-template-name="components/webpage-meta")
     include hbs/webpages/meta_component.hbs
+
+  script(type="text/x-handlebars" data-template-name="components/pebbles-library")
+    include hbs/webpages/pebbles_library_component.hbs
+
+  each siteComp in siteComponents
+    each compScript in siteComp.javascripts
+      script(type='text/javascript', src='/caminio/domains/#{currentDomain.id}/javascripts/#{siteComp.name}/#{compScript}')
+    script(type="text/x-handlebars" data-template-name="components/webpage-"+siteComp.name)
+      !=siteComp.content
+
 
   script(type="text/x-handlebars" data-template-name="webpages/edit")
     include hbs/webpages/edit.hbs

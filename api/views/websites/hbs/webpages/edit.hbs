@@ -88,6 +88,10 @@
                                     {{translateAttr title='editor.image'}}>
                   <i class="fa fa-picture-o"></i>
                 </button>
+                <button class="btn" {{action openPebblesLibrary this}}
+                                    {{translateAttr title='editor.pebbles'}}>
+                  <i class="fa fa-th"></i>
+                </button>
                 <button class="btn" {{action openLinkLibrary}}
                                     {{translateAttr title='editor.link'}}>
                   <i class="fa fa-chain"></i>
@@ -121,3 +125,5 @@
     {{media-manager labels=labels webpages=webpages selectItem=model asDialog=true}}
   </div><!-- /.modal-dialog -->
 </div>
+
+{{pebbles-library pebbles=pebbles webpage=model}}

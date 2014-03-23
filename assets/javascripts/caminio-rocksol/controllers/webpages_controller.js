@@ -20,7 +20,6 @@
       else
         controller.set('availableLayouts', availableWebpageLayouts);
 
-
     }
   });
 
@@ -29,6 +28,8 @@
     domain: currentDomain,
 
     errors: [],
+
+    siteComponents: window.siteComponents,
 
     nameError: function(){
       return ('name' in this.get('errors'));

@@ -108,13 +108,13 @@
         </div>
 
         {{webpage-meta webpage=curSelectedItem translation=curTranslation curLang=curLang}}
+
         
-        {{#if curSelectedItem.isActivityPage}}
-          {{webpage-activities webpage=curSelectedItem}}
+        {{#if curSelectedItem.hasActivityLayout}}
+          {{webpage-activity webpage=curSelectedItem}}
         {{/if}}
 
       </div>
-
 
     </div>
   </form>

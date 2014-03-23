@@ -7,4 +7,4 @@ doc
 .tmp
 test.log
 build
-test/support/*/public
+test/**/public

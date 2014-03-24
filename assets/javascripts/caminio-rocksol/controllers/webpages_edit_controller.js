@@ -23,6 +23,7 @@
 
       'changeLayout': function( layout ){
         this.get('model').set('layout', layout);
+        this.get('translation').send('becomeDirty');
       },
 
       'changeLang': function( lang ){

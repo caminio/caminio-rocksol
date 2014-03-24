@@ -7,8 +7,8 @@
  * @Date:   2014-03-21 00:30:53
  *
 
- * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-24 10:52:00
+ * @Last Modified by:   thorsten zerha
+ * @Last Modified time: 2014-03-24 15:37:08
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -27,6 +27,7 @@ module.exports = function Pebble( caminio, mongoose ){
   var Translation = require('./_sub/translation')( caminio, mongoose );
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
+  var Mixed = mongoose.Schema.Types.Mixed;
 
   var schema = new mongoose.Schema({
 
@@ -77,6 +78,8 @@ module.exports = function Pebble( caminio, mongoose ){
      *  @type ObjectId
      */
     camDomain: { type: ObjectId, ref: 'Domain', public: true },
+
+    preferences: { type: Mixed, default: {} },
 
     /**
      * @property createdAt

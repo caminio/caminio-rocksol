@@ -69,28 +69,43 @@
                         parentType: 'Webpage' };
     });
 
-    $('#crop-img').Jcrop({
-      onChange: showPreview,
-      onSelect: showPreview,
-      aspectRatio: 1
+    var currentCrop;
+
+    $('.preview-thumb').on('click', function(){
+      $('.preview-thumb').removeClass('active');
+      $(this).addClass('active');
+      if( currentCrop )
+        currentCrop.destroy();
+      currentCrop = $.Jcrop('#crop-img', {
+        onChange: showPreview,
+        onSelect: showPreview,
+        aspectRatio: $(this).width()/$(this).height()
+      });
     });
+
+    $('.preview-thumb:first').click();
 
   }
 
   function showPreview(coords){
+
+    var $thumb = $('.preview-thumb.active');
+    
+    var ratioX = $thumb.width() / coords.w;
+    var ratioY = $thumb.height() / coords.h;
+
     var rx = 100 / coords.w;
     var ry = 100 / coords.h;
+    console.log( ratioX, coords.w, Math.round( ratioX * $('#crop-img').width() ) );
 
     if( !currentDomain.preferences.thumbs )
       return console.error('no domain.preferences.thumbs settings were found. aborting');
-
-    currentDomain.preferences.thumbs.forEach( function(thumbSize){
-      $('#preview-thumb'+thumbSize+'-img').css({
-        width: Math.round(rx * $('#crop-img').width()) + 'px',
-        height: Math.round(ry * $('#crop-img').height()) + 'px',
-        marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-        marginTop: '-' + Math.round(ry * coords.y) + 'px'
-      });
+    
+    $thumb.find('img').css({
+      width: Math.round( ratioX * $('#crop-img').width() ) + 'px',
+      height: Math.round( ratioY * $('#crop-img').height() ) + 'px',
+      marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+      marginTop: '-' + Math.round(ry * coords.y) + 'px'
     });
   }
 

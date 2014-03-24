@@ -136,4 +136,12 @@ ul.pebbles-list li .fa{
   overflow: hidden;
   border: 1px solid #ddd;
   box-shadow: 0 0 3px #aaa;
+  display: block;
+  margin-bottom: 10px;
+}
+.preview-thumb img{
+  width: 100%;
+}
+.preview-thumb.active{
+  border: 3px solid #000;
 }

@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-23 23:49:21
+ * @Last Modified time: 2014-03-24 11:00:16
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -34,7 +34,7 @@ var Webpage,
 
 var URL='http://localhost:4004/caminio/webpages';
 
-describe( 'Site Generator variables test', function(){
+describe( 'Site Generator snippets test', function(){
 
   function addWebpage( name, next ){    
     var webpage = new Webpage( { 
@@ -73,48 +73,38 @@ describe( 'Site Generator variables test', function(){
     });
   });
 
-  it('has got anchestors, siblings and children' , function( done ){
-    var test = this;
-    test.agent
-    .get(URL+'/')
-    .end(function(err, res){
-      expect(res.status).to.eq(200);
-      expect(res.body).to.have.length(names.length);
-      done();
-    });
-  });
-
-  describe('Ancestors', function(){
+  describe('Pebble', function(){
 
     before( function( done ){
+      this.pebbleContent = ' a string as pebblecontent';
       this.pebble = new Pebble( { 
         name: 'test', 
         camDomain: domain.id,
-        translations: [{content: 'pebblecontent', locale: 'en'}] 
+        translations: [{content: this.pebbleContent, locale: 'en'}] 
       } );
       this.pebble.save( function( err ){
         done();
       });
     });
 
-    it('can be set at the param "parent"', function( done ){
+    it('have got the key {{ pebble: name }}', function( done ){
       this.agent
       .put(URL+'/'+ids[names[1]])
-      .send( { 'webpage': { parent: ids[names[0]], layout: 'default' } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();
       });
     });
 
-    it('have the same anchastor, means the same "parent" param', function( done ){
-      this.agent
-      .put(URL+'/'+ids[names[2]])
-      .send( { 'webpage': { parent: ids[names[0]], layout: 'default' } } )
-      .end(function(err, res){
-        expect(res.status).to.eq(200);
-        done();
-      });
+    it('writes the content into the snippet', function(){
+      var content = 
+        fs.readFileSync( __dirname + '/../support/content/' + 
+          domain.name.replace('.', '_') +
+         '/public/' + names[1] + '.htm', 
+        { encoding: 'utf8' });
+      var reg = new RegExp(this.pebbleContent);
+      expect( content ).to.match( reg );
     });
 
   });

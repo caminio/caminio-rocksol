@@ -8,7 +8,6 @@ module.exports = function Webpage( caminio, mongoose ){
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
   var TranslationSchema = require('./_sub/translation')( caminio, mongoose );
-  var CobbleSchema = require('./_sub/cobble')( caminio, mongoose );
   var ActivitySchema = require('./_sub/activity')( caminio, mongoose );
 
   var schema = new mongoose.Schema({
@@ -36,8 +35,6 @@ module.exports = function Webpage( caminio, mongoose ){
      * @type ObjectId
      */
     parent: { type: ObjectId, default: null, public: true },
-
-    cobbles: { type: [ CobbleSchema ], public: true },
 
     /**
      * @property requestReviewBy

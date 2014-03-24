@@ -82,7 +82,6 @@ describe( 'Site Generator variables test', function(){
       .put(URL+'/'+ids[names[1]])
       .send( { 'webpage': { parent: ids[names[0]], layout: 'testing' } } )
       .end(function(err, res){
-        console.log(res.text, 'll');
         expect(res.status).to.eq(200);
         done();
       });

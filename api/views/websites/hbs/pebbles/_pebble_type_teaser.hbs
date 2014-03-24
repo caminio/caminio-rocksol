@@ -1,3 +1,17 @@
+<div class="box-title">
+  <span class="btn close" {{action cancelClosePebble}}><i class="fa fa-times"></i></span>
+
+  <div class="btn-group pull-right">
+    <button {{bind-attr class=":save :btn :icon-text curPebble.isDirty:primary:disabled"}}
+            {{action savePebble}}>
+      <i class="fa fa-save"></i> {{t 'save'}}
+    </button>
+  </div>
+
+  <strong>{{curFile.name}}</strong>
+  {{t 'properties'}}
+</div>
+
 <div class="teaser-preview details-container">
   {{#if curPebble.teaser}}
 
@@ -26,7 +40,6 @@
         </div>
       </div>
     </div>
-
   {{else}}
 
     <div class="progress progress-striped" id="progress">

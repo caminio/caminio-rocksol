@@ -39,21 +39,8 @@
                 {{#if curPebble}}
                   <div class="box pebble-box clearfix">
 
-                    <div class="box-title">
-                      <span class="btn close" {{action cancelClosePebble}}><i class="fa fa-times"></i></span>
 
-                      <div class="btn-group pull-right">
-                        <button {{bind-attr class=":save :btn :icon-text curPebble.isDirty:primary:disabled"}}
-                                {{action savePebble}}>
-                          <i class="fa fa-save"></i> {{t 'save'}}
-                        </button>
-                      </div>
-
-                      <strong>{{curFile.name}}</strong>
-                      {{t 'properties'}}
-                    </div>
-
-                    <form class="caminio clearfix" {{action savePebble on='submit'}}>
+{{!--                     <form class="caminio clearfix" {{action savePebble on='submit'}}>
 
                       <div class="form-group">
                         <label class="control-label col-md-3">{{t 'pebble.name'}}</label>
@@ -79,13 +66,11 @@
                         </div>
                       </div>
 
-                    </form>
+                    </form> --}}
 
                     {{#equal 'teaser' curPebble.type }}
                       {{partial 'pebble_type_teaser'}}
                     {{/equal}}
-
-                    <p>&nbsp;</p>
 
                   </div>
                 {{/if}}

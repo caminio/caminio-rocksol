@@ -16,6 +16,7 @@ module.exports = function(grunt) {
               'assets/javascripts/caminio-rocksol/router.js',
               'assets/javascripts/caminio-rocksol/models/translation.js',
               'assets/javascripts/caminio-rocksol/models/pebble.js',
+              'assets/javascripts/caminio-rocksol/models/cobble.js',
               'assets/javascripts/caminio-rocksol/models/webpage.js',
               'assets/javascripts/caminio-rocksol/models/activity.js',
               'assets/javascripts/caminio-rocksol/controllers/webpages_controller.js',

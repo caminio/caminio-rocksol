@@ -128,11 +128,12 @@ module.exports = function( caminio, policies, middleware ){
     if( req.webpage.initialSetupCompleted )
       return next();
 
+
     var layoutFile = join( res.locals.currentDomain.getContentPath(), 'layouts', req.body.webpage.layout, req.body.webpage.layout );
 
     if( fs.existsSync( layoutFile+'.js' ) ){
       var setup = require( layoutFile )( caminio );
-      if( typeof(setup) === 'function' )
+      if( typeof(setup.initialSetup) === 'function' )
         setup.initialSetup( req.webpage, res, markCompleted );
       else
         next();

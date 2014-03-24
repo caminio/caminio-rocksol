@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-24 11:00:16
+ * @Last Modified time: 2014-03-24 12:09:13
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -105,6 +105,31 @@ describe( 'Site Generator snippets test', function(){
         { encoding: 'utf8' });
       var reg = new RegExp(this.pebbleContent);
       expect( content ).to.match( reg );
+    });
+
+  });
+
+  describe('Rubble', function(){
+
+    it('have got the key {{ rubble: name }}', function( done ){
+      this.agent
+      .put(URL+'/'+ids[names[2]])
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'rubble' } } )
+      .end(function(err, res){
+        expect(res.status).to.eq(200);
+        done();
+      });
+    });
+
+    it('writes the content into the snippet', function(){
+      var content = 
+        fs.readFileSync( __dirname + '/../support/content/' + 
+          domain.name.replace('.', '_') +
+         '/public/' + names[2] + '.htm', 
+        { encoding: 'utf8' });
+      console.log(content);
+      // var reg = new RegExp(this.pebbleContent);
+      // expect( content ).to.match( reg );
     });
 
   });

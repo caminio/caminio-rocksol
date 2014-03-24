@@ -43,8 +43,10 @@ module.exports = function( caminio, policies, middleware ){
           return res.json( 500, { error: 'compile_error', details: err });
         if( req.webpage.parent && typeof( req.webpage.parent) === 'object' )
           req.webpage.parent = req.webpage.parent._id;
-        
-        res.json( util.transformJSON( { webpage: JSON.parse(JSON.stringify(req.webpage)) }, req.header('namespaced') ) );
+        Webpage.findOne({ '_id': req.webpage._id })
+        .exec( function( err, webpage ){
+          res.json( util.transformJSON( { webpage: JSON.parse(JSON.stringify(webpage)) }, req.header('namespaced') ) );
+        });
       }
     }
 

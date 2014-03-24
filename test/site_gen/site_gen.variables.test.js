@@ -91,10 +91,10 @@ describe( 'Site Generator variables test', function(){
       var content = JSON.parse( 
         fs.readFileSync( __dirname + '/../support/content/' + 
           domain.name.replace('.', '_') +
-         '/public/' + names[1] + '.htm', 
+         '/public/' + names[0] + '/' + names[1] + '.htm', 
         { encoding: 'utf8' }));
-      // expect(content.ancestors).to.have.length(1);
-      // expect(content.ancestors[0].name).to.eq(names[0]);
+      expect(content.ancestors).to.have.length(1);
+      expect(content.ancestors[0].name).to.eq(names[0]);
     });
 
 
@@ -112,11 +112,11 @@ describe( 'Site Generator variables test', function(){
         var content = JSON.parse( 
           fs.readFileSync( __dirname + '/../support/content/' + 
             domain.name.replace('.', '_') +
-           '/public/' + names[3] + '.htm', 
+           '/public/' + names[0] + '/' + names[1] + '/' + names[3] + '.htm', 
           { encoding: 'utf8' }));
-        // expect(content.ancestors).to.have.length(2);
-        // expect(content.ancestors[1].name).to.eq(names[0]);
-        // expect(content.ancestors[0].name).to.eq(names[1]);
+        expect(content.ancestors).to.have.length(2);
+        expect(content.ancestors[1].name).to.eq(names[0]);
+        expect(content.ancestors[0].name).to.eq(names[1]);
     });
 
   });
@@ -137,7 +137,7 @@ describe( 'Site Generator variables test', function(){
       this.content = JSON.parse( 
         fs.readFileSync( __dirname + '/../support/content/' + 
           domain.name.replace('.', '_') +
-         '/public/' + names[2] + '.htm', 
+         '/public/' + names[0] + '/' + names[2] + '.htm', 
         { encoding: 'utf8' }));      
       expect(this.content.siblings).to.have.length(2);
     });

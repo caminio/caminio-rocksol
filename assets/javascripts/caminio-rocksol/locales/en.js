@@ -66,6 +66,7 @@
     'webpage.select_layout': 'Select a layout',
 
     'webpage.saved': 'Webpage {{name}} has been saved successfully',
+    'webpage.layout_changed': 'Layout for {{name}} has been been changed to {{layout}}',
 
     'translation.no': 'No languages',
     'translation.title': 'Language',

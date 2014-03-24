@@ -23,7 +23,10 @@
 
       'changeLayout': function( layout ){
         this.get('model').set('layout', layout);
-        this.get('translation').send('becomeDirty');
+        var webpage = this.get('model');
+        webpage.save().then(function(){
+          notify('info', Em.I18n.t('webpage.layout_changed', {name: webpage.get('name'), layout: webpage.get('layout')}));
+        });
       },
 
       'changeLang': function( lang ){

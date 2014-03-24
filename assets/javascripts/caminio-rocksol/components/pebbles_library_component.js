@@ -16,24 +16,33 @@
         var self = this;
         this.set('curPebble', pebble);
 
-        setTimeout(function(){
-
-          if( pebble.get('type') === 'teaser' )
-            setupTeaser( pebble, self );
-
-        },100);
+        setTimeout( function(){ updatePlugins(pebble, self); }, 100);
       },
 
       savePebble: function(){
+        var self = this;
         var pebble = this.get('curPebble');
         pebble.save().then( function(){
           notify('info', Em.I18n.t('pebble.saved', { name: pebble.get('name') }) );
+          updatePlugins( pebble, self );
         });
+      },
+
+      cancelClosePebble: function(){
+        this.get('curPebble').rollback();
+        this.set('curPebble',null);
       }
+
 
     }
 
   });
+
+  function updatePlugins(pebble, self){
+
+    if( pebble.get('type') === 'teaser' )
+      setupTeaser( pebble, self );
+  }
 
   function setupTeaser( pebble, comp ){
 

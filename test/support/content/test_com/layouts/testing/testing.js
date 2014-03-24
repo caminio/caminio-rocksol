@@ -4,7 +4,7 @@
     run: run
   };
 
-  function run( options, next ){
+  function run( there, options, next ){
     next();
   }
 

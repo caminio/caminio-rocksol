@@ -7,7 +7,7 @@
  * @Date:   2014-03-22 14:17:27
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-24 15:51:36
+ * @Last Modified time: 2014-03-24 17:34:07
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -17,7 +17,7 @@
 module.exports = function( caminio ) {
 
   return {
-    run: function( options, next ){
+    run: function( what, options, next ){
       console.log(options.markdownContent);
       next();
     },

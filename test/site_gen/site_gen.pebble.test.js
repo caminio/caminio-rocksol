@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-24 12:09:13
+ * @Last Modified time: 2014-03-24 12:58:38
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -127,9 +127,8 @@ describe( 'Site Generator snippets test', function(){
           domain.name.replace('.', '_') +
          '/public/' + names[2] + '.htm', 
         { encoding: 'utf8' });
-      console.log(content);
-      // var reg = new RegExp(this.pebbleContent);
-      // expect( content ).to.match( reg );
+      var reg = new RegExp('am a rubble');
+      expect( content ).to.match( reg );
     });
 
   });

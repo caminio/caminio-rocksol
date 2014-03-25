@@ -61,7 +61,8 @@ module.exports = function( caminio, policies, middleware ){
       return next();
     req.body.webpage.translations = [
       { locale: res.locals.currentDomain.lang,
-        content: '### No content here yet' }
+        title: req.body.webpage.name,
+        content: '### '+req.i18n.t('no_content_here_yet') }
     ];
     next();
   }

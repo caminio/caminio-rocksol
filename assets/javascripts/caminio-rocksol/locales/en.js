@@ -46,6 +46,8 @@
 
     'blogs.title': 'Blog',
 
+    'webpage.title': 'Title',
+    'webpage.subtitle': 'Subtitle',
     'webpage.new': 'New webpage',
     'webpage.enter_name': 'New webpage name',
     'webpage.created': 'Webpage {{name}} has been created successfully',

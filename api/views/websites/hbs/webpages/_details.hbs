@@ -6,7 +6,7 @@
       <span class="btn close" {{action cancelClose}}><i class="fa fa-times"></i></span>
 
       <div class="btn-group pull-right">
-        <button {{bind-attr class=":save :btn :icon-text curSelectedItem.isDirty:primary:disabled"}}
+        <button {{bind-attr class=":save :btn :icon-text curSelectedItem.isDirty:primary"}}
                 {{action saveWebpage curSelectedItem}}
                 tabindex="1">
           <i class="fa fa-save"></i> {{t 'save'}}
@@ -86,7 +86,6 @@
           <div class="pull-left">
             <label>{{t 'webpage.layout'}}</label>
             <br>
-
 
             {{view Ember.Select
                    content=availableLayouts

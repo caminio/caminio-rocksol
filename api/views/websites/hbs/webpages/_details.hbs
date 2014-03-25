@@ -46,6 +46,10 @@
             <i class="fa fa-align-left"></i> {{t 'edit_content'}}
           </button>
 
+          <button class="pull-right btn icon-text" {{action previewWebpage curSelectedItem}}>
+            <i class="fa fa-eye"></i> {{t 'preview_content'}}
+          </button>
+
 
           <button {{action setState 'published'}} 
                   {{bind-attr class=":btn :pale isPublished:success"}}>{{t 'webpage.published'}}</button>

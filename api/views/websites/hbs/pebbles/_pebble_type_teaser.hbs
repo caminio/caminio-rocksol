@@ -1,59 +1,114 @@
-<div class="box-title">
-  <span class="btn close" {{action cancelClosePebble}}><i class="fa fa-times"></i></span>
+<div class="box pebble-box clearfix">
 
-  <div class="btn-group pull-right">
-    <button {{bind-attr class=":save :btn :icon-text curPebble.isDirty:primary:disabled"}}
-            {{action savePebble}}>
-      <i class="fa fa-save"></i> {{t 'save'}}
-    </button>
+  <!-- box title -->
+  <div class="box-title">
+
+    <div class="btn-toolbar pull-right">
+
+      <div class="btn-group">
+        <span class="btn icon-text teaserreplace-btn">
+          <i class="fa fa-upload"></i>
+          {{t 'pebble.teaser.upload_other_picture'}}
+          <input id="teaserreplace" type="file" name="files[]">
+        </span>
+      </div>
+
+      <div class="btn-group">
+        {{#if curPebble.teaser}}
+          <button {{bind-attr class=":save :btn :icon-text curPebble.teaser.isDirty:primary:disabled"}}
+                  {{action saveTeaser}}>
+            <i class="fa fa-save"></i> {{t 'save'}}
+          </button>
+        {{/if}}
+        <button class="btn icon-text" {{action cancelClosePebble}}>
+          <i class="fa fa-arrow-left"></i>
+          {{t 'back'}}
+        </button>
+      </div>
+
+    </div>
+
+    <strong>{{curPebble.name}}</strong>
+    {{t 'properties'}}
   </div>
+  <!-- box title -->
 
-  <strong>{{curFile.name}}</strong>
-  {{t 'properties'}}
-</div>
+  <div class="row">
 
-<div class="teaser-preview details-container">
-  {{#if curPebble.teaser}}
+    <div class="col-md-6">
 
-    <img id="crop-img" {{bind-attr src=curPebble.teaser.url}}>
+      <div class="teaser-preview details-container">
 
-    <div class="previews">
-      {{#each domainThumbs itemController='thumbs'}}
-        <div class="preview-thumb" {{bind-attr style=genThumbSizes}}>
-          <img {{bind-attr src=parentController.curPebble.teaser.url}} {{bind-attr id=genThumbId}}>
+        <div class="progress progress-striped" id="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+            <span class="sr-only"><span class="perc-text">60%</span> {{t 'perc_completed'}}</span>
+          </div>
         </div>
-      {{/each}}
-    </div>
 
-    <div class="row">
-      <div class="form-group">
-        <label class="control-label col-md-3">{{t 'file.copyright'}}</label>
-        <div class="col-md-9">
-          {{input type='text' valueBinding='curPebble.teaser.copyright' class='form-control'}}
-        </div>
+        {{#if curPebble.teaser}}
+
+          <img id="crop-img" {{bind-attr src=curPebble.teaser.url}}>
+
+          <form class="caminio form-horizontal row margin-top" {{action saveTeaser on='submit'}}>
+
+            {{input type='text' valueBinding='curPebble.teaser.preferencesAsStr' class='form-control'}}
+
+            <div class="form-group">
+              <label class="control-label col-md-3">{{t 'file.name'}}</label>
+              <div class="col-md-8">
+                {{input type='text' valueBinding='curPebble.teaser.name' class='form-control'}}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3">{{t 'file.copyright'}}</label>
+              <div class="col-md-8">
+                {{input type='text' valueBinding='curPebble.teaser.copyright' class='form-control'}}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-md-3">{{t 'file.description'}}</label>
+              <div class="col-md-8">
+                {{input type='text' valueBinding='curPebble.teaser.description' class='form-control'}}
+              </div>
+            </div>
+
+          </form>
+
+        {{else}}
+
+          <div class="title">
+            <i class="fa fa-upload"></i><br>
+            {{t 'pebble.teaser.drop_image_here'}}
+          </div>
+
+          <input id="teaserupload" type="file" name="files[]">
+
+        {{/if}}
+
       </div>
 
-      <div class="form-group">
-        <label class="control-label col-md-3">{{t 'file.description'}}</label>
-        <div class="col-md-9">
-          {{input type='text' valueBinding='curPebble.teaser.description' class='form-control'}}
-        </div>
+    </div>
+    
+    <div class="col-md-6">
+
+      <div class="teaser-preview details-container">
+        {{#if curPebble.teaser}}
+
+          <div class="previews">
+            {{#each domainThumbs itemController='thumbs'}}
+              <h4 class="preview-header">{{content}}</h4>
+              <div class="preview-thumb" {{bind-attr style=genThumbSizes}} {{bind-attr data-size=content}}>
+                <img {{bind-attr src=parentController.curPebble.teaser.url}} {{bind-attr id=genThumbId}}>
+              </div>
+            {{/each}}
+          </div>
+
+        {{/if}}
       </div>
     </div>
-  {{else}}
 
-    <div class="progress progress-striped" id="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-        <span class="sr-only"><span class="perc-text">60%</span> {{t 'perc_completed'}}</span>
-      </div>
-    </div>
+  </div><!-- row -->
 
-    <div class="title">
-      <i class="fa fa-upload"></i><br>
-      {{t 'pebble.teaser.drop_image_here'}}
-    </div>
-
-    <input id="teaserupload" type="file" name="files[]">
-
-  {{/if}}
 </div>

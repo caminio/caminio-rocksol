@@ -13,6 +13,7 @@
     'will_be_filename': 'will become part of the document\'s url',
 
     'edit_content': 'Edit content',
+    'preview_content': 'Preview',
 
     'editor.heading': 'Heading',
     'editor.bold': 'Bold',
@@ -28,6 +29,8 @@
     'pebble.description': 'Description',
     'pebble.saved': 'Pebble {{name}} has been saved',
     'pebble.teaser.drop_image_here': 'Drop your teaser image or click here to upload',
+    'pebble.teaser.upload_other_picture': 'Upload other picture and replace',
+    'pebble.teaser.saved': '{{name}} has been saved',
     'pebble.insert_selected': 'Insert selected pebble',
 
     'markdown_code': 'Markdown editor',

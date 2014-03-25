@@ -146,6 +146,11 @@
           });
       },
 
+      'previewWebpage': function( webpage ){
+
+        window.open( webpage.url() );
+      },
+
       'cancelClose': function(){
         var self = this;
         var webpage = this.get('curSelectedItem');

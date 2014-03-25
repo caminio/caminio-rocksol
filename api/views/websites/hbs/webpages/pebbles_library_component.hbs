@@ -12,33 +12,43 @@
 
           <div class="col-md-12">
 
-            <div class="row">
-              
-              <div class="col-md-6">
+            {{#unless curPebble}}
 
-                <div class="box">
+              <div class="row">
+                
+                <div class="col-md-6">
 
-                  <div class="row default-padding">
-                  
-                    <ul class="pebbles-list">
-                      {{#each associatedPebbles}}
-                        <li {{action showPebble this}}>
-                          <i {{bind-attr class=":fa getIcon"}}></i>
-                          {{name}}
-                        </li>
-                      {{/each}}
-                    </ul>
+                  <div class="box">
+
+                    <div class="row default-padding">
+                    
+                      <ul class="pebbles-list">
+                        {{#each associatedPebbles}}
+                          <li {{action showPebble this}}>
+                            <i {{bind-attr class=":fa getIcon"}}></i>
+                            {{name}}
+                          </li>
+                        {{/each}}
+                      </ul>
+
+                    </div>
 
                   </div>
-
                 </div>
+
               </div>
 
-              <div class="col-md-6">
+            {{else}}
+        
+              {{#equal 'teaser' curPebble.type }}
+                {{partial 'pebble_type_teaser'}}
+              {{/equal}}
+            
+            {{/unless}}
 
-                {{#if curPebble}}
-                  <div class="box pebble-box clearfix">
+          </div>
 
+            
 
 {{!--                     <form class="caminio clearfix" {{action savePebble on='submit'}}>
 
@@ -68,17 +78,6 @@
 
                     </form> --}}
 
-                    {{#equal 'teaser' curPebble.type }}
-                      {{partial 'pebble_type_teaser'}}
-                    {{/equal}}
-
-                  </div>
-                {{/if}}
-
-              </div>
-
-            </div>
-          </div>
 
         </div>
       </div>

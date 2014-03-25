@@ -21,7 +21,7 @@ var helper = require('../helper'),
 
 var URL='http://localhost:4004/caminio/webpages';
 
-describe( 'Contact authentifikation API - '+URL, function(){
+describe( 'Webpage authentifikation API - '+URL, function(){
 
   function addWebpage( done ){    
     webpage = new Webpage( { name: 'a page', camDomain: domain.id } );

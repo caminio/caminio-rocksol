@@ -175,22 +175,40 @@ module.exports = function( caminio, policies, middleware ){
 
   function removeFiles( req, res, next ){    
     WebpageMethods.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
-      var path = res.locals.currentDomain.getContentPath();
+      var path = join( res.locals.currentDomain.getContentPath(), 'public');
       ancestors.reverse().forEach( function( ancestor ){
-          path +=  join( path, ancestor.name );
-      });
-      console.log(path);
-      path += join( path, req.webpage.name );
-      console.log(path, 'THE PATH');
-      var dir = path+"/";
-      if( fs.exists( dir ) )
-        fs.unlinkSync( dir );
-      var file = path+".htm";
-      if( fs.exists( path))
-      fs.unlinkSync(path+".htm");
+          path =  join( path, WebpageMethods.underscore( ancestor.name ) );
+      }); 
+      path = join( path, WebpageMethods.underscore( req.webpage.name ) );
+      deleteFolder( path+"/" );
+      deleteFile( path+".htm" );
       next();
     });
   } 
+
+  function deleteFolder( path ) {
+    var files = [];
+    if( fs.existsSync( path ) ) {
+        files = fs.readdirSync( path );
+        files.forEach( checkForFiles );
+        fs.rmdirSync( path );
+    }
+
+    function checkForFiles( file, index ){
+      var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) { 
+          deleteFolderRecursive(curPath);
+      } else { 
+          fs.unlinkSync(curPath);
+      }
+    }
+  }
+
+  function deleteFile( file ){
+    if( fs.existsSync( file )){
+      fs.unlinkSync( file );    
+    }
+  }
 
   function cleanNewTranslations( req, res, next ){
     if( req.body.webpage.translations )

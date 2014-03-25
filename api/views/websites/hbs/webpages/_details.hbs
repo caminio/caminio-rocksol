@@ -37,17 +37,20 @@
           <label>{{t 'webpage.status'}}</label>
           <br>
 
-          <button {{action removeSelectedItem}} class="btn highlight-danger icon-text pull-right" tabindex="-1">
+          <button {{translateAttr title='delete'}} 
+                  {{action removeSelectedItem}} class="btn highlight-danger pull-right" tabindex="-1">
             <i class="fa fa-trash-o"></i>
-            <span>{{t 'delete'}}</span>
           </button>
 
-          <button class="pull-right btn icon-text" {{action editWebpage curSelectedItem}}>
-            <i class="fa fa-align-left"></i> {{t 'edit_content'}}
+          <button class="pull-right btn" 
+                  {{action editWebpage curSelectedItem}}
+                  {{translateAttr title='edit_content'}}>
+            <i class="fa fa-pencil"></i>
           </button>
 
-          <button class="pull-right btn icon-text" {{action previewWebpage curSelectedItem}}>
-            <i class="fa fa-eye"></i> {{t 'preview_content'}}
+          <button class="pull-right btn" {{action previewWebpage curSelectedItem}}
+                  {{translateAttr title='preview_content'}}>
+            <i class="fa fa-eye"></i>
           </button>
 
 

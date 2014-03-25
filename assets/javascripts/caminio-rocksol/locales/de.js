@@ -12,7 +12,7 @@
 
     'will_be_filename': 'wird Teil der URL dieser Webseite',
 
-    'edit_content': 'Inhalt bearbeiten',
+    'edit_content': 'bearbeiten',
     'preview_content': 'Vorschau',
 
     'editor.heading': 'Überschrift',

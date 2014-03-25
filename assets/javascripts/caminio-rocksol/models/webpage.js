@@ -35,7 +35,7 @@
       return url+this.urlPart();
     },
     urlPart: function(){
-      return '/'+inflection.underscore(this.get('name')).replace(/ /g, '')+'.htm';
+      return '/'+this.get('name').replace(/[^\w]/g,'_').toLowerCase()+'.htm';
     }
   });
 

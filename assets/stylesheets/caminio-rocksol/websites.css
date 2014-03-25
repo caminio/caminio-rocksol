@@ -117,8 +117,8 @@ ul.pebbles-list li .fa{
 .details-container.teaser-preview{
   margin: 40px 20px;
   position: relative;
-  height: 100px;
   min-height: 100px;
+  padding: 5px;
 }
 .details-container.teaser-preview .title{
   margin: auto;
@@ -132,16 +132,39 @@ ul.pebbles-list li .fa{
   margin: 20px 0;
 }
 
+.preview-header{
+  font-size: 2rem;
+  color: #bbb;
+  font-weight: 100;
+  margin-top: 1rem;
+}
+
 .preview-thumb{
   overflow: hidden;
   border: 1px solid #ddd;
   box-shadow: 0 0 3px #aaa;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
+  /*border: 3px solid transparent;*/
 }
 .preview-thumb img{
   width: 100%;
 }
 .preview-thumb.active{
-  border: 3px solid #000;
+  border-color: #000;
+}
+
+.teaserreplace-btn{
+  position: relative;
+}
+.teaserreplace-btn input{
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }

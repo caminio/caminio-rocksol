@@ -100,6 +100,12 @@ module.exports = function Webpage( caminio, mongoose ){
   schema.virtual( 'curTranslation' )
       .get( function(){ return this._curTranslation; } )
       .set( function( value ){  this._curTranslation = value; } );
+
+  // TODO: getParent is missing to get parent path
+  schema.methods.url = function url( lang ){
+    return '/'+this.name.replace(/[^\w]*/,'_')+(lang ? '.'+lang : '')+'.html';
+  };
+
   schema.publicAttributes = [ 'translations', 'pebbles', 'activities', 'parent', 'curTranslation' ];
   schema.trash = true;
 

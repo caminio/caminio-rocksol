@@ -83,7 +83,6 @@ module.exports = function( caminio, policies, middleware ){
 
     size.stdout.on('data', function (data) {
       req.quota = data.split(/\t/)[0];
-      next();
     });
 
     size.stdout.on('close', function(){

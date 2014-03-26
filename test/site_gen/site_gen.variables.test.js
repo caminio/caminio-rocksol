@@ -115,8 +115,8 @@ describe( 'Site Generator variables test', function(){
            '/public/' + names[0] + '/' + names[1] + '/' + names[3] + '.htm', 
           { encoding: 'utf8' }));
         expect(content.ancestors).to.have.length(2);
-        expect(content.ancestors[1].name).to.eq(names[0]);
-        expect(content.ancestors[0].name).to.eq(names[1]);
+        expect(content.ancestors[0].name).to.eq(names[0]);
+        expect(content.ancestors[1].name).to.eq(names[1]);
     });
 
   });

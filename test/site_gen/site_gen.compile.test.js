@@ -92,7 +92,6 @@ describe( 'Site Generator compile test', function(){
       .put(URL+'/'+ids[names[1]])
       .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', name: 'new name' } } )
       .end(function(err, res){
-        console.log(res.body);
         expect(res.status).to.eq(200);
         done();
       });

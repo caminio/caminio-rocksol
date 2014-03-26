@@ -27,16 +27,7 @@
     }.property('status'),
     isDraft: function(){
       return this.get('status') === 'draft';
-    }.property('status'),
-    url: function(){
-      var url = 'http://'+currentDomain.fqdn;
-      if( this.get('parent') )
-        url += this.get('parent').urlPart().replace('.htm','');
-      return url+this.urlPart();
-    },
-    urlPart: function(){
-      return '/'+this.get('name').replace(/[^\w]/g,'_').toLowerCase()+'.htm';
-    }
+    }.property('status')
   });
 
 }).call();

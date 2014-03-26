@@ -130,7 +130,7 @@ module.exports = function Webpage( caminio, mongoose ){
 
   schema.methods.underscoreName = function(){
     return this.constructor.underscoreName( this.name );
-  }
+  };
 
   schema.static('underscoreName', function( str ){
     return str.toLowerCase()

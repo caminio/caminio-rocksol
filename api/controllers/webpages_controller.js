@@ -32,13 +32,14 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ cleanNewActivities, cleanNewTranslations, getWebpage, autoCreatePebbles, saveWebpage ],
+      'update': [ cleanNewActivities, cleanNewTranslationIds, getWebpage, checkLocaleExistsAndDismiss, autoCreatePebbles, saveWebpage ],
       'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
     },
 
     'update': function updateWebpage(req, res ){
       var options = {};
       
+      console.log('starting site gen operation', req.webpage.translations);
       if( req.body.webpage.name && ( req.webpage.name !== req.body.webpage.name ) )
         options.compileAll = true;
       
@@ -48,6 +49,7 @@ module.exports = function( caminio, policies, middleware ){
         finalResponse();
       
       function finalResponse( err ){
+        console.log("after compile", req.webpage.translations);
         if( err )
           return res.json( 500, { error: 'compile_error', details: err });
         if( req.webpage.parent && typeof( req.webpage.parent) === 'object' )
@@ -216,13 +218,28 @@ module.exports = function( caminio, policies, middleware ){
     }
   }
 
-  function cleanNewTranslations( req, res, next ){
+  function cleanNewTranslationIds( req, res, next ){
     if( req.body.webpage.translations )
       req.body.webpage.translations.forEach(function(tr){
         if( tr._id === null )
           delete tr._id;
       });
     next();
+  }
+
+  function checkLocaleExistsAndDismiss( req, res, next ){
+
+    var havingTranslations = [];
+    
+    req.body.webpage.translations.forEach(function(tr,index){
+      if( havingTranslations.indexOf(tr.locale) >= 0 && !tr.id )
+        req.body.webpage.translations.splice(index,1);
+      else
+        havingTranslations.push( tr.locale );
+    });
+
+    next();
+
   }
 
   function cleanNewActivities( req, res, next ){

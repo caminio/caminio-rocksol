@@ -101,29 +101,30 @@ module.exports = function Webpage( caminio, mongoose ){
       .get( function(){ return this._curTranslation; } )
       .set( function( value ){  this._curTranslation = value; } );
 
-  // schema.virtual( 'path' )
-  // .get( function(){ return this.path; } )
-  // .set( function( value ){ this.path = value; } );
+  schema.virtual( 'path' )
+    .get( function(){ return this._path; } )
+    .set( function( value ){ this._path = value; } );
 
   // // TODO: getParent is missing to get parent path
-  // schema.methods.url = function url( selectedLang, fallbackLang ){
-  //   var lang = getElementFromArray( translations, 'locale', selectedLang );
-  //   if( translations.length === 1 )
-  //       return this._path + '/' + this.name + '.htm';
-  //   if( lang )
-  //       return this._path + '/' + this.name + '.' + lang + '.htm';
-  //   return this._path + '/' + this.name + '.' + fallbackLang + '.htm';
+  schema.methods.url = function url( selectedLang, fallbackLang ){
+    fallbackLang = fallbackLang || selectedLang;
+    var lang = getElementFromArray( translations, 'locale', selectedLang );
+    if( translations.length === 1 )
+        return this._path + '/' + this.name + '.htm';
+    if( lang )
+        return this._path + '/' + this.name + '.' + lang + '.htm';
+    return this._path + '/' + this.name + '.' + fallbackLang + '.htm';
 
-  //   function getElementFromArray( array, param, value ){
-  //     var element;
-  //     array.forEach( function( elem ){
-  //       if( elem[param] === value ){
-  //         element =  elem;
-  //       }
-  //     });
-  //     return element;
-  //   }
-  // };
+    function getElementFromArray( array, param, value ){
+      var element;
+      array.forEach( function( elem ){
+        if( elem[param] === value ){
+          element =  elem;
+        }
+      });
+      return element;
+    }
+  };
 
   schema.publicAttributes = [ 'translations', 'activities', 'curTranslation' ];
   schema.trash = true;

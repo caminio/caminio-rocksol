@@ -10,10 +10,10 @@
     metaDescription: DS.attr(),
     metaKeywords: DS.attr(),
     availableLangs: function(){
-      return currentDomain.preferences.availableLangs;
+      return domainSettings.availableLangs;
     }.property('locale'),
     hasMultiLang: function(){
-      return currentDomain.preferences.availableLangs.length > 1;
+      return domainSettings.availableLangs.length > 1;
     }.property('locale')
   });
 

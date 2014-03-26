@@ -59,14 +59,14 @@ module.exports = function( caminio, policies, middleware ){
     'disk_quota': [
       computeDiskQuota,
       function( req, res ){
-        var avail = res.locals.currentDomain.preferences.diskQuota || 0;
+        var avail = res.locals.currentDomain.diskQuotaM || 0;
         res.json({ quota: {used: parseInt(req.quota), available: avail * 1000 * 1000 }});
       }],
 
     'users_quota': [
       computeUsersQuota,
       function( req, res ){
-        var avail = res.locals.currentDomain.preferences.usersQuota || 1;
+        var avail = res.locals.currentDomain.usersQuota || 1;
         res.json({ quota: {used: parseInt(req.quota), available: avail }});
       }]
 
@@ -96,7 +96,6 @@ module.exports = function( caminio, policies, middleware ){
    */
   function computeUsersQuota( req, res, next ){
     User.count({ camDomains: res.locals.currentDomain._id }, function( err, users ){
-      console.log(arguments);
       if( err ){ return res.json(500, { error: 'server_error', details: err }); }
       req.quota = users;
       next();
@@ -152,6 +151,9 @@ module.exports = function( caminio, policies, middleware ){
       mkdirp.sync( join(domainTmplPath, 'index') );
       fs.writeFileSync( join(domainTmplPath, 'index', 'index.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
     }
+    if( !fs.existsSync( join(domainTmplPath, '..', '.settings.js') ) )
+      fs.writeFileSync( join(domainTmplPath, '..', '.settings.js'), fs.readFileSync(__dirname+'/../../lib/templates/.settings.js', 'utf8') );
+    
     if( !fs.existsSync( join(domainTmplPath, 'default', 'default.jade') ) ){
       mkdirp.sync( join(domainTmplPath, 'default') );
       fs.writeFileSync( join(domainTmplPath, 'default', 'default.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );

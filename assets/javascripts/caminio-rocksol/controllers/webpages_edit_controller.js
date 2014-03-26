@@ -63,7 +63,6 @@
         $('#editor').ghostDown('insertImage', mediafile);
       }
 
-
     }
 
   });

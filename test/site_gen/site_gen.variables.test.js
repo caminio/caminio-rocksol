@@ -34,7 +34,9 @@ describe( 'Site Generator variables test', function(){
       camDomain: domain.id, 
       status: 'published',
       layout: 'testing',
-      translations: [{content: 'testcontent', locale: 'en'}] 
+      translations: [{content: 'testcontent', locale: 'en'}
+      //, { content: 'deutsch', locale: 'de'}
+      ] 
     } );
     webpage.save( function( err ){
       ids[name] = webpage._id;

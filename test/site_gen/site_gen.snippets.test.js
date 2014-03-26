@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-24 18:50:20
+ * @Last Modified time: 2014-03-26 10:55:22
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -80,7 +80,7 @@ describe( 'Site Generator snippets test', function(){
       this.pebble = new Pebble( { 
         name: 'test', 
         camDomain: domain.id,
-        translations: [{content: this.pebbleContent, locale: 'en'}] 
+        translations: [{content: this.pebbleContent, locale: 'en', layout: 'pebble' }] 
       } );
       this.pebble.save( function( err ){
         done();

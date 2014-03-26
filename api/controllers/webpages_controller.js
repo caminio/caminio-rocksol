@@ -38,11 +38,13 @@ module.exports = function( caminio, policies, middleware ){
 
     'update': function updateWebpage(req, res ){
       var options = {};
+      console.log(req.webpage.status, 'hehe');
       
       if( req.body.webpage.name && ( req.webpage.name !== req.body.webpage.name ) )
         options.compileAll = true;
-      
-      if( req.webpage.status === 'published' )
+      if( req.webpage.status === 'draft' )
+        options.isDraft = true;
+      if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
         SiteGen.compilePage( res, req.webpage, options, finalResponse );
       else
         finalResponse();

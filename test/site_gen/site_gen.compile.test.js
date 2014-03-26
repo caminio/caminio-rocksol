@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-26 14:59:37
+ * @Last Modified time: 2014-03-26 15:07:28
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -40,7 +40,7 @@ describe( 'Site Generator compile test', function(){
     var webpage = new Webpage( { 
       name: name, 
       camDomain: domain.id, 
-      status: 'published',
+      status: 'draft',
       layout: 'default',
       translations: [{content: 'testcontent with pebble {{ pebble: test, global=true }}', locale: 'en'}] 
     } );
@@ -92,6 +92,7 @@ describe( 'Site Generator compile test', function(){
       .put(URL+'/'+ids[names[1]])
       .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', name: 'new name' } } )
       .end(function(err, res){
+        console.log(res.body);
         expect(res.status).to.eq(200);
         done();
       });

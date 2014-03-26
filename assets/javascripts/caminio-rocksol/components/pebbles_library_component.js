@@ -4,7 +4,7 @@
 
   App.PebblesLibraryComponent = Ember.Component.extend({
 
-    domainThumbs: currentDomain.preferences.thumbs,
+    domainThumbs: domainSettings.thumbs,
 
     didInsertElement: function(){
 
@@ -172,8 +172,8 @@
       return;
 
     var $thumb = $('.preview-thumb.active');
-    if( !currentDomain.preferences.thumbs )
-      return console.error('no domain.preferences.thumbs settings were found. aborting');
+    if( !domainSettings.thumbs )
+      return console.error('no domainSettings.thumbs settings were found. aborting');
     
     updatePreviewThumb( $thumb,
                         genCoords($thumb,coords));

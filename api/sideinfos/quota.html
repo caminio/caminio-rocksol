@@ -1,0 +1,30 @@
+<div class="sideinfo-box w-progress">
+  <div class="title">
+    <h4>
+      <span class="pull-right values">
+        <span id="disk-quota-used-hum"></span> /
+        <span id="disk-quota-avail-hum"></span>
+      </span>
+      <span data-translate="disk_quota">Disk Quota</span>
+    </h4>
+  </div>
+  <div class="progress">
+    <div id="disk-quota-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+    </div>
+  </div>
+
+  <div class="graph" id="online-users-graph"></div>
+
+  <script type="text/javascript">
+    jQuery( function($){
+      $.getJSON('/caminio/websites/disk_quota').done( function( response ){
+        var perc = Math.round(response.quota.used / (response.quota.available / 100));
+        if( perc < 1 )
+          perc = 1;
+        $('#disk-quota-progress').css({ width: perc.toString()+'%'}).attr('aria-valuenow', perc);
+        $('#disk-quota-used-hum').text( filesize( response.quota.used ) );
+        $('#disk-quota-avail-hum').text( filesize( response.quota.available ) );
+      });
+    });
+  </script>
+</div>

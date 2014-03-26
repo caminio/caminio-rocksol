@@ -108,12 +108,14 @@ module.exports = function Webpage( caminio, mongoose ){
   // // TODO: getParent is missing to get parent path
   schema.methods.url = function url( selectedLang, fallbackLang ){
     fallbackLang = fallbackLang || selectedLang;
-    var lang = getElementFromArray( translations, 'locale', selectedLang );
-    if( translations.length === 1 )
-        return this._path + '/' + this.name + '.htm';
+    var lang = getElementFromArray( this.translations, 'locale', selectedLang ).locale;
+
+    console.log('inside trans', lang);
+    if( this.translations.length === 1 )
+        return this._path + '/' + this.underscoreName() + '.htm';
     if( lang )
-        return this._path + '/' + this.name + '.' + lang + '.htm';
-    return this._path + '/' + this.name + '.' + fallbackLang + '.htm';
+        return this._path + '/' + this.underscoreName() + '.' + lang + '.htm';
+    return this._path + '/' + this.underscoreName() + '.' + fallbackLang + '.htm';
 
     function getElementFromArray( array, param, value ){
       var element;
@@ -125,6 +127,19 @@ module.exports = function Webpage( caminio, mongoose ){
       return element;
     }
   };
+
+  schema.methods.underscoreName = function(){
+    return this.constructor.underscoreName( this.name );
+  }
+
+  schema.static('underscoreName', function( str ){
+    return str.toLowerCase()
+    .replace(/ö/g,"oe")
+    .replace(/ä/g,"ae")
+    .replace(/ü/g,"ue")
+    .replace(/ß/g,"ss")
+    .replace(/[^\w]/g,'_');
+  })
 
   schema.publicAttributes = [ 'translations', 'activities', 'curTranslation' ];
   schema.trash = true;

@@ -108,9 +108,10 @@ module.exports = function Webpage( caminio, mongoose ){
   // // TODO: getParent is missing to get parent path
   schema.methods.url = function url( selectedLang, fallbackLang ){
     fallbackLang = fallbackLang || selectedLang;
-    var lang = getElementFromArray( this.translations, 'locale', selectedLang ).locale;
+    var lang = getElementFromArray( this.translations, 'locale', selectedLang );
+    if( lang )
+      lang = lang.locale;
 
-    console.log('inside trans', lang);
     if( this.translations.length === 1 )
         return this._path + '/' + this.underscoreName() + '.htm';
     if( lang )

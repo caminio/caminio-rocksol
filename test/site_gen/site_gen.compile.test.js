@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-25 22:52:58
+ * @Last Modified time: 2014-03-26 12:00:06
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -21,7 +21,7 @@ var helper = require('../helper'),
     expect = helper.chai.expect,
     request = require('superagent'),
     async = require('async'),
-    names = [ 'parent', 'sibling1', 'sibling2', 'child', 'grandchild' ]
+    names = [ 'parent', 'sibling1', 'sibling2', 'child', 'grandchild' ],
     ids = {};
   
 var user,

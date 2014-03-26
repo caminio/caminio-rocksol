@@ -38,9 +38,10 @@ module.exports = function( caminio, policies, middleware ){
 
     'update': function updateWebpage(req, res ){
       var options = {};
-      if( req.webpage.name !== req.body.webpage.name )
+      
+      if( req.body.webpage.name && ( req.webpage.name !== req.body.webpage.name ) )
         options.compileAll = true;
-
+      
       if( req.webpage.status === 'published' )
         SiteGen.compilePage( res, req.webpage, options, finalResponse );
       else

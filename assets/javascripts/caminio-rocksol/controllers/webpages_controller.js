@@ -148,7 +148,11 @@
 
       'previewWebpage': function( webpage ){
 
-        window.open( webpage.url() );
+        var url = 'http://'+currentDomain.fqdn+'/drafts/'+webpage.get('id');
+        if( webpage.get('translations').content.length > 1 )
+          url += '.' + this.get('curLang');
+        window.open( url+'.htm' );
+
       },
 
       'cancelClose': function(){

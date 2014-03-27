@@ -1,0 +1,46 @@
+<div class="box pebble-box clearfix">
+
+  <!-- box title -->
+  <div class="box-title">
+
+    <div class="btn-toolbar pull-right">
+
+      <div class="btn-group">
+        <span class="btn icon-text teaserreplace-btn">
+          <i class="fa fa-upload"></i>
+          {{t 'pebble.teaser.upload_other_picture'}}
+          <input id="teaserreplace" type="file" name="files[]">
+        </span>
+      </div>
+
+      <div class="btn-group">
+        <button {{bind-attr class=":save :btn :icon-text curPebble.teaser.isDirty:primary:disabled"}}
+                {{action saveTeaser}}>
+          <i class="fa fa-save"></i> {{t 'save'}}
+        </button>
+        <button class="btn icon-text" {{action cancelClosePebble}}>
+          <i class="fa fa-arrow-left"></i>
+          {{t 'back'}}
+        </button>
+      </div>
+
+    </div>
+
+    <strong>{{curPebble.name}}</strong>
+    {{t 'properties'}}
+  </div>
+  <!-- box title -->
+
+  <div class="row">
+
+    <div class="col-md-6">
+    <h1>Pe</h1>
+    </div>
+
+    <div class="col-md-6">
+
+    </div>
+
+  </div>
+
+</div>

@@ -7,7 +7,7 @@
  * @Date:   2014-03-23 09:58:10
  *
  * @Last Modified by:   thorsten zerha
- * @Last Modified time: 2014-03-24 15:25:05
+ * @Last Modified time: 2014-03-27 13:34:50
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -41,7 +41,7 @@ module.exports = function( caminio, policies, middleware ){
     {
       webpage: req.body.pebble.webpage
     }
-    ])
+    ]);
     if( id )
       q.where('_id').ne(id);
     q.exec( function( err, pebble ){

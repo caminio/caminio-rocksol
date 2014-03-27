@@ -140,7 +140,7 @@ module.exports = function Webpage( caminio, mongoose ){
     .replace(/ü/g,"ue")
     .replace(/ß/g,"ss")
     .replace(/[^\w]/g,'_');
-  })
+  });
 
   schema.publicAttributes = [ 'translations', 'activities', 'curTranslation' ];
   schema.trash = true;

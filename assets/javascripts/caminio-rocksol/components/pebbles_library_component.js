@@ -10,6 +10,13 @@
     
     },
 
+    sortedActivities: (function() {
+      return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
+        sortProperties: ['startsAt'],
+        content: this.get('curPebble.activities')
+      });
+    }).property('curPebble.activities'),
+
     actions: {
       
       showPebble: function( pebble ){
@@ -37,28 +44,20 @@
 
       saveActivity: function(){
         var activity = this.get('curPebbleActivity');
-        if( !activity.id )
-          this.get('curPebble.activities').pushObject( activity );
-        console.log('activity', activity.get('startsAt'));
+        if( !activity.get('id') )
+          this.get('curPebble.activities').addObject( activity );
         var self = this;
         this.get('curPebble').save().then(function(){
+
+          if( !activity.get('id') ){
+            self.get('curPebble.activities').removeObject( activity );
+            self.set('curPebbleActivity', App.User.store.createRecord('activity', { startsAt: activity.get('startsAt') }));
+          }
+
+          self.get('curPebble.activities').sortBy('startsAt');
+
           notify('info', Em.I18n.t('pebble.activity_saved', { at: moment(activity.get('startsAt')).format('LLLL') }));
         });
-      },
-
-      removeActivity: function( activity ){
-        if( this.get('curPebbleActivity') && this.get('curPebbleActivity.id') === activity.get('id') )
-          this.set('curPebbleActivity', null);
-        this.get('curPebble.activities').removeObject( activity );
-        this.get('curPebble').save().then(function(){
-          notify('info', Em.I18n.t('pebble.activity_removed', { at: moment(activity.get('startsAt')).format('LLLL') }));
-        });
-      },
-
-      editActivity: function( activity ){
-        this.set('curPebbleActivity', activity);
-        $('#activity-datepicker').datepicker('setDate', activity.get('startsAt') );
-        $('#activity-timepicker').val( moment(activity.get('startsAt')).format('HH:mm') );
       },
 
       saveTeaser: function(){
@@ -232,6 +231,38 @@
     genThumbId: function(){
       return "preview-thumb"+this.get('content')+"-img";
     }.property()
+  });
+
+  App.ActivitiesController = Em.Controller.extend({
+
+    isCurrentActivity: function(){
+      return( this.get('parentController.curPebbleActivity.id') && this.get('parentController.curPebbleActivity.id') === this.get('content.id') );
+    }.property('parentController.curPebbleActivity'),
+
+    actions: {
+
+      editActivity: function( activity ){
+        
+        if( this.get('parentController.curPebbleActivity.id') && this.get('parentController.curPebbleActivity.id') === activity.get('id') )
+          return this.get('parentController').set('curPebbleActivity', App.User.store.createRecord('activity', { startsAt: moment().startOf('hour').toDate() }));
+
+        this.get('parentController').set('curPebbleActivity', activity);
+        $('#activity-datepicker').datepicker('setDate', activity.get('startsAt') );
+        $('#activity-timepicker').val( moment(activity.get('startsAt')).format('HH:mm') );
+      },
+
+      removeActivity: function( activity ){
+        if( this.get('parentController.curPebbleActivity') && this.get('parentController.curPebbleActivity.id') === activity.get('id') )
+          this.get('parentController').set('curPebbleActivity', App.User.store.createRecord('activity', { startsAt: moment().startOf('hour').toDate() }));
+        this.get('parentController.curPebble.activities').removeObject( activity );
+        this.get('parentController.curPebble').save().then(function(){
+          notify('info', Em.I18n.t('pebble.activity_removed', { at: moment(activity.get('startsAt')).format('LLLL') }));
+        });
+      },
+
+
+
+    }
   });
 
 })(App);

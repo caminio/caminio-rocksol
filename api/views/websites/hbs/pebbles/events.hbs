@@ -29,17 +29,15 @@
 
     <div class="col-md-6">
       <ul class="activities">
-        {{#each activity in curPebble.activities}}
-          {{#if activity.id}}
-            <li {{action editActivity activity}}>
-              <button class="btn pale pull-right highlight-danger" {{action removeActivity activity}}
-                      {{translateAttr title='pebble.remove_activity'}}>
-                <i class="fa fa-trash-o"></i>
-              </button>
-              <i class="fa fa-clock-o"></i>
-              {{formatDate activity.startsAt format='dd, DD. MMM HH:mm'}}
-            </li>
-          {{/if}}
+        {{#each sortedActivities itemController='activities'}}
+          <li {{action editActivity content}} {{bind-attr class="isCurrentActivity:active"}}>
+            <button class="btn pale pull-right highlight-danger" {{action removeActivity content}}
+                    {{translateAttr title='pebble.remove_activity'}}>
+              <i class="fa fa-trash-o"></i>
+            </button>
+            <i class="fa fa-clock-o"></i>
+            {{formatDate content.startsAt format='dd, DD. MMM HH:mm'}}
+          </li>
         {{/each}}
       </ul>
     </div>

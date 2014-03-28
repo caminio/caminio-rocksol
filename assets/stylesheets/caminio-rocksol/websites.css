@@ -89,6 +89,9 @@ ul.activities li{
   margin: 3px 5px;
   cursor: pointer;
 }
+ul.activities li.active{
+  background-color: #ffc;
+}
 ul.activities .btn{
   margin: -3px -3px 0 0;
 }

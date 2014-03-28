@@ -14,6 +14,8 @@
       switch( this.get('type') ){
         case 'teaser':
           return 'fa-picture-o';
+        case 'events':
+          return 'fa-clock-o';
         default: 
           return 'fa-square';
       }

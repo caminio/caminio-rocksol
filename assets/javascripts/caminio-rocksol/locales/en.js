@@ -9,6 +9,7 @@
     'nav.webpages': 'Webpages',
     'nav.media': 'Media',
     'nav.blog': 'Blog',
+    'nav.locations': 'Locations',
 
     'will_be_filename': 'will become part of the document\'s url',
 
@@ -106,7 +107,21 @@
     'meta.description': 'Meta Description',
     'meta.description_desc': 'this text may appear as short description in google search results',
     'meta.keywords': 'Meta Keywords',
-    'meta.keywords_desc': 'help search engines to categorize your webpage'
+    'meta.keywords_desc': 'help search engines to categorize your webpage',
+
+    'locations.title': 'Locations',
+    'location.new': 'New location',
+    'location.name': 'Location name',
+    'location.city': 'Stadt',
+    'location.street': 'Street',
+    'location.zip': 'ZIP',
+    'location.country': 'Country',
+
+    'location.saved': 'Location {{name}} has been saved',
+    'location.remove': 'remove this location',
+    'location.removed': 'Location {{name}} has ben deleted',
+
+    'location.linked': 'Location {{name}} has been linked with {{at}}'
 
   };
 

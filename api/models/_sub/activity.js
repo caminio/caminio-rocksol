@@ -20,7 +20,7 @@ module.exports = function Activity( caminio, mongoose ){
      * @property location
      * @type String
      */  
-    location: { type: ObjectId, ref: 'Location' },
+    location: { type: ObjectId, ref: 'Pebble' },
 
     /**
      * @property seats

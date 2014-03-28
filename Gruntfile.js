@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   var uglifyFiles = {};
   uglifyFiles['build/javascripts/'+gearName+'.min.js'] = [
               'assets/javascripts/caminio-rocksol/3rdparty/ghostdown.js',
+              'assets/javascripts/caminio-rocksol/3rdparty/leaflet.js',
               'assets/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js',
               'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-datepicker.js',
               'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-timepicker.js',
@@ -103,6 +104,7 @@ module.exports = function(grunt) {
           'build/stylesheets/<%= gearName %>.min.css': [ 
             'assets/stylesheets/<%= gearName %>/3rdparty/ghostdown.css',
             'assets/stylesheets/<%= gearName %>/3rdparty/datepicker.css',
+            'assets/stylesheets/<%= gearName %>/3rdparty/leaflet.css',
             'assets/stylesheets/<%= gearName %>/3rdparty/timepicker.css',
             'assets/stylesheets/<%= gearName %>/websites.css'
             ]

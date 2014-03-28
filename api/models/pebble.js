@@ -83,6 +83,48 @@ module.exports = function Pebble( caminio, mongoose ){
     preferences: { type: Mixed, default: {} },
 
     /**
+     * @property street
+     * @type String
+     */  
+    street: { type: String, public: true },
+    
+    /**
+     * @property city
+     * @type String
+     */  
+    city: { type: String, public: true },
+
+    /**
+     * @property zip
+     * @type String
+     */  
+    zip: { type: String, public: true },
+
+    /**
+     * @property country
+     * @type String
+     */  
+    country: { type: String, public: true },
+
+    /**
+     * @property state
+     * @type String
+     */  
+    state: { type: String, public: true },
+
+    /**
+     * @property lng
+     * @type Float
+     */  
+    lng: { type: Number, public: true },
+
+    /**
+     * @property lat
+     * @type Float
+     */  
+    lat: { type: Number, public: true },
+
+    /**
      * activities are dates with meta information
      * sticked to the webpage
      * @property activities

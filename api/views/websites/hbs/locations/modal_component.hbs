@@ -1,0 +1,103 @@
+{{#if runModal}}
+  <div id='locations-library' class='modal fade'>
+    <div class="modal-dialog" style="width: 80%">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">{{t 'locations.title'}}</h4>
+        </div>
+        <div class="modal-body clearfix">
+{{else}}
+
+  <header>
+    <div class="box title-box website">
+      <div class="main-ctrl">
+        <button class="btn icon-text" {{action 'saveLocation'}}>
+          <i class="fa fa-save"></i>
+          {{t 'save'}}
+        </button>
+      </div>
+
+      <h1>{{t 'locations.title'}}</h1>
+
+    </div>
+
+  </header>
+
+{{/if}}
+
+        <div class="locations row">
+
+          <div class="col-md-6">
+
+            <ul class="locations">
+
+              {{#each locations itemController='location'}}
+
+                <li {{action 'editLocation' this}} {{bind-attr class="isCurrentLocation:active"}}>
+                  <button class="btn pale pull-right highlight-danger"
+                          {{action 'removeLocation' this}}
+                          {{translateAttr title='location.remove'}}>
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                  <i class="fa fa-map-marker"></i>
+                  {{content.name}}
+                </li>
+
+              {{/each}}
+
+            </ul>
+
+          </div>
+
+          <div class="col-md-6">
+
+            <form class="caminio locations-form" {{action saveLocation on='submit'}}>
+
+              <div class="form-group">
+                <div {{bind-attr class="nameError:field-with-error"}}>
+                  {{input valueBinding='curLocation.name' class='form-control' placeholderTranslation='location.name'}}
+                  {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <div>
+                  {{input valueBinding='curLocation.street' class='form-control' placeholderTranslation='location.street'}}
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-xs-4">
+                  {{input valueBinding='curLocation.zip' class='form-control' placeholderTranslation='location.zip'}}
+                </div>
+                <div class="col-xs-8">
+                  {{input valueBinding='curLocation.city' class='form-control' placeholderTranslation='location.city'}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  {{input valueBinding='curLocation.country' class='form-control' placeholderTranslation='location.country'}}
+                </div>
+              </div>
+
+              <div id="location-map"></div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+{{#if runModal}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'close'}}</button>
+          <button type="button" {{bind-attr class=":btn curLocation:primary:disabled"}} {{action useLocation}}>{{t 'pebble.insert_selected'}}</button>
+        </div>
+      </div>
+    </div><!-- /.modal-dialog -->
+  </div>
+{{/if}}

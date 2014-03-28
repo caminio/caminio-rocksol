@@ -10,6 +10,11 @@
     translations: DS.hasMany( 'translation' ),
     preferences: DS.attr('object'),
     activities: DS.hasMany( 'activity' ),
+    street: DS.attr(),
+    zip: DS.attr(),
+    city: DS.attr(),
+    country: DS.attr(),
+    state: DS.attr(),
     getIcon: function(){
       switch( this.get('type') ){
         case 'teaser':

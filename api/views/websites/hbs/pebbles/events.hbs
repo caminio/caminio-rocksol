@@ -73,9 +73,12 @@
 
             <div class="form-group clearfix">
               <label>{{t 'activity.location'}}</label>
-              {{input type="text"
-                      value=curPebbleActivity.location
-                      class="form-control"}}
+              {{#if curPebbleActivity.location}}
+                <strong>{{curPebbleActivity.location.name}}</strong>
+              {{/if}}
+              <button class="btn" {{action 'openLocationsModal'}}>
+                <i class="fa fa-pencil-o"></i>
+              </button>
             </div>
 
           </div>

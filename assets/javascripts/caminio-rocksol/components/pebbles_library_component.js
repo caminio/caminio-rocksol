@@ -60,6 +60,10 @@
         });
       },
 
+      openLocationsModal: function(){
+        $('#locations-library').modal('show');
+      }, 
+
       saveTeaser: function(){
         var self = this;
         var teaser = this.get('curPebble.teaser');

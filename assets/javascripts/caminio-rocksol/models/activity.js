@@ -6,7 +6,7 @@
     startsAt: DS.attr('date'),
     note: DS.attr(),
     seats: DS.attr('number', { defaultValue: 80 }),
-    location: DS.attr()
+    location: DS.belongsTo('pebble')
   });
 
 })( App );

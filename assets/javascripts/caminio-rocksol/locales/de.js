@@ -9,6 +9,7 @@
     'nav.webpages': 'Webseiten',
     'nav.media': 'Medien',
     'nav.blog': 'Blog',
+    'nav.locations': 'Spielorte',
 
     'will_be_filename': 'wird Teil der URL dieser Webseite',
 
@@ -105,7 +106,21 @@
     'meta.description': 'Meta Beschreibung',
     'meta.description_desc': 'Dieser Text erscheint eventuell bei einer Suchmaschine als Beschreibungstext',
     'meta.keywords': 'Schlagwörter',
-    'meta.keywords_desc': 'hilft diese Webseite einzuordnen'
+    'meta.keywords_desc': 'hilft diese Webseite einzuordnen',
+    
+    'locations.title': 'Spielorte',
+    'location.new': 'Neuer Spielort',
+    'location.name': 'Spielortname',
+    'location.street': 'Straße',
+    'location.zip': 'PLZ',
+    'location.city': 'Stadt',
+    'location.country': 'Land',
+
+    'location.saved': 'Spielort {{name}} wurde gespeichert',
+    'location.remove': 'Spielort entfernen',
+    'location.removed': 'Spielort {{name}} wurde entfernt',
+
+    'location.linked': 'Spielort {{name}} wurde mit {{at}} verlinkt'
 
   };
 

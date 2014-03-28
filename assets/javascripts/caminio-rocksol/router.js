@@ -10,6 +10,7 @@
     });
     this.resource('media.index');
     this.resource('blog');
+    this.resource('locations');
   });
 
   window.App.IndexRoute = Ember.Route.extend({
@@ -19,7 +20,14 @@
   });
 
   window.App.ApplicationController = Ember.Controller.extend({
-    blogEnabled: domainSettings.blog
+    blogEnabled: domainSettings.blog,
+    locationsEnabled: domainSettings.locations
+  });
+
+  window.App.ApplicationRoute = Ember.Route.extend({
+    setupController: function( controller, model ){
+      this.store.find('user');
+    }
   });
 
 }).call();

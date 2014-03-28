@@ -79,26 +79,33 @@ body .features .editor .entry-preview.active .entry-preview-content{
 .activities-tab .mini-title{
   padding-top: 8px;
 }
+ul.locations,
 ul.activities{
   list-style: none;
   padding: 0;
 }
+ul.locations li,
 ul.activities li{
   padding: 5px;
   border: 1px solid #ddd;
   margin: 3px 5px;
   cursor: pointer;
 }
+ul.locations li.active,
 ul.activities li.active{
   background-color: #ffc;
 }
+ul.locations .btn,
 ul.activities .btn{
   margin: -3px -3px 0 0;
 }
+
+ul.locations .fa-map-marker,
 ul.activities .fa-clock-o{
   float: left;
   margin: 3px 5px 0 0;
 }
+
 ul.pebbles-list{
   margin: 5px;
   padding: 0;
@@ -188,4 +195,13 @@ ul.pebbles-list li .fa{
 
 .seats{
   width: 5em;
+}
+
+.locations-form{
+  padding: 20px;
+}
+
+#location-map{
+  width: 100%;
+  height: 400px;
 }

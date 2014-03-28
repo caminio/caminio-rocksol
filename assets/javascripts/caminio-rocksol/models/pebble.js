@@ -9,6 +9,7 @@
     teaser: DS.belongsTo('mediafile'),
     translations: DS.hasMany( 'translation' ),
     preferences: DS.attr('object'),
+    activities: DS.hasMany( 'activity' ),
     getIcon: function(){
       switch( this.get('type') ){
         case 'teaser':

@@ -57,9 +57,29 @@ module.exports = function( caminio, policies, middleware ){
 
     _before: {
       '*': policies.ensureLogin,
-      'create, update': checkName
+      'create, update': [ checkName, cleanNewTranslationIds, cleanNewActivityIds ]
     }
 
   };
+
+
+  function cleanNewTranslationIds( req, res, next ){
+    if( req.body.pebble.translations )
+      req.body.pebble.translations.forEach(function(tr){
+        if( tr._id === null )
+          delete tr._id;
+      });
+    next();
+  }
+
+  function cleanNewActivityIds( req, res, next ){
+    if( req.body.pebble.activities )
+      req.body.pebble.activities.forEach(function(act){
+        if( act._id === null )
+          delete act._id;
+      });
+    next();
+  }
+
 
 };

@@ -9,6 +9,7 @@
     status: DS.attr('string', { defaultValue: 'draft'}),
     translations: DS.hasMany( 'translation' ),
     layout: DS.attr(),
+    childrenLayout: DS.attr(),
     parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble' ),
     usedLocales: function(){

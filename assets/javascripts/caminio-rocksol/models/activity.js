@@ -5,7 +5,8 @@
   App.Activity = DS.Model.extend({
     startsAt: DS.attr('date'),
     note: DS.attr(),
-    seats: DS.attr('number', { defaultValue: 80 })
+    seats: DS.attr('number', { defaultValue: 80 }),
+    location: DS.attr()
   });
 
 })( App );

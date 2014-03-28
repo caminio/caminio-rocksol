@@ -32,6 +32,13 @@
     'pebble.teaser.upload_other_picture': 'Bild ersetzen',
     'pebble.teaser.saved': '{{name}} wurde gespeichert',
     'pebble.insert_selected': 'Ausgewähltes Pebble einfügen',
+    'pebble.text_here': 'Hier steht noch kein Text',
+
+    'pebble.press_texts': 'Pressetexte',
+    'pebble.add_activity': 'Termin hinuzfügen',
+    'pebble.activity_saved': 'Termin {{at}} wurde gespeichert',
+    'pebble.remove_activity': 'Termin löschen',
+    'pebble.activity_removed': 'Termin {{at}} wurde gelöscht',
 
     'markdown_code': 'Markdown Editor',
     'preview': 'Vorschau',
@@ -81,13 +88,19 @@
     'activities.title': 'Termine',
     'activity.keep_open': 'offen halten',
     'activity.new': 'Neuer Termin',
+    'activity.time': 'Zeit',
     'activity.create': 'Termin erstellen',
     'activity.seats': 'Sitzplätze',
     'activity.note': 'Notiz',
     'activity.starts_at': 'Beginnt',
+    'activity.location': 'Ort',
 
     'activity.saved': 'Termin {{starts}} wurde gespeichert',
+    'webpage.init_pebbles': 'Pebbles für {{name}} werden initialisiert',
+    'webpage.init_pebbles_done': 'Pebbles für {{name}} wurden vollständig initialisiert',
+    'adv.title': 'Erweiterte Einstellungen',
 
+    'children_layout': 'Layout Kindseiten',
     'meta.title': 'Webseite Meta Informationen',
     'meta.description': 'Meta Beschreibung',
     'meta.description_desc': 'Dieser Text erscheint eventuell bei einer Suchmaschine als Beschreibungstext',

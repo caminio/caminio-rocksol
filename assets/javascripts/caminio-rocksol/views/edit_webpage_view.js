@@ -19,7 +19,7 @@
       var controller = this.get('controller');
       clearInterval( syncModelIval );
       syncModelIval = setInterval( function(){
-        var tr = controller.get('model.translations').findBy('id', controller.get('translation').id);
+        var tr = controller.get('webpage.translations').findBy('id', controller.get('translation').id);
         if( tr && $('#editor').length )
           tr.set('content', $('#editor').ghostDown('getMarkdown') );
       }, 1000);

@@ -18,4 +18,8 @@
     }
   });
 
+  window.App.ApplicationController = Ember.Controller.extend({
+    blogEnabled: domainSettings.blog
+  });
+
 }).call();

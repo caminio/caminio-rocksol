@@ -25,6 +25,7 @@
 module.exports = function Pebble( caminio, mongoose ){
 
   var Translation = require('./_sub/translation')( caminio, mongoose );
+  var ActivitySchema = require('./_sub/activity')( caminio, mongoose );
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
   var Mixed = mongoose.Schema.Types.Mixed;
@@ -82,6 +83,15 @@ module.exports = function Pebble( caminio, mongoose ){
     preferences: { type: Mixed, default: {} },
 
     /**
+     * activities are dates with meta information
+     * sticked to the webpage
+     * @property activities
+     * @type [ ActivitySchema ]
+     *
+     */
+    activities: [ ActivitySchema ],
+
+    /**
      * @property createdAt
      * @type Date
      */
@@ -106,6 +116,8 @@ module.exports = function Pebble( caminio, mongoose ){
     updatedBy: { type: ObjectId, ref: 'User', public: true }
 
   });
+
+  schema.publicAttributes = [ 'activities' ];
 
   return schema;
 

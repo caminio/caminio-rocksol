@@ -33,6 +33,13 @@
     'pebble.teaser.saved': '{{name}} has been saved',
     'pebble.insert_selected': 'Insert selected pebble',
 
+    'pebble.press_texts': 'Press texts',
+    'pebble.text_here': 'No text content here yet',
+    'pebble.add_activity': 'Add event',
+    'pebble.activity_saved': 'Event {{at}} has been saved',
+    'pebble.remove_activity': 'Delete event',
+    'pebble.activity_removed': 'Event {{at}} has been removed',
+
     'markdown_code': 'Markdown editor',
     'preview': 'Preview',
 
@@ -85,8 +92,15 @@
     'activity.seats': 'Seats',
     'activity.note': 'Note',
     'activity.starts_at': 'Starts',
+    'activity.time': 'Time',
+    'activity.location': 'Location',
 
     'activity.saved': 'Activity from {{starts}} has been saved successfully',
+
+    'children_layout': 'Layout child pages',
+    'webpage.init_pebbles': 'Pebbles for {{name}} are being initialized',
+    'webpage.init_pebbles_done': 'Pebbles for {{name}} have been initialized and are now readz to use',
+    'adv.title': 'Advanced settings',
 
     'meta.title': 'Webpage Meta Information',
     'meta.description': 'Meta Description',

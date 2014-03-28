@@ -6,8 +6,7 @@ append head
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol.min.css' )
   else
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/3rdparty/ghostdown.css' )
-    link( rel='stylesheet', href='/stylesheets/caminio-rocksol/3rdparty/datepicker.css' )
-    link( rel='stylesheet', href='/stylesheets/caminio-rocksol/3rdparty/timepicker.css' )
+    link( rel='stylesheet', href='/stylesheets/3rdparty/ui-datepicker.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-media/media_manager.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-media/3rdparty/jcrop.min.css' )
@@ -20,8 +19,6 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio/ember-tree.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/ghostdown.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js')
-    script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/bootstrap-datepicker.js')
-    script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/bootstrap-timepicker.js')
 
     script(type='text/javascript').
       var siteComponents = [];
@@ -39,6 +36,8 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpage_tree_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/pebble_plugin_text_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/pebble_plugin_events_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/webpage_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/meta_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/pebbles_library_component.js')
@@ -106,6 +105,10 @@ append foot
     include hbs/webpages/_details.hbs
   script(type="text/x-handlebars" data-template-name="_pebble_type_teaser")
     include hbs/pebbles/_pebble_type_teaser.hbs
+  script(type="text/x-handlebars" data-template-name="pebble_plugins/text")
+    include hbs/pebbles/text.hbs
+  script(type="text/x-handlebars" data-template-name="pebble_plugins/events")
+    include hbs/pebbles/events.hbs
 
 block content
 

@@ -23,7 +23,7 @@
                     <div class="row default-padding">
                     
                       <ul class="pebbles-list">
-                        {{#each associatedPebbles}}
+                        {{#each pebbles}}
                           <li {{action showPebble this}}>
                             <i {{bind-attr class=":fa getIcon"}}></i>
                             {{name}}
@@ -44,46 +44,23 @@
                 {{partial 'pebble_type_teaser'}}
               {{/equal}}
             
+              {{#equal 'text' curPebble.type }}
+                {{view App.PebblePluginTextView}}
+              {{/equal}}
+
+              {{#equal 'events' curPebble.type }}
+                {{view App.PebblePluginEventsView}}
+              {{/equal}}
+
             {{/unless}}
 
           </div>
-
-            
-
-{{!--                     <form class="caminio clearfix" {{action savePebble on='submit'}}>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3">{{t 'pebble.name'}}</label>
-                        <div class="col-md-9">
-                          {{input type='text' valueBinding='curPebble.name' class='form-control'}}
-                          <div class="desc row">
-                            <div class="col-md-6">
-                              <span>{{t 'created'}}:</span>
-                              <strong>{{curPebble.createdBy.fullname}}</strong>
-                            </div>
-                            <div class="col-md-6">
-                              <span>{{t 'date'}}:</span>
-                              <strong>{{formatDate curPebble.createdAt format='DD MM YYYY HH:mm'}}</strong>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3">{{t 'pebble.description'}}</label>
-                        <div class="col-md-9">
-                          {{input type='text' valueBinding='curPebble.description' class='form-control'}}
-                        </div>
-                      </div>
-
-                    </form> --}}
-
 
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">{{t 'close'}}</button>
-        <button type="button" {{bind-attr class=":btn curFile:primary"}} {{action insertPebble}}>{{t 'pebble.insert_selected'}}</button>
+        <button type="button" {{bind-attr class=":btn curPebble.canInsert:primary:disabled"}} {{action insertPebble}}>{{t 'pebble.insert_selected'}}</button>
       </div>
     </div>
   </div><!-- /.modal-dialog -->

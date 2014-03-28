@@ -111,6 +111,16 @@
             notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
             self.set('curSelectedItem', model);
             self.set('addedItem', model);
+
+            // if parent try to initialize pebbles
+            if( model.get('parent') && model.get('parent.childrenLayout')){
+              notify('info', Ember.I18n.t('webpage.init_pebbles', {name: model.get('name')}) );
+              model.set('layout', model.get('parent.childrenLayout') );
+              model.save().then(function(){
+                notify('info', Ember.I18n.t('webpage.init_pebbles_done', {name: model.get('name')}) );
+              });
+            }
+
           }).catch(function(err){
             console.error( err );
             notify.processError( err.responseJSON );

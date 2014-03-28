@@ -7,7 +7,7 @@
     actions: {
 
       saveTranslation: function(){
-        var webpage = this.get('model');
+        var webpage = this.get('webpage');
         webpage.save().then(function(){
           notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
         })
@@ -22,15 +22,15 @@
       },
 
       'changeLayout': function( layout ){
-        this.get('model').set('layout', layout);
-        var webpage = this.get('model');
+        this.get('webpage').set('layout', layout);
+        var webpage = this.get('webpage');
         webpage.save().then(function(){
           notify('info', Em.I18n.t('webpage.layout_changed', {name: webpage.get('name'), layout: webpage.get('layout')}));
         });
       },
 
       'changeLang': function( lang ){
-        var webpage = this.get('model');
+        var webpage = this.get('webpage');
         var curTr = this.get('translation');
         var tr = webpage.get('translations').find( function( tr ){
           return tr.get('locale') === lang;
@@ -72,12 +72,11 @@
       return this.store.find('webpage', params.id );
     },
     setupController: function( controller, model ){
-      controller.set('model', model);
+      controller.set('webpage', model);
       controller.set('translation', model.get('translations').content[0] );
       controller.set('webpages', controller.store.find('webpage', {parent: 'null'}));
       controller.set('labels', controller.store.find('label'));
-      controller.set('associatedPebbles', controller.store.find('pebble', { webpage: model.id}));
-      controller.set('pebbles', controller.store.find('pebble'));
+      controller.set('pebbles', controller.store.find('pebble', { webpage: model.id}));
       controller.store.find('mediafile',{parent: model.id});
       this.store.find('user');
 
@@ -88,7 +87,6 @@
         });
       else
         controller.set('availableLayouts', availableWebpageLayouts);
-
     }
   });
 

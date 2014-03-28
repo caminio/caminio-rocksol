@@ -7,7 +7,7 @@
     domainThumbs: domainSettings.thumbs,
 
     didInsertElement: function(){
-
+    
     },
 
     actions: {
@@ -22,10 +22,43 @@
       savePebble: function(){
         var self = this;
         var pebble = this.get('curPebble');
+        if( this.get('curPebbleTranslation') ){
+          var tr = pebble.get('translations').content.find( function(tr){
+            return tr.get('locale') === self.get('curPebbleTranslation.locale');
+          });
+          if( !tr )
+            tr = pebble.get('translations').pushObject( this.get('curPebbleTranslation') );
+        }  
         pebble.save().then( function(){
           notify('info', Em.I18n.t('pebble.saved', { name: pebble.get('name') }) );
           updatePlugins( pebble, self );
         });
+      },
+
+      saveActivity: function(){
+        var activity = this.get('curPebbleActivity');
+        if( !activity.id )
+          this.get('curPebble.activities').pushObject( activity );
+        console.log('activity', activity.get('startsAt'));
+        var self = this;
+        this.get('curPebble').save().then(function(){
+          notify('info', Em.I18n.t('pebble.activity_saved', { at: moment(activity.get('startsAt')).format('LLLL') }));
+        });
+      },
+
+      removeActivity: function( activity ){
+        if( this.get('curPebbleActivity') && this.get('curPebbleActivity.id') === activity.get('id') )
+          this.set('curPebbleActivity', null);
+        this.get('curPebble.activities').removeObject( activity );
+        this.get('curPebble').save().then(function(){
+          notify('info', Em.I18n.t('pebble.activity_removed', { at: moment(activity.get('startsAt')).format('LLLL') }));
+        });
+      },
+
+      editActivity: function( activity ){
+        this.set('curPebbleActivity', activity);
+        $('#activity-datepicker').datepicker('setDate', activity.get('startsAt') );
+        $('#activity-timepicker').val( moment(activity.get('startsAt')).format('HH:mm') );
       },
 
       saveTeaser: function(){

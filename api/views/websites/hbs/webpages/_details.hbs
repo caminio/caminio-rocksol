@@ -115,11 +115,33 @@
 
         {{webpage-meta webpage=curSelectedItem translation=curTranslation curLang=curLang}}
 
-        
-        {{#if curSelectedItem.hasActivityLayout}}
-          {{webpage-Projekt webpage=curSelectedItem}}
-        {{/if}}
+        <div class="activities-tab settings-tab">
 
+          <h4 class="mini-title">
+            <a href="#" class="toggle-container"
+              {{action 'toggleContainer' 'showAdvanced'}}>
+              <i {{bind-attr class=":toggle-container :fa showMeta:fa-angle-down:fa-angle-right"}}></i>
+              {{t 'adv.title'}}
+            </a>
+          </h4>
+
+          <div {{bind-attr class="showAdvanced::hide"}}>
+
+            <div class="form-group">
+
+              <label for="example-text-input">
+                {{t 'children_layout'}}
+              </label>
+              <div>
+                {{input valueBinding='curSelectedItem.childrenLayout' class='form-control'}}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+        
       </div>
 
     </div>

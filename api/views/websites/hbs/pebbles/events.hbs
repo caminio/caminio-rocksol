@@ -73,12 +73,15 @@
 
             <div class="form-group clearfix">
               <label>{{t 'activity.location'}}</label>
-              {{#if curPebbleActivity.location}}
-                <strong>{{curPebbleActivity.location.name}}</strong>
-              {{/if}}
-              <button class="btn" {{action 'openLocationsModal'}}>
-                <i class="fa fa-pencil-o"></i>
-              </button>
+              <p>
+                <button class="btn pull-right" {{action 'openLocationsModal'}}>
+                  <i class="fa fa-map-marker"></i>
+                </button>
+                {{#if curPebbleActivity.location}}
+                  <strong>{{curPebbleActivity.locationObj.name}}</strong>
+                {{/if}}
+              </p>
+
             </div>
 
           </div>

@@ -15,6 +15,8 @@
     city: DS.attr(),
     country: DS.attr(),
     state: DS.attr(),
+    lat: DS.attr('number'),
+    lng: DS.attr('number'),
     getIcon: function(){
       switch( this.get('type') ){
         case 'teaser':

@@ -120,7 +120,8 @@
     'location.remove': 'Spielort entfernen',
     'location.removed': 'Spielort {{name}} wurde entfernt',
 
-    'location.linked': 'Spielort {{name}} wurde mit {{at}} verlinkt'
+    'location.linked': 'Spielort {{name}} wurde mit {{at}} verlinkt',
+    'location.geo_coords_changed': '{{name}}: Breite: {{lat}}, Länge: {{lng}} (ungespeichert)',
 
   };
 

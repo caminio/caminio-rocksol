@@ -47,6 +47,11 @@
         if( !activity.get('id') )
           this.get('curPebble.activities').addObject( activity );
         var self = this;
+        if( activity.get('location') && activity.get('location.type') !== 'location' ){
+          console.log('rescue');
+          activity.set('location', null);
+        }
+        console.log('loc', activity.get('location.name'));
         this.get('curPebble').save().then(function(){
 
           if( !activity.get('id') ){

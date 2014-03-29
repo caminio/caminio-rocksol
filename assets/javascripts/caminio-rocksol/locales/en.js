@@ -121,7 +121,8 @@
     'location.remove': 'remove this location',
     'location.removed': 'Location {{name}} has ben deleted',
 
-    'location.linked': 'Location {{name}} has been linked with {{at}}'
+    'location.linked': 'Location {{name}} has been linked with {{at}}',
+    'location.geo_coords_changed': '{{name}} Latitude: {{lat}}, Longitude: {{lng}} (unsaved)',
 
   };
 

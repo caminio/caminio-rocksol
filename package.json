@@ -39,7 +39,9 @@
     "grunt-contrib-copy": "~0.5.0"
   },
   "scripts": {
-    "test": "grunt test --verbose"
+    "test": "grunt test --verbose",
+    "grunt": "~0.4.2",
+    "grunt-mocha-test": "~0.9.4"
   },
   "main": "index.js",
   "license": "MIT"

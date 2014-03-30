@@ -37,6 +37,13 @@
             </button>
             <i class="fa fa-clock-o"></i>
             {{formatDate content.startsAt format='dd, DD. MMM HH:mm'}}
+            {{#if content.locationObj}}
+              <span class="location">
+                <i class="fa fa-map-marker"></i>
+                {{content.locationObj.name}}
+              </span>
+            {{/if}}
+            &nbsp;
           </li>
         {{/each}}
       </ul>

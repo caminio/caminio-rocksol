@@ -1,0 +1,68 @@
+<div class="box pebble-box clearfix">
+
+  <!-- box title -->
+  <div class="box-title">
+
+    <div class="btn-toolbar pull-right">
+
+      <div class="btn-group">
+        <button {{bind-attr class=":save :btn :icon-text curPebble.isDirty:primary"}}
+                {{action savePebble}}>
+          <i class="fa fa-save"></i> {{t 'save'}}
+        </button>
+        <button class="btn icon-text" {{action cancelClosePebble}}>
+          <i class="fa fa-arrow-left"></i>
+          {{t 'back'}}
+        </button>
+      </div>
+
+    </div>
+
+    <strong>{{curPebble.name}}</strong>
+
+  </div>
+  <!-- box title -->
+
+  <div class="row">
+
+
+    <div class="col-md-6">
+
+      <iframe id="video-preview" 
+              width="420" 
+              height="315"
+              frameborder="0"
+              allowfullscreen></iframe>
+
+    </div>
+
+    <div class="col-md-6">
+
+      <div class="form-group">
+        <label>{{t 'pebble.type'}}</label><br>
+        <button {{bind-attr class=":btn curPebble.isYoutubeLink:primary"}}
+                {{action 'toggleLinkType' 'youtube'}}>
+          <i class="fa fa-youtube-square"></i>
+          youtube.com
+        </button>
+
+        <button {{bind-attr class=":btn curPebble.isVimeoLink:primary"}}
+                {{action 'toggleLinkType' 'vimeo'}}>
+          <i class="fa fa-vimeo-square"></i>
+          vimeo.com
+        </button>
+
+      </div>
+
+      <div class="form-group">
+        <label>URL</label>
+        {{input type="text"
+                value=curPebble.link
+                class="form-control"}}
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -106,6 +106,16 @@ ul.activities .fa-clock-o{
   margin: 3px 5px 0 0;
 }
 
+ul.activities time{
+  float: left;
+  margin-right: 5px;
+  width: 120px;
+}
+ul.activities .location{
+  color: #aaa;
+  font-size: 0.8em;
+}
+
 ul.pebbles-list{
   margin: 5px;
   padding: 0;

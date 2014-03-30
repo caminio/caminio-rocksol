@@ -39,6 +39,7 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpage_tree_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/pebble_plugin_text_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/pebble_plugin_video_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/pebble_plugin_events_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/webpage_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/locations_component.js')
@@ -116,6 +117,8 @@ append foot
     include hbs/pebbles/_pebble_type_teaser.hbs
   script(type="text/x-handlebars" data-template-name="pebble_plugins/text")
     include hbs/pebbles/text.hbs
+  script(type="text/x-handlebars" data-template-name="pebble_plugins/video")
+    include hbs/pebbles/video.hbs
   script(type="text/x-handlebars" data-template-name="pebble_plugins/events")
     include hbs/pebbles/events.hbs
 

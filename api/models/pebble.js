@@ -51,6 +51,22 @@ module.exports = function Pebble( caminio, mongoose ){
     type: { type: String, public: true },
 
     /**
+     * link is any link to the external internet
+     * @property link
+     * @type String
+     */
+    link: { type: String, public: true },
+
+    /**
+     * linkType is a hint for the html processor
+     * what to do with the link. e.g.: youtube (embedded)
+     * @property linkType
+     * @type String
+     */
+    linkType: { type: String, public: true },
+
+
+    /**
      * @property webpage
      * @type [ObjectId]
      */

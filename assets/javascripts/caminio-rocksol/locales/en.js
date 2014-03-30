@@ -34,6 +34,8 @@
     'pebble.teaser.saved': '{{name}} has been saved',
     'pebble.insert_selected': 'Insert selected pebble',
 
+    'pebble.type': 'Type',
+    'pebble.video': 'Video',
     'pebble.press_texts': 'Press texts',
     'pebble.text_here': 'No text content here yet',
     'pebble.add_activity': 'Add event',
@@ -120,6 +122,7 @@
     'location.saved': 'Location {{name}} has been saved',
     'location.remove': 'remove this location',
     'location.removed': 'Location {{name}} has ben deleted',
+    'location.use': 'Use this location',
 
     'location.linked': 'Location {{name}} has been linked with {{at}}',
     'location.geo_coords_changed': '{{name}} Latitude: {{lat}}, Longitude: {{lng}} (unsaved)',

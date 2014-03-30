@@ -52,6 +52,10 @@
                 {{view App.PebblePluginEventsView}}
               {{/equal}}
 
+              {{#equal 'video' curPebble.type }}
+                {{view App.PebblePluginVideoView}}
+              {{/equal}}
+
             {{/unless}}
 
           </div>

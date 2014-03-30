@@ -47,10 +47,6 @@
         if( !activity.get('id') )
           this.get('curPebble.activities').addObject( activity );
         var self = this;
-        if( activity.get('location') && activity.get('location.type') !== 'location' ){
-          console.log('rescue');
-          activity.set('location', null);
-        }
         console.log('loc', activity.get('location.name'));
         this.get('curPebble').save().then(function(){
 
@@ -75,6 +71,11 @@
         teaser.save().then( function(){
           notify('info', Em.I18n.t('pebble.teaser.saved', { name: teaser.get('name') }) );
         });
+      },
+
+      toggleLinkType: function( type ){
+        this.get('curPebble').set('linkType', type );
+        console.log('type', type, this.get('curPebble.linkType'));
       },
 
       cancelClosePebble: function(){

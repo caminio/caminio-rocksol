@@ -7,6 +7,8 @@
     type: DS.attr(),
     description: DS.attr(),
     teaser: DS.belongsTo('mediafile'),
+    linkType: DS.attr(),
+    link: DS.attr(),
     translations: DS.hasMany( 'translation' ),
     preferences: DS.attr('object'),
     activities: DS.hasMany( 'activity' ),
@@ -23,10 +25,28 @@
           return 'fa-picture-o';
         case 'events':
           return 'fa-clock-o';
+        case 'video':
+          return 'fa-youtube-play';
+        case 'text':
+          return 'fa-file-text';
         default: 
           return 'fa-square';
       }
-    }.property('type')
+    }.property('type'),
+    isYoutubeLink: function(){
+      return this.get('linkType') === 'youtube';
+    }.property('linkType'),
+    isVimeoLink: function(){
+      return this.get('linkType') === 'vimeo';
+    }.property('linkType'),
+    updateVideoPreview: function(){
+      if( !this.get('link') )
+        return
+      if( this.get('link').indexOf('watch?v=') > 0 ){
+        $('#video-preview').attr('src', '//www.youtube.com/embed/'+ this.get('link').split('watch?v=')[1] );
+        this.set('linkType', 'youtube');
+      }
+    }.observes('link','linkType')
   });
 
 }).call();

@@ -35,6 +35,8 @@
     'pebble.insert_selected': 'Ausgewähltes Pebble einfügen',
     'pebble.text_here': 'Hier steht noch kein Text',
 
+    'pebble.type': 'Typ',
+    'pebble.video': 'Video',
     'pebble.press_texts': 'Pressetexte',
     'pebble.add_activity': 'Termin hinuzfügen',
     'pebble.activity_saved': 'Termin {{at}} wurde gespeichert',
@@ -119,6 +121,7 @@
     'location.saved': 'Spielort {{name}} wurde gespeichert',
     'location.remove': 'Spielort entfernen',
     'location.removed': 'Spielort {{name}} wurde entfernt',
+    'location.use': 'Diesen Spielort verwenden',
 
     'location.linked': 'Spielort {{name}} wurde mit {{at}} verlinkt',
     'location.geo_coords_changed': '{{name}}: Breite: {{lat}}, Länge: {{lng}} (ungespeichert)',

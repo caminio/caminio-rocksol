@@ -30,6 +30,7 @@ function setupPebbleActivity( controller ){
     .datepicker({
       prevText: '',
       nextText: '',
+      dateFormat: 'yy-mm-dd',
       onSelect: function( dateString ){
         setDate( moment(dateString) );
       }

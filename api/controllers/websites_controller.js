@@ -40,6 +40,7 @@ module.exports = function( caminio, policies, middleware ){
       ensureDefaultTemplates,
       function( req, res ){
 
+        console.log('content paths', res.locals.currentDomain.getContentPath());
         var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'layouts' );
 
         if( !res.locals.currentDomain )

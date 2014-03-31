@@ -47,7 +47,6 @@
         if( !activity.get('id') )
           this.get('curPebble.activities').addObject( activity );
         var self = this;
-        console.log('loc', activity.get('location.name'));
         this.get('curPebble').save().then(function(){
 
           if( !activity.get('id') ){
@@ -75,7 +74,6 @@
 
       toggleLinkType: function( type ){
         this.get('curPebble').set('linkType', type );
-        console.log('type', type, this.get('curPebble.linkType'));
       },
 
       cancelClosePebble: function(){

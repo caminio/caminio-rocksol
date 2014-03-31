@@ -8,17 +8,17 @@ module.exports = function(grunt) {
   
   var uglifyFiles = {};
   uglifyFiles['build/javascripts/caminio-rocksol.min.js'] = [
-              'assets/javascripts/caminio-rocksol/3rdparty/ghostdown.js',
-              'assets/javascripts/caminio-rocksol/3rdparty/leaflet.js',
-              'assets/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js',
-              'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-datepicker.js',
-              'assets/javascripts/caminio-rocksol/3rdparty/bootstrap-timepicker.js',
+              'assets/javascripts/caminio-rocksol/3rdparty/*.js',
+              'assets/javascripts/caminio-rocksol/router.js',
               'assets/javascripts/caminio-rocksol/locales/*.js',
               'assets/javascripts/caminio-rocksol/models/*.js',
               'assets/javascripts/caminio-rocksol/controllers/*.js',
               'assets/javascripts/caminio-rocksol/views/*.js',
-              'assets/javascripts/caminio-rocksol/components/*.js',
-              'assets/javascripts/caminio-rocksol/router.js' ];
+              'assets/javascripts/caminio-rocksol/components/webpage_component.js',
+              'assets/javascripts/caminio-rocksol/components/meta_component.js',
+              'assets/javascripts/caminio-rocksol/components/locations_component.js',
+              'assets/javascripts/caminio-rocksol/components/pebbles_library_component.js'
+               ];
 
   // Project configuration.
   grunt.initConfig({

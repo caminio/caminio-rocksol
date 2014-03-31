@@ -13,6 +13,13 @@ append head
     link( rel='stylesheet', href='/stylesheets/caminio-media/3rdparty/jcrop.min.css' )
 
 append foot
+
+  script(type='text/javascript').
+    var siteComponents = [];
+  each siteComp in siteComponents
+    script(type='text/javascript').
+      siteComponents.push( { name: '!{siteComp.name}' } );
+
   if env === 'production'
     script(type='text/javascript', src='/javascripts/caminio-rocksol.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media.min.js')
@@ -21,13 +28,6 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/ghostdown.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/leaflet.js')
-
-    script(type='text/javascript').
-      var siteComponents = [];
-    each siteComp in siteComponents
-      script(type='text/javascript').
-        siteComponents.push( { name: '!{siteComp.name}' } );
-
     script(type='text/javascript', src='/javascripts/caminio-rocksol/locales/#{currentLang}.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/router.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/models/translation.js')

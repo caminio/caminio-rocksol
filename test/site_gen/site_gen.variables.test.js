@@ -34,8 +34,8 @@ describe( 'Site Generator variables test', function(){
       camDomain: domain.id, 
       status: 'published',
       layout: 'testing',
-      translations: [{content: 'testcontent', locale: 'en'}
-      , { content: 'deutsch', locale: 'de'}
+      translations: [{content: 'testcontent', locale: 'en'},
+                     { content: 'deutsch', locale: 'de'}
       ] 
     } );
     webpage.save( function( err ){
@@ -93,7 +93,7 @@ describe( 'Site Generator variables test', function(){
       var content = JSON.parse( 
         fs.readFileSync( __dirname + '/../support/content/' + 
           domain.name.replace('.', '_') +
-         '/public/' + names[0] + '/' + names[1] + '.htm', 
+         '/public/' + names[0] + '/' + names[1] + '.en.htm', 
         { encoding: 'utf8' }));
       expect(content.ancestors).to.have.length(1);
       expect(content.ancestors[0].name).to.eq(names[0]);
@@ -114,7 +114,7 @@ describe( 'Site Generator variables test', function(){
         var content = JSON.parse( 
           fs.readFileSync( __dirname + '/../support/content/' + 
             domain.name.replace('.', '_') +
-           '/public/' + names[0] + '/' + names[1] + '/' + names[3] + '.htm', 
+           '/public/' + names[0] + '/' + names[1] + '/' + names[3] + '.en.htm', 
           { encoding: 'utf8' }));
         expect(content.ancestors).to.have.length(2);
         expect(content.ancestors[0].name).to.eq(names[0]);
@@ -139,7 +139,7 @@ describe( 'Site Generator variables test', function(){
       this.content = JSON.parse( 
         fs.readFileSync( __dirname + '/../support/content/' + 
           domain.name.replace('.', '_') +
-         '/public/' + names[0] + '/' + names[2] + '.htm', 
+         '/public/' + names[0] + '/' + names[2] + '.en.htm', 
         { encoding: 'utf8' }));      
       expect(this.content.siblings).to.have.length(2);
     });
@@ -171,9 +171,33 @@ describe( 'Site Generator variables test', function(){
       var content = JSON.parse( 
         fs.readFileSync( __dirname + '/../support/content/' + 
           domain.name.replace('.', '_') +
-         '/public/' + names[0] + '.htm', 
+         '/public/' + names[0] + '.en.htm', 
         { encoding: 'utf8' }));      
       expect(content.children).to.have.length(2);
+    });
+
+  });
+
+  describe('Path', function(){
+
+
+    it('is the relativ path to the webpage', function( done ){
+      this.agent
+      .put(URL+'/'+ids[names[4]])
+      .send( { 'webpage': { parent: ids[names[3]], layout: 'testing' } } )
+      .end(function(err, res){
+        expect(res.status).to.eq(200);
+        done();
+      });
+    });
+
+    it('are available in the webpage object and jadefile as "path"', function(){
+      var content = JSON.parse( 
+        fs.readFileSync( __dirname + '/../support/content/' + 
+          domain.name.replace('.', '_') +
+         '/public/' + names[0] + '/' + names[1] + '/' + names[3] + '/' + names[4] + '.en.htm', 
+        { encoding: 'utf8' }));  
+      expect( content.webpage.path ).to.eq('/' + names[0] + '/' + names[1] + '/' + names[3]);
     });
 
   });

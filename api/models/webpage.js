@@ -134,7 +134,7 @@ module.exports = function Webpage( caminio, mongoose ){
     .replace(/[^\w]/g,'_');
   });
 
-  schema.publicAttributes = [ 'translations', 'activities', 'curTranslation' ];
+  schema.publicAttributes = [ 'translations', 'activities', 'curTranslation', 'path' ];
   schema.trash = true;
 
   return schema;

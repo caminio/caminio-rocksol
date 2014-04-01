@@ -39,8 +39,9 @@ module.exports = function( caminio, policies, middleware ){
     'update': function updateWebpage(req, res ){
       var options = {};
       
-      if( req.body.webpage.name && ( req.webpage.name !== req.body.webpage.name ) )
-        options.compileAll = true;
+    
+        // options.contentOnly = true;
+
       if( req.webpage.status === 'published' )
         options.isPublished = true;
       if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )

@@ -26,7 +26,7 @@
                         {{#each pebbles}}
                           <li {{action showPebble this}}>
                             <i {{bind-attr class=":fa getIcon"}}></i>
-                            {{name}}
+                            {{tKey name prefix='pebbles'}}
                           </li>
                         {{/each}}
                       </ul>

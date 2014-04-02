@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-26 15:07:28
+ * @Last Modified time: 2014-04-02 22:51:20
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -73,7 +73,7 @@ describe( 'Site Generator compile test', function(){
     });
   });
 
-  describe('Pebble', function(){
+  describe('Compile All test', function(){
 
     before( function( done ){
       this.pebbleContent = ' a string as pebblecontent';
@@ -87,10 +87,10 @@ describe( 'Site Generator compile test', function(){
       });
     });
 
-    it('have got the key {{ pebble: name }}', function( done ){
+    it('compiles all if name is changed', function( done ){
       this.agent
       .put(URL+'/'+ids[names[1]])
-      .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', name: 'new name' } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', name: 'test name' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();

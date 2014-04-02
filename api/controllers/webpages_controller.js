@@ -32,16 +32,24 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ cleanNewActivities, cleanNewTranslationIds, getWebpage, checkLocaleExistsAndDismiss, autoCreatePebbles, saveWebpage ],
+      'update': [ 
+        cleanNewActivities, 
+        cleanNewTranslationIds, 
+        getWebpage, 
+        checkLocaleExistsAndDismiss, 
+        autoCreatePebbles, 
+        saveWebpage ],
       'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
     },
 
     'update': function updateWebpage(req, res ){
       var options = {};
-      
-    
-        // options.contentOnly = true;
 
+      if( req.compileAll ){
+        options.compileChildren = true;
+        options.compileAncestors = true;
+        options.compileSiblings = true;      
+      }
       if( req.webpage.status === 'published' )
         options.isPublished = true;
       if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
@@ -205,7 +213,7 @@ module.exports = function( caminio, policies, middleware ){
     function checkForFiles( file, index ){
       var curPath = path + "/" + file;
       if(fs.lstatSync(curPath).isDirectory()) { 
-          deleteFolderRecursive(curPath);
+          deleteFolder(curPath);
       } else { 
           fs.unlinkSync(curPath);
       }
@@ -280,10 +288,15 @@ module.exports = function( caminio, policies, middleware ){
 
   function saveWebpage( req, res, next ){
 
+    if( WebpageMethods.otherThanContentModified( req.webpage, req.body.webpage ) )
+      req.compileAll = true;
+
+    // if( req.webpage.name !== req.body.webpage.name )
+    //   removeFiles( req, res, function(){});
+
     req.body.webpage.updatedBy = res.locals.currentUser;
     req.body.webpage.camDomain = res.locals.currentDomain;
-
-    req.webpage.update( req.body.webpage, function(err){
+    req.webpage.update( req.body.webpage, function( err ){
       error( 'server_error', err );
       Webpage.findOne({_id: req.param('id')}, function( err, webpage ){
         error( 'server_error', err );

@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-03 15:03:59
+ * @Last Modified time: 2014-04-03 16:25:34
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -93,6 +93,7 @@ describe( 'Site Generator compile test', function(){
       .put(URL+'/'+ids[names[1]])
       .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', status: 'published', name: 'atest name' } } )
       .end(function(err, res){
+        console.log(res.text);
         expect(res.status).to.eq(200);
         done();
       });

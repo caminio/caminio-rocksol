@@ -91,10 +91,11 @@ module.exports = function( caminio, policies, middleware ){
         return res.json(404, { error: 'not_found' });
       req.webpage = webpage;
 
-      if( req.webpage.name !== req.body.webpage.name )
-        req.removeFiles = true;
-      else
-        req.removeFiles = false;
+      if( req.body.webpage )
+        if( req.webpage.name !== req.body.webpage.name )
+          req.removeFiles = true;
+        else
+          req.removeFiles = false;
 
       next();
     });

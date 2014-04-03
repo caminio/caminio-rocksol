@@ -13,7 +13,8 @@
  */
 
 var superagent = require('superagent'),
-    async = require('async');
+    async = require('async'),
+    fs = require('fs');
 
 var helper = {};
 
@@ -79,5 +80,29 @@ helper.getDomainAndUser = function( caminio, done ){
     });
   });
 };
+
+helper.cleanContentDir = function( domain ){
+  var path = __dirname + '/support/content/' + domain.name.replace('.', '_') + '/public/';
+  deleteFolder( path );
+  fs.mkdirSync( path );
+};
+
+function deleteFolder( path ) {
+  var files = [];
+  if( fs.existsSync( path ) ) {
+      files = fs.readdirSync( path );
+      files.forEach( checkForFiles );
+      fs.rmdirSync( path );
+  }
+
+  function checkForFiles( file, index ){
+    var curPath = path + "/" + file;
+    if(fs.lstatSync(curPath).isDirectory()) { 
+        deleteFolder(curPath);
+    } else { 
+        fs.unlinkSync(curPath);
+    }
+  }
+}
 
 module.exports = helper;

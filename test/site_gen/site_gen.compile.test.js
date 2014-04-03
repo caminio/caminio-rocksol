@@ -7,7 +7,7 @@
  * @Date:   2014-03-21 11:21:07
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-02 22:51:20
+ * @Last Modified time: 2014-04-03 15:03:59
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -65,6 +65,7 @@ describe( 'Site Generator compile test', function(){
           .end(function(err,res){
             akku.agent.get( helper.url+'/website/available_layouts')
             .end( function( err, res ){
+              helper.cleanContentDir( domain );
               async.forEach( names, addWebpage, done );
             });
           });
@@ -90,7 +91,18 @@ describe( 'Site Generator compile test', function(){
     it('compiles all if name is changed', function( done ){
       this.agent
       .put(URL+'/'+ids[names[1]])
-      .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', name: 'test name' } } )
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', status: 'published', name: 'atest name' } } )
+      .end(function(err, res){
+        expect(res.status).to.eq(200);
+        done();
+      });
+    });
+
+
+    it('deletes old files if name is changed', function( done ){
+      this.agent
+      .put(URL+'/'+ids[names[1]])
+      .send( { 'webpage': { parent: ids[names[0]], layout: 'pebble', status: 'published', name: 'a another name' } } )
       .end(function(err, res){
         expect(res.status).to.eq(200);
         done();

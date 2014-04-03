@@ -35,10 +35,11 @@ module.exports = function( caminio, policies, middleware ){
       'update': [ 
         cleanNewActivities, 
         cleanNewTranslationIds, 
-        getWebpage, 
+        getWebpage,
+        removeFiles, 
         checkLocaleExistsAndDismiss, 
         autoCreatePebbles, 
-        saveWebpage ],
+        saveWebpage],
       'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
     },
 
@@ -89,6 +90,12 @@ module.exports = function( caminio, policies, middleware ){
       if( !webpage )
         return res.json(404, { error: 'not_found' });
       req.webpage = webpage;
+
+      if( req.webpage.name !== req.body.webpage.name )
+        req.removeFiles = true;
+      else
+        req.removeFiles = false;
+
       next();
     });
   }
@@ -122,6 +129,7 @@ module.exports = function( caminio, policies, middleware ){
    *  @method removeLocalPebbles
    */
   function removeLocalPebbles( req, res, next ){
+    req.removeFiles = true;
     removePebbles( req.webpage._id, next );
   }
 
@@ -190,16 +198,20 @@ module.exports = function( caminio, policies, middleware ){
   }
 
   function removeFiles( req, res, next ){    
-    WebpageMethods.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
-      var path = join( res.locals.currentDomain.getContentPath(), 'public');
-      ancestors.reverse().forEach( function( ancestor ){
-          path =  join( path, WebpageMethods.underscore( ancestor.name ) );
-      }); 
-      path = join( path, WebpageMethods.underscore( req.webpage.name ) );
-      deleteFolder( path+"/" );
-      deleteFile( path+".htm" );
-      next();
-    });
+    console.log('we are doing', req.removeFiles);
+    if( req.removeFiles ){
+      WebpageMethods.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
+        var path = join( res.locals.currentDomain.getContentPath(), 'public');
+        ancestors.reverse().forEach( function( ancestor ){
+            path =  join( path, WebpageMethods.underscore( ancestor.name ) );
+        }); 
+        path = join( path, WebpageMethods.underscore( req.webpage.name ) );
+        deleteFolder( path+"/" );
+        console.log('the path: ', path);
+        deleteFile( path+".htm" );
+        next();
+      });
+    }
   } 
 
   function deleteFolder( path ) {
@@ -290,9 +302,6 @@ module.exports = function( caminio, policies, middleware ){
 
     if( WebpageMethods.otherThanContentModified( req.webpage, req.body.webpage ) )
       req.compileAll = true;
-
-    // if( req.webpage.name !== req.body.webpage.name )
-    //   removeFiles( req, res, function(){});
 
     req.body.webpage.updatedBy = res.locals.currentUser;
     req.body.webpage.camDomain = res.locals.currentDomain;

@@ -213,8 +213,8 @@ module.exports = function( caminio, policies, middleware ){
         deleteFile( path+".htm" );
         return next();
       });
-    }
-    next();
+    } else
+      next();
   } 
 
   function deleteFolder( path ) {

@@ -145,6 +145,7 @@
 
       'saveWebpage': function( webpage ){
         var controller = this;
+        console.log(webpage.get('parent.name'));
         webpage
           .save()
           .then( function(){

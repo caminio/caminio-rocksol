@@ -210,9 +210,10 @@ module.exports = function( caminio, policies, middleware ){
         deleteFolder( path+"/" );
         console.log('the path: ', path);
         deleteFile( path+".htm" );
-        next();
+        return next();
       });
     }
+    next();
   } 
 
   function deleteFolder( path ) {

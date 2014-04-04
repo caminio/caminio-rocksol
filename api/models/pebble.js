@@ -7,8 +7,8 @@
  * @Date:   2014-03-21 00:30:53
  *
 
- * @Last Modified by:   thorsten zerha
- * @Last Modified time: 2014-03-24 15:37:08
+ * @Last Modified by:   David Reinisch
+ * @Last Modified time: 2014-04-04 16:35:46
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -70,7 +70,7 @@ module.exports = function Pebble( caminio, mongoose ){
      * @property webpage
      * @type [ObjectId]
      */
-    webpage: { type: ObjectId, ref: 'Webpage', public: true },
+    webpage: { type: [ ObjectId ], ref: 'Webpage', public: true },
 
     /**
      * @property mediafiles

@@ -39,6 +39,8 @@ module.exports = function( caminio, policies, middleware ){
         removeFiles, 
         checkLocaleExistsAndDismiss, 
         autoCreatePebbles, 
+        getChildren,
+        checkParent,
         saveWebpage],
       'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
     },
@@ -46,7 +48,6 @@ module.exports = function( caminio, policies, middleware ){
     'update': function updateWebpage(req, res ){
       var options = {};
 
-      console.log(req.webpage._id)
       if( req.compileAll ){
         options.compileChildren = true;
         options.compileAncestors = true;
@@ -73,6 +74,14 @@ module.exports = function( caminio, policies, middleware ){
     }
 
   };
+
+  function checkParent( req, res, next ){
+    req.children.forEach( function( child ){
+      if( child._id == req.body.webpage.parent )
+        req.body.webpage.parent = null;
+    });
+    next();
+  }
 
   function setupDefaultTranslation( req, res, next ){
     if( !req.body.webpage )
@@ -209,7 +218,6 @@ module.exports = function( caminio, policies, middleware ){
         }); 
         path = join( path, WebpageMethods.underscore( req.webpage.name ) );
         deleteFolder( path+"/" );
-        console.log('the path: ', path);
         deleteFile( path+".htm" );
         return next();
       });

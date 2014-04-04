@@ -46,11 +46,13 @@ module.exports = function( caminio, policies, middleware ){
     'update': function updateWebpage(req, res ){
       var options = {};
 
+      console.log(req.webpage._id)
       if( req.compileAll ){
         options.compileChildren = true;
         options.compileAncestors = true;
         options.compileSiblings = true;      
       }
+
       if( req.webpage.status === 'published' )
         options.isPublished = true;
       if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
@@ -199,7 +201,6 @@ module.exports = function( caminio, policies, middleware ){
   }
 
   function removeFiles( req, res, next ){    
-    console.log('we are doing', req.removeFiles);
     if( req.removeFiles ){
       WebpageMethods.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
         var path = join( res.locals.currentDomain.getContentPath(), 'public');

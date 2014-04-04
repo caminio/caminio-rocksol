@@ -145,11 +145,6 @@
 
       'saveWebpage': function( webpage ){
         var controller = this;
-<<<<<<< HEAD
-        console.log(webpage.get('parent.name'));
-=======
-        return;
->>>>>>> 425e311591ecec3bcccbb87503272754dbb6dfd8
         webpage
           .save()
           .then( function(){

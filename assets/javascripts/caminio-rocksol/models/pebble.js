@@ -19,6 +19,9 @@
     state: DS.attr(),
     lat: DS.attr('number'),
     lng: DS.attr('number'),
+    businfo: DS.attr(),
+    contact: DS.attr(),
+    timeinfo: DS.attr(),
     getIcon: function(){
       switch( this.get('type') ){
         case 'teaser':

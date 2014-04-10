@@ -8,7 +8,7 @@
  *
 
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-04 16:35:46
+ * @Last Modified time: 2014-04-10 01:53:56
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -139,6 +139,10 @@ module.exports = function Pebble( caminio, mongoose ){
      * @type Float
      */  
     lat: { type: Number, public: true },
+
+    businfo: { type: String, public: true },
+    contact: { type: String, public: true },
+    timeinfo: { type: String, public: true },
 
     /**
      * activities are dates with meta information

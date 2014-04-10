@@ -117,12 +117,16 @@
     'meta.keywords_desc': 'help search engines to categorize your webpage',
 
     'locations.title': 'Locations',
+    'location.description': 'Description',
     'location.new': 'New location',
     'location.name': 'Location name',
     'location.city': 'Stadt',
     'location.street': 'Street',
     'location.zip': 'ZIP',
     'location.country': 'Country',
+    'location.businfo': 'Travel information',
+    'location.timeinfo': 'Time information',
+    'location.contact': 'Contact information',
 
     'location.saved': 'Location {{name}} has been saved',
     'location.remove': 'remove this location',

@@ -64,6 +64,12 @@
 
               <div class="form-group">
                 <div>
+                  {{input valueBinding='curLocation.description' class='form-control' placeholderTranslation='location.description'}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div>
                   {{input valueBinding='curLocation.street' class='form-control' placeholderTranslation='location.street'}}
                 </div>
               </div>
@@ -84,6 +90,24 @@
               </div>
 
               <div id="location-map"></div>
+
+              <div class="form-group">
+                <div>
+                  {{input valueBinding='curLocation.businfo' class='form-control' placeholderTranslation='location.businfo'}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  {{input valueBinding='curLocation.timeinfo' class='form-control' placeholderTranslation='location.timeinfo'}}
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  {{input valueBinding='curLocation.contact' class='form-control' placeholderTranslation='location.contact'}}
+                </div>
+              </div>
 
             </form>
 

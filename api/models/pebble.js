@@ -8,7 +8,7 @@
  *
 
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-10 01:53:56
+ * @Last Modified time: 2014-04-11 13:02:31
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -141,7 +141,8 @@ module.exports = function Pebble( caminio, mongoose ){
     lat: { type: Number, public: true },
 
     businfo: { type: String, public: true },
-    contact: { type: String, public: true },
+    traminfo: { type: String, public: true },
+    contactinfo: { type: String, public: true },
     timeinfo: { type: String, public: true },
 
     /**

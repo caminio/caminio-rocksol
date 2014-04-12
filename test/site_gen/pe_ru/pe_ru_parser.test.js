@@ -7,7 +7,7 @@
  * @Date:   2014-04-12 00:44:55
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-12 01:52:39
+ * @Last Modified time: 2014-04-12 02:44:26
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -37,12 +37,12 @@ describe( 'Pebble - Rubble - Parser test', function(){
   describe( 'PeRuParser', function(){
 
     it('can be required through the rocksol lib with /lib/pe_ru_bbles/pe_ru_bble_parser', function(){
-      testRequire = require('./../../../lib/pe_ru_bble/pe_ru_bble_parser')( caminio );
+      testRequire = require('./../../../lib/pe_ru_bble/pe_ru_bble_parser');
       expect( testRequire ).to.exist;
     });
 
     describe( 'methods: ', function(){
-      PeRuParser = require('./../../../lib/pe_ru_bble/pe_ru_bble_parser')( caminio );
+      PeRuParser = require('./../../../lib/pe_ru_bble/pe_ru_bble_parser');
       var result;
       result = PeRuParser.getSnippets( snippets1 );
 

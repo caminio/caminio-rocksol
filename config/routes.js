@@ -6,6 +6,5 @@ module.exports.routes = {
   '/caminio/websites/disk_quota': 'WebsitesController#disk_quota',
   '/caminio/websites/users_quota': 'WebsitesController#users_quota',
   'autorest /caminio/webpages': 'Webpage',
-  'autorest /caminio/pebbles': 'Pebble',
-  '/caminio/webpages/:id/preview': 'WebapagesController#preview'
+  'autorest /caminio/pebbles': 'Pebble'
 };

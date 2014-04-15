@@ -1,0 +1,1 @@
+module.exports = require( __dirname + '/api/models/_sub/translation');

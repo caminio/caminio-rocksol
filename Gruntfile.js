@@ -19,6 +19,8 @@ module.exports = function(grunt) {
               'assets/javascripts/caminio-rocksol/components/locations_component.js',
               'assets/javascripts/caminio-rocksol/components/pebbles_library_component.js'
                ];
+  uglifyFiles['build/javascripts/caminio-rocksol-translation.min.js'] = [
+              'assets/javascripts/caminio-rocksol/models/translation.js',
 
   // Project configuration.
   grunt.initConfig({

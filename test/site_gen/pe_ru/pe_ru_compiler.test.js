@@ -7,7 +7,7 @@
  * @Date:   2014-04-14 01:23:59
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-14 12:55:41
+ * @Last Modified time: 2014-04-14 15:25:19
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -69,9 +69,16 @@ describe( 'Pebble - Rubble - Compiler test', function(){
           pebble = new Pebble( { 
             name: 'test', 
             translations: [{content: this.pebbleContent, locale: 'en', layout: 'pebble' }] 
-          } );
+          });
+
+          pebble2 = new Pebble( { 
+            name: 'another', 
+            translations: [{content: this.pebbleContent, locale: 'en', layout: 'pebble' }] 
+          });
           pebble.save( function( err ){
-            done();
+            pebble2.save( function( err ){
+              done();
+            });
           });
         });
 
@@ -82,7 +89,8 @@ describe( 'Pebble - Rubble - Compiler test', function(){
             path:  __dirname + '/../../support/content/test_com/rubbles/this/',
             name: "this"
           }, function( err, content){
-            console.log( content );
+            expect( content ).to.eq( " h1 i am a rubble");
+            expect( err ).to.be.null;
             done();
           });
         });
@@ -94,21 +102,38 @@ describe( 'Pebble - Rubble - Compiler test', function(){
             path:  __dirname + '/../../support/content/test_com/rubbles/that/',
             name: "this"
           }, function( err, content){
-            console.log( content );
+            expect( content ).to.eq( "{{ rubble: this  Warning: could not find rubble in filesystem }}");
+            expect( err ).to.not.be.null;
             done();
           });
         });
 
-
-        it( 'works with a pebble', function( done ){
+        it( 'works with a pebble with jade file', function( done ){
           compiler.compileSnippet( { 
-            original: '{{ rubble: this }}', 
+            original: '{{ pebble: test }}', 
             params: {},
             path:  __dirname + '/../../support/content/test_com/pebbles/test/',
             db: pebble,
+            type: "pebble",
             name: "test"
-          }, function( err, content){
-            console.log( content );
+          }, function( err, content){   
+            expect( content ).to.eq( "\n<h1>we are pebble</h1><p> a string as pebblecontent</p>");
+            expect( err ).to.be.null;
+            done();
+          });
+        });
+
+        it( 'works with a pebble without jade file', function( done ){
+          compiler.compileSnippet( { 
+            original: '{{ pebble: another }}', 
+            params: {},
+            path:  __dirname + '/../../support/content/test_com/pebbles/another/',
+            db: pebble2,
+            type: "pebble",
+            name: "another"
+          }, function( err, content){   
+            expect( content ).to.eq( "<p> a string as pebblecontent</p>" );
+            expect( err ).to.be.null;
             done();
           });
         });

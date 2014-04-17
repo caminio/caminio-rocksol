@@ -7,7 +7,7 @@
  * @Date:   2014-04-14 01:23:59
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-14 15:25:19
+ * @Last Modified time: 2014-04-18 01:27:23
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -22,7 +22,8 @@ var helper = require('../../helper'),
 var PeRuCompiler,
     caminio,
     Pebble,
-    Methods;
+    Methods, 
+    Webpage;
 
 var snippets1 = " {{ pebble: iAmPebble }} {{ rubble: iAmRubble }} {{ missmach: iAmMissmatch }}";
 var rubbleSnippet = " {{ rubble: this }} ";
@@ -60,6 +61,7 @@ describe( 'Pebble - Rubble - Compiler test', function(){
       describe('compileSnippet', function(){
         var compiler;
         var pebble;
+        var pebble2;
 
         before( function( done ){
           var PeRuCompiler = require('./../../../lib/pe_ru_bble/pe_ru_bble_compiler');

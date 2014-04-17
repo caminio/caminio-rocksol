@@ -7,7 +7,7 @@
  * @Date:   2014-04-12 02:32:22
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-15 13:26:34
+ * @Last Modified time: 2014-04-18 01:30:40
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -21,7 +21,8 @@ var helper = require('../../helper'),
 
 var PeRuProcessor,
     caminio,
-    Pebble;
+    Pebble,
+    Webpage;
 
 var snippets1 = "PLAIN TEXT";
 var rubbleSnippet = "{{ rubble: iAmRubble }}";
@@ -59,6 +60,7 @@ describe( 'Pebble - Rubble - Processor test', function(){
     describe( 'methods: ', function(){
       var processor;
       var webpage;
+      var pebble;
 
       before( function( done ){
         webpage = new caminio.models.Webpage({ name: 'testpage' });

@@ -4,16 +4,14 @@ module.exports = {
     "100x100"
   ],
 
-  usersQuota: 5,
-
-  diskQuota: 10, // MB
-
-  uploadLimit: 5, // MB
-
   availableLangs: [
     'de'
   ],
 
-  isCaminioHosted: true
+  isCaminioHosted: true,
+
+  layoutCompiler: require('jade'),
+
+  useTransformers: []
   
 };

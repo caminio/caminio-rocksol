@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-23 00:02:14
+ * @Last Modified time: 2014-04-23 13:32:40
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -29,7 +29,7 @@ var PeRuProcessor,
     user,
     domain;
 
-var snippets1 = "PLAIN TEXT";
+var snippets1 = "#Heading\n Paragraph text *bold* text.";
 var rubbleSnippet = "{{ rubble: iAmRubble }}";
 var pebbleSnippet = "{{ pebble: test }}";
 var pebble2Snippet = "{{ pebble: test2 }}";
@@ -98,10 +98,9 @@ describe( 'Site Generator test', function(){
       var gen;
 
       before( function( done ){
-        webpage = new caminio.models.Webpage({ name: 'testpage' });
+        webpage = new Webpage({ name: 'testpage' });
 
         var SiteGen = require('./../../lib/site_generator');
-
         gen = new SiteGen( {}, caminio );
 
         this.pebbleContent = ' a string as pebblecontent';
@@ -126,9 +125,10 @@ describe( 'Site Generator test', function(){
         });
 
         it('works with layout content', function( done ){
-          gen.compileContent( snippets1, {  locale: 'en', contentPath: path, layout: { content: 'h1=markdownContent' } }, function( err, content ){
+          gen.compileContent( snippets1, {  locale: 'en', contentPath: path, layout: { content: 'h1 heading\n !=markdownContent' } }, function( err, content ){
             expect( err ).to.be.null;
-            expect( content ).to.eq( "\n<h1>"+snippets1+"</h1>" );
+            console.log(' herer', content  );
+            expect( content ).to.eq( "\n<p>"+snippets1+"</p>" );
             done();
           });
         });

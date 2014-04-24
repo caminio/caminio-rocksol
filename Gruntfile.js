@@ -20,7 +20,7 @@ module.exports = function(grunt) {
               'assets/javascripts/caminio-rocksol/components/pebbles_library_component.js'
                ];
   uglifyFiles['build/javascripts/caminio-rocksol-translation.min.js'] = [
-              'assets/javascripts/caminio-rocksol/models/translation.js',
+              'assets/javascripts/caminio-rocksol/models/translation.js'];
 
   // Project configuration.
   grunt.initConfig({
@@ -105,12 +105,13 @@ module.exports = function(grunt) {
         }
       }
     },
+
     jshint: {
       all: ['Gruntfile.js', 'api/**/*.js', 'config/**/*.js', 'assets/javascripts/<%= gearName %>/app'],
       options: {
         "laxcomma": true
       }
-    },
+    }
 
   });
 

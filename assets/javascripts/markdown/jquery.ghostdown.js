@@ -1,4 +1,4 @@
-(function ($, ShowDown, CodeMirror) {
+(function ($, marked, CodeMirror) {
     "use strict";
 
     $.widget( "b4m.ghostDown", {
@@ -8,7 +8,13 @@
         converter: null,
         _create: function( options ){
 
-            this.converter = new ShowDown.converter();
+            marked.setOptions({
+              breaks: true,
+              highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+              }
+            });
+
             this.editor = CodeMirror.fromTextArea(this.element.find('textarea')[0], {
                 mode: 'markdown',
                 tabMode: 'indent',
@@ -50,7 +56,7 @@
         _updatePreview: function() {
             var preview = this.element.find('.rendered-markdown');
             this.markdown = this.editor.getValue();
-            this.html = this.converter.makeHtml(this.markdown);
+            this.html = marked(this.markdown);
             preview.html(this.html);
             this._updateWordCount();
             //console.log('content', this.editor.getValue());
@@ -104,4 +110,4 @@
             }
         }
     });
-}(jQuery, Showdown, CodeMirror));
+}(jQuery, marked, CodeMirror));

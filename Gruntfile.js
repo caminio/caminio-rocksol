@@ -19,8 +19,9 @@ module.exports = function(grunt) {
               'assets/javascripts/caminio-rocksol/components/locations_component.js',
               'assets/javascripts/caminio-rocksol/components/pebbles_library_component.js'
                ];
-  uglifyFiles['build/javascripts/caminio-rocksol-translation.min.js'] = [
-              'assets/javascripts/caminio-rocksol/models/translation.js'];
+  
+  uglifyFiles['build/javascripts/caminio-rocksol-translation.min.js'] = ['assets/javascripts/caminio-rocksol/models/translation.js'];
+  uglifyFiles['build/javascripts/caminio-markdown.min.js'] = ['assets/javascripts/markdown/*.js'];
 
   // Project configuration.
   grunt.initConfig({
@@ -101,7 +102,10 @@ module.exports = function(grunt) {
             'assets/stylesheets/<%= gearName %>/3rdparty/leaflet.css',
             'assets/stylesheets/<%= gearName %>/3rdparty/timepicker.css',
             'assets/stylesheets/<%= gearName %>/websites.css'
-            ]
+            ],
+          'build/stylesheets/markdown.min.css': [
+            'assets/stylesheets/markdown/*.css'
+          ]
         }
       }
     },

@@ -474,7 +474,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 .features .editor .entry-markdown-content textarea:focus {
   outline: 0
 }
-.features .editor .CodeMirror {
+.CodeMirror{
   height: auto;
   position: absolute;
   top: 0;
@@ -486,48 +486,51 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   line-height: 1.3em;
   color: #6c7379
 }
-.features .editor .CodeMirror .CodeMirror-focused, .features .editor .CodeMirror .CodeMirror-selected {
+.CodeMirror .CodeMirror-focused, .features .editor .CodeMirror .CodeMirror-selected {
   color: #242628;
   background: #b3d5f3;
   text-shadow: none
 }
-.features .editor .CodeMirror ::selection {
+.CodeMirror ::selection {
   color: #242628;
   background: #b3d5f3;
   text-shadow: none
 }
-.features .editor .CodeMirror-lines {
+.CodeMirror-lines {
   padding: 65px 0 40px 0
 }
 @media (max-width: 860px), (max-width: 860px) {
-.features .editor .CodeMirror-lines {
+.CodeMirror-lines {
   padding: 25px 0 30px 0
 }
 }
 @media (max-width: 400px), (max-width: 400px) {
-.features .editor .CodeMirror-lines {
+.CodeMirror-lines {
   padding: 15px 0
 }
 }
-.features .editor .CodeMirror pre {
+.CodeMirror pre {
   padding: 0 40px 0 40px
 }
 @media (max-width: 860px), (max-width: 860px) {
-.features .editor .CodeMirror pre {
+.CodeMirror pre {
   padding: 0 30px
 }
 }
 @media (max-width: 400px), (max-width: 400px) {
-.features .editor .CodeMirror pre {
+.CodeMirror pre {
   padding: 0 15px
 }
 }
-.features .editor .cm-header {
+.CodeMirror .cm-header{
   color: #000;
   font-size: 2rem;
   line-height: 1.4em
 }
-.features .editor .cm-string, .features .editor .cm-link, .features .editor .cm-comment, .features .editor .cm-quote {
+.CodeMirror .cm-string, 
+.CodeMirror .cm-link, 
+.CodeMirror .cm-comment, 
+.CodeMirror .cm-quote {
   color: #000
 }
 @media (max-width: 860px), (max-width: 860px) {

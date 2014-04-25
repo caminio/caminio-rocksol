@@ -4,8 +4,10 @@ append head
   if env === 'production'
     link( rel='stylesheet', href='/stylesheets/caminio-media.min.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol.min.css' )
+    link( rel='stylesheet', href='/stylesheets/markdown.min.css' )
   else
-    link( rel='stylesheet', href='/stylesheets/caminio-rocksol/3rdparty/ghostdown.css' )
+    link( rel='stylesheet', href='/stylesheets/markdown/ghostdown.css' )
+    link( rel='stylesheet', href='/stylesheets/markdown/github-styles.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/3rdparty/leaflet.css' )
     link( rel='stylesheet', href='/stylesheets/3rdparty/ui-datepicker.css' )
     link( rel='stylesheet', href='/stylesheets/caminio-rocksol/websites.css' )
@@ -23,10 +25,9 @@ append foot
   if env === 'production'
     script(type='text/javascript', src='/javascripts/caminio-rocksol.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media.min.js')
+    script(type='text/javascript', src='/javascripts/markdown.min.js')
   else
     script(type='text/javascript', src='/javascripts/caminio/ember-tree.js')
-    script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/ghostdown.js')
-    script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/jquery.ghostdown.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/3rdparty/leaflet.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/locales/#{currentLang}.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/router.js')
@@ -45,6 +46,12 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/locations_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/meta_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/pebbles_library_component.js')
+
+
+    script(type='text/javascript', src='/javascripts/markdown/codemirror.js')
+    script(type='text/javascript', src='/javascripts/markdown/marked.js')
+    script(type='text/javascript', src='/javascripts/markdown/highlight.pack.js')
+    script(type='text/javascript', src='/javascripts/markdown/jquery.ghostdown.js')
 
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jcrop.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')

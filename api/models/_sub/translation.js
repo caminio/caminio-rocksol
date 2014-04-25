@@ -12,37 +12,37 @@ module.exports = function Translation( caminio, mongoose ){
      * @property locale
      * @type String
      */  
-    locale: { type: String, required: true },
+    locale: { type: String, required: true, public: true },
 
     /**
      * @property title
      * @type String
      */  
-    title: String,
+    title: { type: String, public: true },
 
     /**
      * @property subtitle
      * @type String
      */  
-    subtitle: String,
+    subtitle: { type: String, public: true },
 
     /**
      * @property content
      * @type String
      */  
-    content: String,
+    content: { type: String, public: true },
 
     /**
      * @property metaDescription
      * @type String
      */
-    metaDescription: String,
+    metaDescription: { type: String, public: true },
 
     /**
      * @property metaKeywords
      * @type String
      */
-    metaKeywords: String
+    metaKeywords: { type: String, public: true }
 
   });
 

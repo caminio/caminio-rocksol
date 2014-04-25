@@ -11,6 +11,7 @@ module.exports = {
   isCaminioHosted: true,
 
   layoutCompiler: require('jade'),
+  
 
   useTransformers: []
   

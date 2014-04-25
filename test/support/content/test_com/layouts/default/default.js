@@ -7,7 +7,7 @@
  * @Date:   2014-03-23 00:35:53
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-03-24 17:33:16
+ * @Last Modified time: 2014-04-25 12:52:35
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -19,10 +19,15 @@
 
   return {
     run: function( pebble, options, next ){
+      locals( options );
       caminio.models.Pebble.find()
       .exec( function( err, ps ){
         next();
       });
+    },
+
+    locals: function( options ){
+
     },
 
     initialSetup: function( webpage, res, next ){

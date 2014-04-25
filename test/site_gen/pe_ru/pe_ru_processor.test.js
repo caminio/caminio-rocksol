@@ -7,7 +7,7 @@
  * @Date:   2014-04-12 02:32:22
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-25 01:10:16
+ * @Last Modified time: 2014-04-25 15:09:46
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -54,7 +54,8 @@ describe( 'Pebble - Rubble - Processor test', function(){
     describe( 'methods: ', function(){
       var processor;
       var webpage;
-      var pebble;
+      var pebble,
+          pebble2;
 
 
       var pebbleSnippet = "{{ pebble: test }}";
@@ -89,7 +90,7 @@ describe( 'Pebble - Rubble - Processor test', function(){
       describe('startSearch', function(){
 
         it('returns the plain content if no pebble or rubble is found', function( done ){
-          processor.startSearch( snippets1,{ attr: {  locale: "en", webpage: webpage } }, function( err, content ){
+          processor.startSearch( snippets1,{ locale: "en", locals: { webpage: webpage } }, function( err, content ){
             expect( content ).to.eq( snippets1 );
             expect( err ).to.have.length( 0 );
             done();
@@ -97,13 +98,13 @@ describe( 'Pebble - Rubble - Processor test', function(){
         });
 
         it('returns the content with replaced pebbles if found', function( done ){
-          processor.startSearch( pebbleSnippet, { attr: { locale: "en", webpage: webpage } }, function( err, content ){
+          processor.startSearch( pebbleSnippet, { locale: "en", locals: { webpage: webpage } }, function( err, content ){
             done();
           });
         });
 
         it('works without passed webpage', function( done ){
-          processor.startSearch( pebbleSnippet,{ attr: {  locale: "en" } }, function( err, content ){
+          processor.startSearch( pebbleSnippet,{  locale: "en" }, function( err, content ){
             //expect( content ).to.eq( "{{ pebble: test Warning: pebble has no db file or is global! }}" );
             expect( err ).to.have.length( 0 );
             done();
@@ -111,7 +112,7 @@ describe( 'Pebble - Rubble - Processor test', function(){
         });
 
         it('works without passed locale', function( done ){
-          processor.startSearch( pebbleSnippet,{ attr: { webpage: webpage } }, function( err, content ){
+          processor.startSearch( pebbleSnippet,{ locals: { webpage: webpage } }, function( err, content ){
             //expect( content ).to.eq( "<p> a string as pebblecontent</p>" );
             expect( err ).to.have.length( 0 );
             done();
@@ -119,14 +120,15 @@ describe( 'Pebble - Rubble - Processor test', function(){
         });
 
         it('it gives an error if there are two translations and no locale passed', function( done ){
-          processor.startSearch( pebbleSnippet2,{ attr: { webpage: webpage } }, function( err, content ){
+          processor.startSearch( pebbleSnippet2,{ locals: { webpage: webpage } }, function( err, content ){
+            console
             expect( err ).to.have.length( 1 );
             done();
           });
         });
 
         it('it works with a rubble', function( done ){
-          processor.startSearch( "{{ rubble: this }}", { attr: { webpage: webpage }, contentPath: path }, function( err, content ){
+          processor.startSearch( "{{ rubble: this }}", { locals: { webpage: webpage }, contentPath: path }, function( err, content ){
             expect( err ).to.have.length( 0 );
             done();
           });

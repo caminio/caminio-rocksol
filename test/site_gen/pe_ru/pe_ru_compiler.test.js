@@ -7,7 +7,7 @@
  * @Date:   2014-04-14 01:23:59
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-18 01:27:23
+ * @Last Modified time: 2014-04-25 15:06:07
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -104,7 +104,7 @@ describe( 'Pebble - Rubble - Compiler test', function(){
             path:  __dirname + '/../../support/content/test_com/rubbles/that/',
             name: "this"
           }, function( err, content){
-            expect( content ).to.eq( "{{ rubble: this  Warning: could not find rubble in filesystem }}");
+            expect( content ).to.eq( "{{ Warning: could not find rubble in filesystem!  rubble: this }}");
             expect( err ).to.not.be.null;
             done();
           });

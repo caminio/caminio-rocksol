@@ -18,6 +18,9 @@ module.exports = function( caminio ){
     if( !res.locals.currentDomain )
       return next();
     var filename = res.locals.currentDomain.getContentPath()+'/.settings';
+
+    // delete cache file (so the server doesn't need a restart)
+    delete require.cache[ filename+'.js' ];
     res.locals.domainSettings = fs.existsSync( filename +'.js' ) ? 
                                 require( filename ) : 
                                 {};

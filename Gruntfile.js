@@ -21,7 +21,12 @@ module.exports = function(grunt) {
                ];
   
   uglifyFiles['build/javascripts/caminio-rocksol-translation.min.js'] = ['assets/javascripts/caminio-rocksol/models/translation.js'];
-  uglifyFiles['build/javascripts/caminio-markdown.min.js'] = ['assets/javascripts/markdown/*.js'];
+  uglifyFiles['build/javascripts/caminio-markdown.min.js'] = [
+    'assets/javascripts/markdown/codemirror.js',
+    'assets/javascripts/markdown/marked.js',
+    'assets/javascripts/markdown/highlight.pack.js',
+    'assets/javascripts/markdown/jquery.ghostdown.js'
+    ];
 
   // Project configuration.
   grunt.initConfig({

@@ -46,7 +46,12 @@ module.exports = function( caminio, policies, middleware ){
     },
 
     'update': function updateWebpage(req, res ){
-      var options = {};
+      var options = {
+        locals: res.locals
+      };
+      
+      var SiteGen = require('./../../lib/site/site_generator');
+      var gen = new SiteGen( caminio, res.locals.currentDomain.getContentPath() );
 
       if( req.compileAll ){
         options.compileChildren = true;
@@ -57,7 +62,8 @@ module.exports = function( caminio, policies, middleware ){
       if( req.webpage.status === 'published' )
         options.isPublished = true;
       if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
-        SiteGen.compilePage( res, req.webpage, options, req.webpage.layout, finalResponse );
+        gen.compileObject( req.webpage, options, finalResponse );
+        // SiteGen.compilePage( res, req.webpage, options, req.webpage.layout, finalResponse );
       else
         finalResponse();
       

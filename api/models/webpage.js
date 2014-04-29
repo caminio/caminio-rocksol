@@ -13,12 +13,14 @@ module.exports = function Webpage( caminio, mongoose ){
 
   var schema = new mongoose.Schema({
 
+    // TODO: remove name! only filename anymore and titles
     /**
      * @property name
      * @type String
      */  
     name: { type: String, public: true },
 
+    filename: { type: String, public: true },
     /**
      * @property translations
      * @type Array an array of Translation Schema Objects
@@ -122,6 +124,13 @@ module.exports = function Webpage( caminio, mongoose ){
       return element;
     }
   };
+
+  schema.pre('save', function(next){
+    if( !this.isNew )
+      return next();
+    this.filename = normalizeFilename( this.translations[0].title );
+    next();
+  });
 
   schema.methods.underscoreName = function(){
     return this.constructor.underscoreName( this.name );

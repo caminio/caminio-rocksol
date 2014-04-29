@@ -57,7 +57,7 @@ module.exports = function( caminio, policies, middleware ){
       if( req.webpage.status === 'published' )
         options.isPublished = true;
       if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
-        SiteGen.compilePage( res, req.webpage, options, finalResponse );
+        SiteGen.compilePage( res, req.webpage, options, req.webpage.layout, finalResponse );
       else
         finalResponse();
       

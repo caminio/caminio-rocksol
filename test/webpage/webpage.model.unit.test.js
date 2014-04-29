@@ -99,7 +99,7 @@ describe( 'Webpage', function(){
     });    
 
     it('.update', function( done ){
-      test = this;
+      var test = this;
       test.webpage.update( { name: 'newname' }, function( err ){
         expect( err ).to.be.null;
         done();
@@ -107,7 +107,7 @@ describe( 'Webpage', function(){
     });
 
     it('.remove', function( done ){
-      test = this;
+      var test = this;
       test.webpage.remove( function( err ){
         expect( err ).to.be.null;
         done();

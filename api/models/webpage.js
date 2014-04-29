@@ -6,6 +6,8 @@
  
 module.exports = function Webpage( caminio, mongoose ){
 
+  var normalizeFilename = require('caminio/util').normalizeFilename;
+
   var ObjectId = mongoose.Schema.Types.ObjectId;
   var TranslationSchema = require('./_sub/translation')( caminio, mongoose );
 
@@ -126,12 +128,7 @@ module.exports = function Webpage( caminio, mongoose ){
   };
 
   schema.static('underscoreName', function( str ){
-    return str.toLowerCase()
-    .replace(/ö/g,"oe")
-    .replace(/ä/g,"ae")
-    .replace(/ü/g,"ue")
-    .replace(/ß/g,"ss")
-    .replace(/[^\w]/g,'_');
+    return normalizeFilename( str );
   });
 
   schema.publicAttributes = [ 'translations', 'activities', 'curTranslation', 'path' ];

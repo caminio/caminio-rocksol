@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-29 16:24:17
+ * @Last Modified time: 2014-04-29 18:48:15
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -39,7 +39,7 @@ describe( 'Site Generator test', function(){
 
   function addWebpage( name, next ){    
     var webpage = new Webpage( { 
-      name: name, 
+      filename: name, 
       camDomain: domain.id, 
       status: 'published',
       layout: 'testing',

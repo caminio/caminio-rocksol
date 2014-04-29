@@ -19,6 +19,7 @@ module.exports = function Webpage( caminio, mongoose ){
      */  
     name: { type: String, public: true },
 
+    filename: { type: String, public: true },
     /**
      * @property translations
      * @type Array an array of Translation Schema Objects

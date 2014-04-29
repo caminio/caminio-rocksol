@@ -125,6 +125,13 @@ module.exports = function Webpage( caminio, mongoose ){
     }
   };
 
+  schema.pre('save', function(next){
+    if( !this.isNew )
+      return next();
+    this.filename = normalizeFilename( this.translations[0].title );
+    next();
+  });
+
   schema.methods.underscoreName = function(){
     return this.constructor.underscoreName( this.name );
   };

@@ -1,0 +1,1 @@
+module.exports = require('./lib/site/site_generator');

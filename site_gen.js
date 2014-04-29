@@ -1,1 +1,0 @@
-module.exports = require('./lib/site_gen');

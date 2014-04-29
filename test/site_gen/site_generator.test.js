@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-29 13:23:25
+ * @Last Modified time: 2014-04-29 15:43:15
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -172,9 +172,12 @@ describe( 'Site Generator test', function(){
       describe('compileObject', function(){
 
         it('works with a webpage', function( done ){
-          gen.compileObject( pages[names[0]], { locals: {  currentUser: 'adsfsadf', } }, function( err, content ){
-            console.log( err, content, 'DONE');
-            done();
+          gen.compileObject( 
+            pages[names[0]], 
+            { locals: {  currentUser: 'adsfsadf', }, isPublished: true },
+            function( err, content ){
+              console.log( err, content, 'DONE');
+              done();
           });
         });
 

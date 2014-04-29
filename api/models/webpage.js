@@ -13,6 +13,7 @@ module.exports = function Webpage( caminio, mongoose ){
 
   var schema = new mongoose.Schema({
 
+    // TODO: remove name! only filename anymore and titles
     /**
      * @property name
      * @type String

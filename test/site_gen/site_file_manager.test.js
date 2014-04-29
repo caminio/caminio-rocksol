@@ -7,7 +7,7 @@
  * @Date:   2014-04-28 11:20:47
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-29 12:59:46
+ * @Last Modified time: 2014-04-29 18:50:50
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -122,7 +122,7 @@ describe( 'Site - File - Manager test', function(){
 
         function addWebpage( name, next ){   
           var webpage = new Webpage( { 
-            name: name, 
+            filename: name, 
             status: 'published',
             layout: 'testing',
             translations: [

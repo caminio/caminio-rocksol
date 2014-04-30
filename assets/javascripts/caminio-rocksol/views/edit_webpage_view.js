@@ -26,6 +26,8 @@
 
       setupScrolls();
 
+      App.setupCtrlS( this.get('controller.content'), Em.I18n.t('webpage.saved', {name: this.get('controller.content.curTranslation.title')}) );
+
     },
 
     willClearRender: function(){

@@ -167,11 +167,12 @@ describe( 'Webpage authentifikation API - '+URL, function(){
 
   describe('DELETE '+URL+'/:id', function(){
     
-    it('deletes a contact', function(done){
+    it('deletes a webpage', function(done){
       var test = this;
       test.agent
       .del(URL+'/'+webpage.id)
       .end(function(err, res){
+        console.log('err', res.text);
         expect(res.status).to.eq(200);
         done();
       });

@@ -4,9 +4,10 @@
  *
  */
  
-module.exports = function Webpage( caminio, mongoose ){
+var _                 = require('lodash');
+var normalizeFilename = require('caminio/util').normalizeFilename;
 
-  var normalizeFilename = require('caminio/util').normalizeFilename;
+module.exports = function Webpage( caminio, mongoose ){
 
   var ObjectId = mongoose.Schema.Types.ObjectId;
   var TranslationSchema = require('./_sub/translation')( caminio, mongoose );
@@ -93,37 +94,22 @@ module.exports = function Webpage( caminio, mongoose ){
 
   });
   
-  schema.virtual( 'curTranslation' )
-      .get( function(){ return this._curTranslation; } )
-      .set( function( value ){  this._curTranslation = value; } );
 
-  schema.virtual( 'path' )
-    .get( function(){ return this._path; } )
-    .set( function( value ){ this._path = value; } );
+  schema.virtual('curTranslation')
+    .get(function(){
+      if( !this._curLang )
+        return null;
+      return _.first( this.translations, { locale: this._curLang } )[0]; 
+    });
 
-  // // TODO: getParent is missing to get parent path
-  schema.methods.url = function url( selectedLang, fallbackLang ){
-    fallbackLang = fallbackLang || selectedLang;
-    var lang = getElementFromArray( this.translations, 'locale', selectedLang );
-    if( lang )
-      lang = lang.locale;
+  schema.virtual('curLang')
+    .set(function(lang){
+      this._curLang = lang;
+    });
 
-    if( this.translations.length === 1 )
-        return this._path + '/' + this.underscoreName() + '.htm';
-    if( lang )
-        return this._path + '/' + this.underscoreName() + '.' + lang + '.htm';
-    return this._path + '/' + this.underscoreName() + '.' + fallbackLang + '.htm';
-
-    function getElementFromArray( array, param, value ){
-      var element;
-      array.forEach( function( elem ){
-        if( elem[param] === value ){
-          element =  elem;
-        }
-      });
-      return element;
-    }
-  };
+  //TODO: make teaser
+  schema.virtual( 'teaser' )
+    .get( function(){ return; } )
 
   schema.pre('save', function(next){
     if( !this.isNew )
@@ -133,6 +119,21 @@ module.exports = function Webpage( caminio, mongoose ){
     next();
   });
 
+  schema.virtual('absoluteUrl')
+    .get(function(){
+      return this.url();
+    });
+
+  schema.methods.url = function url(){
+    
+    if( this.translations.length === 1 )
+        return this._path + '/' + this.filename + '.htm';
+    // if( lang )
+    //     return this._path + '/' + this.filename + '.' + lang + '.htm';
+    return this._path + '/' + this.filename + '.' + this._curLang + '.htm';
+
+  };
+
   schema.methods.underscoreName = function(){
     return this.constructor.underscoreName( this.name );
   };
@@ -141,7 +142,7 @@ module.exports = function Webpage( caminio, mongoose ){
     return normalizeFilename( str );
   });
 
-  schema.publicAttributes = [ 'translations', 'activities', 'curTranslation', 'path' ];
+  schema.publicAttributes = [ 'translations', 'activities', 'curTranslation', 'path', 'absoluteUrl' ];
   schema.trash = true;
 
   return schema;

@@ -24,7 +24,12 @@ var URL='http://localhost:4004/caminio/webpages';
 describe( 'Webpage authentifikation API - '+URL, function(){
 
   function addWebpage( done ){    
-    webpage = new Webpage( { name: 'a page', camDomain: domain.id } );
+    webpage = new Webpage( { 
+      name: 'a page', camDomain: domain.id,
+      translations: [
+        { content: 'testcontent', locale: 'en', title: 'title' },
+        { content: 'deutsch', locale: 'de', title: 'title' }
+      ]  } );
     webpage.save( function( err ){
       done();
     });

@@ -87,6 +87,10 @@ describe( 'Webpage', function(){
       this.user = new caminio.models.User( { name: 'dummy' } );
       this.webpage = new Webpage( fixtures.Webpage.attributes({
         camDomain: this.domain._id,
+        translations: [
+          { content: 'testcontent', locale: 'en', title: 'title' },
+          { content: 'deutsch', locale: 'de', title: 'title' }
+        ] ,
         requestReviewBy: this.user._id
       }) );
     });

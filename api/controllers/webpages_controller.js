@@ -12,6 +12,7 @@ var fs      = require('fs');
 var join    = require('path').join;
 var mkdirp  = require('mkdirp');
 var util    = require('caminio/util');
+var normalizeFilename = util.normalizeFilename;
 var async   = require('async');
 var join    = require('path').join;
 
@@ -21,8 +22,8 @@ var join    = require('path').join;
  */
 module.exports = function( caminio, policies, middleware ){
 
-  var SiteGen        = require('../../lib/site_gen')( caminio );
-  var WebpageMethods = require('../../lib/webpage_methods')( caminio );
+  var SiteGen = require('./../../lib/site/site_generator')( caminio );
+  var docUtils = require('../../doc_utils')(caminio);
 
   var Webpage = caminio.models.Webpage;
   var Pebble  = caminio.models.Pebble;
@@ -32,54 +33,71 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      'update': [ 
-        cleanNewActivities, 
-        cleanNewTranslationIds, 
-        getWebpage,
-        removeFiles, 
-        checkLocaleExistsAndDismiss, 
-        autoCreatePebbles, 
-        getChildren,
-        checkParent,
-        saveWebpage],
+      // 'update': [ 
+      //   cleanNewActivities, 
+      //   cleanNewTranslationIds, 
+      //   getWebpage,
+      //   removeFiles, 
+      //   checkLocaleExistsAndDismiss, 
+      //   autoCreatePebbles, 
+      //   getChildren,
+      //   checkParent,
+      //   saveWebpage],
+      'update': [ removeFiles, checkLocaleExistsAndDismiss],
       'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
     },
 
-    'update': function updateWebpage(req, res ){
-      var options = {
-        locals: res.locals
-      };
-      
-      var SiteGen = require('./../../lib/site/site_generator');
-      var gen = new SiteGen( caminio, res.locals.currentDomain.getContentPath() );
+    _beforeResponse: {
+      'update': compilePages
+    },
 
-      if( req.compileAll ){
-        options.compileChildren = true;
-        options.compileAncestors = true;
-        options.compileSiblings = true;      
-      }
 
-      if( req.webpage.status === 'published' )
-        options.isPublished = true;
-      if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
-        gen.compileObject( req.webpage, options, finalResponse );
-        // SiteGen.compilePage( res, req.webpage, options, req.webpage.layout, finalResponse );
-      else
-        finalResponse();
+    // 'update': function updateWebpage(req, res ){
+    //   var options = {
+    //     locals: res.locals
+    //   };
       
-      function finalResponse( err ){
-        if( err )
-          return res.json( 500, { error: 'compile_error', details: err });
-        if( req.webpage.parent && typeof( req.webpage.parent) === 'object' )
-          req.webpage.parent = req.webpage.parent._id;
-        Webpage.findOne({ '_id': req.webpage._id })
-        .exec( function( err, webpage ){
-          res.json( util.transformJSON( { webpage: JSON.parse(JSON.stringify(webpage)) }, req.header('namespaced') ) );
-        });
-      }
-    }
+    //   var gen = new SiteGen( res.locals.currentDomain.getContentPath() );
+
+    //   if( req.compileAll ){
+    //     options.compileChildren = true;
+    //     options.compileAncestors = true;
+    //     options.compileSiblings = true;      
+    //   }
+
+    //   if( req.webpage.status === 'published' )
+    //     options.isPublished = true;
+    //   if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
+    //     gen.compileObject( req.webpage, options, finalResponse );
+    //     // SiteGen.compilePage( res, req.webpage, options, req.webpage.layout, finalResponse );
+    //   else
+    //     finalResponse();
+      
+    //   function finalResponse( err ){
+    //     if( err )
+    //       return res.json( 500, { error: 'compile_error', details: err });
+    //     if( req.webpage.parent && typeof( req.webpage.parent) === 'object' )
+    //       req.webpage.parent = req.webpage.parent._id;
+    //     Webpage.findOne({ '_id': req.webpage._id })
+    //     .exec( function( err, webpage ){
+    //       res.json( util.transformJSON( { webpage: JSON.parse(JSON.stringify(webpage)) }, req.header('namespaced') ) );
+    //     });
+    //   }
+    // }
 
   };
+
+  function compilePages( req, res, next ){
+    gen = new SiteGen( res.locals.currentDomain.getContentPath() );
+    gen.compileObject( 
+            req.doc,
+            { locals: res.locals,
+              layout: {
+                name: 'projects'
+              },
+              isPublished: (req.doc.status === 'published') },
+            next);
+  }
 
   function checkParent( req, res, next ){
     req.children.forEach( function( child ){
@@ -161,7 +179,7 @@ module.exports = function( caminio, policies, middleware ){
    *              children are found
    */ 
   function getChildrenDeep( webpage, arr, done){
-    WebpageMethods.getChildrenOfWebpage( webpage._id, function( err, children ){
+    docUtils.getChildrenOfWebpage( webpage._id, function( err, children ){
       if( !( children && children.length ) ){
         return done( null, arr );
       }
@@ -217,12 +235,12 @@ module.exports = function( caminio, policies, middleware ){
 
   function removeFiles( req, res, next ){    
     if( req.removeFiles ){
-      WebpageMethods.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
+      docUtils.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
         var path = join( res.locals.currentDomain.getContentPath(), 'public');
         ancestors.reverse().forEach( function( ancestor ){
-            path =  join( path, WebpageMethods.underscore( ancestor.name ) );
+            path =  join( path, normalizeFilename( ancestor.name ) );
         }); 
-        path = join( path, WebpageMethods.underscore( req.webpage.name ) );
+        path = join( path, normalizeFilename( req.webpage.name ) );
         deleteFolder( path+"/" );
         deleteFile( path+".htm" );
         return next();
@@ -317,7 +335,7 @@ module.exports = function( caminio, policies, middleware ){
 
   function saveWebpage( req, res, next ){
 
-    if( WebpageMethods.otherThanContentModified( req.webpage, req.body.webpage ) )
+    if( docUtils.otherThanContentModified( req.webpage, req.body.webpage ) )
       req.compileAll = true;
 
     req.body.webpage.updatedBy = res.locals.currentUser;

@@ -7,7 +7,7 @@
  * @Date:   2014-04-28 11:20:47
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-29 18:50:50
+ * @Last Modified time: 2014-04-30 13:52:19
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -126,8 +126,8 @@ describe( 'Site - File - Manager test', function(){
             status: 'published',
             layout: 'testing',
             translations: [
-              { content: 'testcontent', locale: 'en'},
-              { content: 'deutsch', locale: 'de'}
+              { content: 'testcontent', locale: 'en', title: 'title' },
+              { content: 'deutsch', locale: 'de', title: 'title' }
             ] 
           } );
           webpage.save( function( err ){

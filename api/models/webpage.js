@@ -128,7 +128,8 @@ module.exports = function Webpage( caminio, mongoose ){
   schema.pre('save', function(next){
     if( !this.isNew )
       return next();
-    this.filename = normalizeFilename( this.translations[0].title );
+    if( !this.filename )
+      this.filename = normalizeFilename( this.translations[0].title );
     next();
   });
 

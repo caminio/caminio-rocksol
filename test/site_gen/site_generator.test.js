@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-29 18:49:05
+ * @Last Modified time: 2014-04-30 13:46:02
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -43,8 +43,9 @@ describe( 'Site Generator test', function(){
       camDomain: domain.id, 
       status: 'published',
       layout: 'testing',
-      translations: [{content: 'testcontent', locale: 'en'},
-                     { content: 'deutsch', locale: 'de'}
+      translations: [
+        { content: 'testcontent', locale: 'en', title: 'hello' },
+        { content: 'deutsch', locale: 'de', title: 'hello' }
       ] 
     } );
     webpage.save( function( err ){
@@ -97,10 +98,15 @@ describe( 'Site Generator test', function(){
       var gen;
 
       before( function( done ){
-        webpage = new Webpage({ filename: 'testpage' });
+        webpage = new Webpage(
+          { filename: 'testpage',
+            translations: [
+              { content: 'testcontent', locale: 'en', title: 'hello' },
+              { content: 'deutsch', locale: 'de', title: 'hello' }
+            ]  });
 
-        var SiteGen = require('./../../lib/site/site_generator');
-        gen = new SiteGen( caminio, path );
+        var SiteGen = require('./../../lib/site/site_generator')( caminio );
+        gen = new SiteGen( path );
 
         this.pebbleContent = ' a string as pebblecontent';
         var pebble = new Pebble( { 

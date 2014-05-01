@@ -87,11 +87,6 @@
     'translation.title': 'Language',
 
     'pebbles.amount': '{{count}} pebbles',
-    'pebbles.teaser': 'Teaser',
-    'pebbles.events': 'Events',
-    'pebbles.press': 'Press text',
-    'pebbles.video': 'Video (link)',
-    'pebbles.team': 'Team listing',
 
     'activities.title': 'Actvities',
     'activity.keep_open': 'keep open',

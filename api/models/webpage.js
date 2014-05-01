@@ -142,7 +142,7 @@ module.exports = function Webpage( caminio, mongoose ){
     return normalizeFilename( str );
   });
 
-  schema.publicAttributes = [ 'translations', 'activities', 'curTranslation', 'path', 'absoluteUrl' ];
+  schema.publicAttributes = [ 'translations', 'activities', 'path', 'absoluteUrl' ];
   schema.trash = true;
 
   return schema;

@@ -7,7 +7,7 @@
  * @Date:   2014-04-12 02:32:22
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-25 15:09:46
+ * @Last Modified time: 2014-05-01 21:10:10
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -92,7 +92,7 @@ describe( 'Pebble - Rubble - Processor test', function(){
         it('returns the plain content if no pebble or rubble is found', function( done ){
           processor.startSearch( snippets1,{ locale: "en", locals: { webpage: webpage } }, function( err, content ){
             expect( content ).to.eq( snippets1 );
-            expect( err ).to.have.length( 0 );
+            expect( err ).to.eq( null );
             done();
           });
         });

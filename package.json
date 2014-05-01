@@ -1,7 +1,7 @@
 {
   "name": "caminio-rocksol",
   "description": "static website builder gear for caminio",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "author": "quaqua <quaqua@tastenwerk.com>",
   "keywords": [
@@ -11,8 +11,7 @@
     "generator"
   ],
   "dependencies": {
-    "caminio": "git://github.com/caminio/caminio#master",
-    "caminio-media": "git://github.com/caminio/caminio-media#master",
+    "caminio": "~1.1.2",
     "grunt": "~0.4.2",
     "jade": "~1.1.5",
     "inflection": "~1.3.2",

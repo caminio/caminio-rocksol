@@ -9,6 +9,7 @@
     content: DS.attr(),
     metaDescription: DS.attr(),
     metaKeywords: DS.attr(),
+    aside: DS.attr(),
     availableLangs: function(){
       return domainSettings.availableLangs;
     }.property('locale'),

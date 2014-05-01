@@ -27,6 +27,11 @@ module.exports = function Translation( caminio, mongoose ){
     subtitle: { type: String, public: true },
 
     /**
+     * @property aside
+     */
+    aside: { type: String, public: true },
+
+    /**
      * @property content
      * @type String
      */  

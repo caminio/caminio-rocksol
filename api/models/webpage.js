@@ -107,9 +107,9 @@ module.exports = function Webpage( caminio, mongoose ){
       this._curLang = lang;
     });
 
-  //TODO: make teaser
   schema.virtual( 'teaser' )
-    .get( function(){ return; } );
+    .get( function(){ return this._teaser; } )
+    .set( function(teaser){ this._teaser = teaser; });
 
   schema.pre('save', function(next){
     if( !this.isNew )

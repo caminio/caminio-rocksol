@@ -9,8 +9,18 @@
   </h4>
 
   <div {{bind-attr class="showMeta::hide"}}>
-    
+
     <div class="form-group">
+
+      <label>{{t 'filename'}} <span class="desc">&nbsp;{{t 'will_be_filename'}}</span></label>
+      <div {{bind-attr class="filenameError:field-with-error"}}>
+        {{input valueBinding='webpage.filename' class='form-control'}}
+        {{#if filenameError}}<span class="help-block">{{errors.filename}}</span>{{/if}}
+      </div>
+
+    </div>
+
+{{!--     <div class="form-group">
 
       <label for="example-text-input">
         {{t 'webpage.title'}}
@@ -20,7 +30,7 @@
       </div>
 
     </div>
-    
+ --}}    
     <div class="form-group">
 
       <label for="example-text-input">

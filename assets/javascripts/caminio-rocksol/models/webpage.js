@@ -3,7 +3,7 @@
   'use strict';
   
   window.App.Webpage = DS.Model.extend({
-    name: DS.attr('string'),
+    filename: DS.attr('string'),
     requestReviewBy: DS.belongsTo('user'),
     requestReviewMsg: DS.attr(),
     status: DS.attr('string', { defaultValue: 'draft'}),
@@ -28,7 +28,11 @@
     }.property('status'),
     isDraft: function(){
       return this.get('status') === 'draft';
-    }.property('status')
+    }.property('status'),
+    curTranslation: function(){
+      return this.get('translations').findBy('locale', App._curLang);
+    }.property('translations.@each', 'App._curLang')
+
   });
 
 }).call();

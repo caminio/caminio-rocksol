@@ -9,7 +9,7 @@
       saveTranslation: function(){
         var webpage = this.get('webpage');
         webpage.save().then(function(){
-          notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
+          notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('filename')}));
         })
         .catch( function(err){
           notify('error',err);
@@ -25,7 +25,7 @@
         this.get('webpage').set('layout', layout);
         var webpage = this.get('webpage');
         webpage.save().then(function(){
-          notify('info', Em.I18n.t('webpage.layout_changed', {name: webpage.get('name'), layout: webpage.get('layout')}));
+          notify('info', Em.I18n.t('webpage.layout_changed', {name: webpage.get('filename'), layout: webpage.get('layout')}));
         });
       },
 

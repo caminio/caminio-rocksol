@@ -24,10 +24,9 @@
 
         <div class="form-group">
 
-          <label>{{t 'name'}} <span class="desc">&nbsp;{{t 'will_be_filename'}}</span></label>
-          <div {{bind-attr class="nameError:field-with-error"}}>
-            {{input valueBinding='curSelectedItem.name' class='form-control'}}
-            {{#if nameError}}<span class="help-block">{{errors.name}}</span>{{/if}}
+          <label>{{t 'title'}} <span class="desc">&nbsp;{{t 'shown_in_title_not_filename'}}</span></label>
+          <div>
+            {{input valueBinding='curTranslation.title' class='form-control'}}
           </div>
 
         </div>

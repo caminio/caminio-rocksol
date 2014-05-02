@@ -112,7 +112,7 @@ module.exports = function( caminio, policies, middleware ){
       return next();
     req.body.webpage.translations = [
       { locale: res.locals.currentDomain.lang,
-        title: req.body.webpage.name,
+        title: req.body.webpage.filename,
         content: '### '+req.i18n.t('no_content_here_yet') }
     ];
     next();
@@ -127,7 +127,7 @@ module.exports = function( caminio, policies, middleware ){
       req.webpage = webpage;
 
       if( req.body.webpage )
-        if( req.webpage.name !== req.body.webpage.name )
+        if( req.webpage.filename !== req.body.webpage.filename )
           req.removeFiles = true;
         else
           req.removeFiles = false;
@@ -238,9 +238,9 @@ module.exports = function( caminio, policies, middleware ){
       docUtils.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
         var path = join( res.locals.currentDomain.getContentPath(), 'public');
         ancestors.reverse().forEach( function( ancestor ){
-            path =  join( path, normalizeFilename( ancestor.name ) );
+            path =  join( path, normalizeFilename( ancestor.filename ) );
         }); 
-        path = join( path, normalizeFilename( req.webpage.name ) );
+        path = join( path, normalizeFilename( req.webpage.filename ) );
         deleteFolder( path+"/" );
         deleteFile( path+".htm" );
         return next();

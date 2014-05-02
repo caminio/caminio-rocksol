@@ -26,7 +26,7 @@
 
       setupScrolls();
 
-      App.setupCtrlS( this.get('controller.content'), Em.I18n.t('webpage.saved', {name: this.get('controller.content.curTranslation.title')}) );
+      App.setupCtrlS( controller.get('webpage'), Em.I18n.t('webpage.saved', {name: controller.get('webpage.curTranslation.title')}) );
 
     },
 

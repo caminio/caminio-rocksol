@@ -10,8 +10,9 @@
     'nav.media': 'Media',
     'nav.blog': 'Blog',
     'nav.locations': 'Locations',
-
+    
     'will_be_filename': 'will become part of the document\'s url',
+    'shown_in_title_not_filename': 'Title of webpage (not filename)',
 
     'edit_content': 'Edit content',
     'preview_content': 'Preview',

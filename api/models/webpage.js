@@ -14,13 +14,6 @@ module.exports = function Webpage( caminio, mongoose ){
 
   var schema = new mongoose.Schema({
 
-    // TODO: remove name! only filename anymore and titles
-    /**
-     * @property name
-     * @type String
-     */  
-    name: { type: String, public: true },
-
     filename: { type: String, public: true },
     /**
      * @property translations
@@ -107,11 +100,19 @@ module.exports = function Webpage( caminio, mongoose ){
       this._curLang = lang;
     });
 
+  // backwards compatibility
+  schema.virtual('name')
+    .get(function(){
+      return this.filename;
+    });
+
   schema.virtual( 'teaser' )
     .get( function(){ return this._teaser; } )
     .set( function(teaser){ this._teaser = teaser; });
 
   schema.pre('save', function(next){
+    if(this.filename)
+      this.filename = normalizeFilename( this.filename );
     if( !this.isNew )
       return next();
     if( !this.filename )

@@ -12,6 +12,7 @@
     'nav.locations': 'Spielorte',
 
     'will_be_filename': 'wird Teil der URL dieser Webseite',
+    'shown_in_title_not_filename': 'Titel der Webseite (nicht Dateiname)',
 
     'edit_content': 'bearbeiten',
     'preview_content': 'Vorschau',

@@ -7,6 +7,7 @@
   window.App.WebpagesIndexRoute = Ember.Route.extend({
 
     setupController: function( controller, model ){
+
       if( webpages )
         return;
       
@@ -23,6 +24,8 @@
     }
   });
 
+  window.App._curLang = currentDomain.lang;
+
   window.App.WebpagesIndexController = Ember.Controller.extend({
 
     domain: currentDomain,
@@ -31,8 +34,8 @@
 
     siteComponents: window.siteComponents,
 
-    nameError: function(){
-      return ('name' in this.get('errors'));
+    filenameError: function(){
+      return ('filename' in this.get('errors'));
     }.property('errors'),
 
     langError: function(){
@@ -105,19 +108,19 @@
         bootbox.prompt( title, function(result) { 
           if( !result || result.length < 1 )
             return;
-          var model = self.store.createRecord('webpage', { name: result });
+          var model = self.store.createRecord('webpage', { filename: result });
           model.set('parent', self.get('curSelectedItem') );
           model.save().then( function(){
-            notify('info', Ember.I18n.t('webpage.created', {name: model.get('name')}) );
+            notify('info', Ember.I18n.t('webpage.created', {name: model.get('filename')}) );
             self.set('curSelectedItem', model);
             self.set('addedItem', model);
 
             // if parent try to initialize pebbles
             if( model.get('parent') && model.get('parent.childrenLayout')){
-              notify('info', Ember.I18n.t('webpage.init_pebbles', {name: model.get('name')}) );
+              notify('info', Ember.I18n.t('webpage.init_pebbles', {name: model.get('filename')}) );
               model.set('layout', model.get('parent.childrenLayout') );
               model.save().then(function(){
-                notify('info', Ember.I18n.t('webpage.init_pebbles_done', {name: model.get('name')}) );
+                notify('info', Ember.I18n.t('webpage.init_pebbles_done', {name: model.get('filename')}) );
               });
             }
 
@@ -148,7 +151,7 @@
         webpage
           .save()
           .then( function(){
-            notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('name')}));
+            notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('filename')}));
             //controller.set('curSelectedItem',null);
           })
           .catch( function(err){
@@ -181,12 +184,12 @@
       'removeSelectedItem': function(){
         var self = this;
         var webpage = this.get('curSelectedItem');
-        bootbox.confirm( Em.I18n.t('webpage.really_delete', {name: webpage.get('name') }), function(result){
+        bootbox.confirm( Em.I18n.t('webpage.really_delete', {name: webpage.get('filename') }), function(result){
           if( result ){
             webpage.deleteRecord();
             webpage.save().then( function(){
               self.set('removedItem', webpage);
-              notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('name') }) );
+              notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('filename') }) );
               self.set('curSelectedItem',null);
 
             });

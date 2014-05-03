@@ -46,8 +46,8 @@ describe( 'Webpage', function(){
         }) );
       });
 
-      it('.name', function(){
-        expect( this.webpage.name ).to.eq( fixtures.Webpage.attributes().name );
+      it('.filename', function(){
+        expect( this.webpage.filename ).to.eq( fixtures.Webpage.attributes().filename );
       });
 
       it('.translations', function(){

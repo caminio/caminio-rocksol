@@ -100,7 +100,7 @@ describe( 'Webpage authentifikation API - '+URL, function(){
       .end(function(err, res){
         expect(res.status).to.eq(200);
         var jsonRes = JSON.parse(res.text);
-        expect( jsonRes.name ).to.eq( webpage.name );
+        expect( jsonRes.filename ).to.eq( webpage.filename );
         done();
       });
     });
@@ -111,7 +111,7 @@ describe( 'Webpage authentifikation API - '+URL, function(){
   describe('POST '+URL+'/', function(){
 
     it('adds a valid webpage', function(done){
-      var attr = new caminio.models.Webpage({ name: 'testpage' });
+      var attr = new caminio.models.Webpage({ filename: 'testpage' });
       attr.camDomain = domain;
       var test = this;
       test.agent

@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-30 15:04:43
+ * @Last Modified time: 2014-05-03 20:48:52
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -180,7 +180,7 @@ describe( 'Site Generator test', function(){
         it('works with a webpage', function( done ){
           gen.compileObject( 
             pages[names[0]], 
-            { locals: {  currentUser: 'adsfsadf', }, isPublished: true },
+            { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
             function( err, content ){
               done();
           });
@@ -194,7 +194,7 @@ describe( 'Site Generator test', function(){
         it('works with an array of webpages', function( done ){
           gen.compileArray( 
             [ pages[names[0]], pages[names[1]] ],
-            { locals: {  currentUser: 'adsfsadf', }, isPublished: true },
+            { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
             function( err, content ){
               done();
           });
@@ -208,7 +208,7 @@ describe( 'Site Generator test', function(){
         it('works with an array of webpages', function( done ){
           gen.compile( 
             [ pages[names[0]], pages[names[1]] ],
-            { locals: {  currentUser: 'adsfsadf', }, isPublished: true },
+            { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
             function( err, content ){
               console.log( err, content, 'DONE');
               done();

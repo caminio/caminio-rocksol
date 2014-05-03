@@ -11,11 +11,12 @@
 var fixtures = require('caminio-fixtures');
 
 fixtures.define('Webpage', {
-  name: 'testpage',
+  filename: 'testpage',
   requestReviewMsg: 'test message' 
 });
 
 fixtures.define('Translation', {
   locale: 'en',
-  content: 'this is a test content with an <h1> title </h1>'
+  content: 'this is a test content with an <h1> title </h1>',
+  title: 'a Translation title'
 });

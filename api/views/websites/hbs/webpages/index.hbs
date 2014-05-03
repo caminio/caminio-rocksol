@@ -8,7 +8,12 @@
           {{t webpage.new}}
         </button>
       </div>
-      <h1><span>Domain{{domain.name}}</span></h1>
+      <h1>
+        {{domain.name}}
+        {{#if domain.contentDirPkgVersion}}
+          <small class="desc">{{domain.contentDirPkgVersion}}</small>
+        {{/if}}
+      </h1>
 
     </div>
 

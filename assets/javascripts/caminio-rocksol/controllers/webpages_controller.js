@@ -66,8 +66,6 @@
       return !(this.get('webpages.content') && this.get('webpages.content').content && this.get('webpages.content').content.length > 1);
     }.property('webpages.content'),
 
-    curLang: currentDomain.lang,
-
     curTranslation: null,
 
     updateCurTranslation: function(){
@@ -77,13 +75,13 @@
       if( !this.get('curSelectedItem') )
         return;
       this.set('curTranslation', this.get('curSelectedItem').get('translations').content.find(function(tr){
-        if( tr.get('locale') === self.get('curLang') )
+        if( tr.get('locale') === App.get('_curLang') )
           return true;
       }));
       if( this.get('curTranslation') )
         return;
 
-      var tr = this.store.createRecord('translation', { locale: this.get('curLang'),
+      var tr = this.store.createRecord('translation', { locale: App.get('_curLang'),
                                                     title: oldTr ? oldTr.get('title') : 'Title',
                                                     subtitle: oldTr ? oldTr.get('subtitle') : 'Subtitle',
                                                     metaDescription: oldTr ? oldTr.get('metaDescription') : '',
@@ -91,7 +89,7 @@
                                                     content: oldTr ? oldTr.get('content') : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut a neque vel felis iaculis pulvinar ut sed erat. Aliquam accumsan diam diam, ac facilisis massa blandit vel. Morbi sollicitudin est non bibendum consequat. Maecenas pretium lobortis neque, eu luctus lectus pharetra id. Phasellus sem libero, viverra ut purus id, accumsan interdum orci. Donec sed mauris ullamcorper, luctus ligula ac, euismod erat. Maecenas faucibus eros justo. Aliquam tempor ipsum augue, tempus tempus lorem porttitor at. Nullam nulla tortor, facilisis nec consectetur eu, interdum sed elit. Praesent at iaculis odio.' });
       this.get('curSelectedItem.translations').pushObject( tr );
       this.set('curTranslation', tr);
-    }.observes('curSelectedItem', 'curLang'),
+    }.observes('curSelectedItem', 'App._curLang'),
 
     updateWebpageDirty: function(){
       if( this.get('curTranslation.isDirty') && this.get('curSelectedItem') )
@@ -180,8 +178,8 @@
 
         var url = 'http://'+currentDomain.fqdn+'/drafts/'+webpage.get('id');
         if( webpage.get('translations').content.length > 1 )
-          url += '.' + this.get('curLang');
-        window.open( url+'.htm' );
+          url += '.htm' + (App.get('_curLang') ? '.'+App.get('_curLang') : '');
+        window.open( url );
 
       },
 

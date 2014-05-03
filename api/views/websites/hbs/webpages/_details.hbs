@@ -15,7 +15,6 @@
 
       <strong>{{curSelectedItem.curTranslation.title}}</strong>
       {{t 'properties'}}
-      {{curSelectedItem.parent.filename}}
 
     </div>
 
@@ -105,7 +104,7 @@
 
               {{view Ember.Select
                      content=curTranslation.availableLangs
-                     valueBinding='curLang'
+                     valueBinding='App._curLang'
               }}
               
             </div>

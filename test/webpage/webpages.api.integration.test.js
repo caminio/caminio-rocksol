@@ -144,7 +144,6 @@ describe( 'Webpage authentifikation API - '+URL, function(){
     //   .put(URL+'/'+webpage.id)
     //   .send( { 'webpage': { name: 'updated page' } } )
     //   .end(function(err, res){
-    //     console.log(res.text);
     //     expect(res.status).to.eq(200);
     //     expect(res.text.name).to.eq( 'updated page' );
     //     done();
@@ -172,7 +171,6 @@ describe( 'Webpage authentifikation API - '+URL, function(){
       test.agent
       .del(URL+'/'+webpage.id)
       .end(function(err, res){
-        console.log('err', res.text);
         expect(res.status).to.eq(200);
         done();
       });

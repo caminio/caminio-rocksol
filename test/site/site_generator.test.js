@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-05-03 20:48:52
+ * @Last Modified time: 2014-05-03 20:58:20
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -89,6 +89,50 @@ describe( 'Site Generator test', function(){
       // it('pebbleDb', function(){  
       //   expect( caminio ).to.exist;
       // });
+
+    });
+
+
+
+    describe( 'options: ', function(){
+      var processor;
+      var webpage;
+      var gen;
+
+      before( function( done ){
+        webpage = new Webpage(
+          { filename: 'testpage',
+            translations: [
+              { content: 'testcontent', locale: 'en', title: 'hello' },
+              { content: 'deutsch', locale: 'de', title: 'hello' }
+            ]  });
+
+        var SiteGen = require('./../../lib/site/site_generator')( caminio );
+        gen = new SiteGen( path );
+
+        this.pebbleContent = ' a string as pebblecontent';
+        var pebble = new Pebble( { 
+          name: 'test', 
+          translations: [{content: this.pebbleContent, locale: 'en', layout: 'pebble' }],
+          webpage: webpage._id 
+        });
+        pebble.save( function( err ){
+          done();
+        });
+      });
+
+      describe('compileDeps', function( done ){
+
+        // it('works with a single webpage', function( done ){
+        //   gen.compileObject( 
+        //     pages[names[0]], 
+        //     { locals: {  currentUser: user, currentDomain: domain, compileDeps: ['ancestors'] }, isPublished: true },
+        //     function( err, content ){
+        //       done();
+        //   });
+        // });
+
+      });
 
     });
 
@@ -210,12 +254,9 @@ describe( 'Site Generator test', function(){
             [ pages[names[0]], pages[names[1]] ],
             { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
             function( err, content ){
-              console.log( err, content, 'DONE');
               done();
           });
         });
-
-
       });
 
 

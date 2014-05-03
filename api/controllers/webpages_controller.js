@@ -51,6 +51,11 @@ module.exports = function( caminio, policies, middleware ){
       'update': compilePages
     },
 
+    'compileAll': [
+      policies.ensureLogin,
+      compileAll
+    ],
+
 
     // 'update': function updateWebpage(req, res ){
     //   var options = {
@@ -87,6 +92,30 @@ module.exports = function( caminio, policies, middleware ){
 
   };
 
+  function compileAll( req, res, next ){
+    console.log('THIS IS CALLED!');
+    gen = new SiteGen( res.locals.currentDomain.getContentPath() );
+    Webpage.find()
+    .exec( function( err, webpages ){
+      async.eachSeries( webpages, function( webpage, compileNext ){
+
+        req.doc = webpage;
+        res.locals.doc = webpage;
+        gen.compileObject( 
+            req.doc,
+            { locals: res.locals,
+              layout: {
+                name: 'projects'
+              },
+              isPublished: (req.doc.status === 'published') },
+            compileNext );
+
+      console.log('COMPILED: ', webpage.filename );
+
+      }, next());
+    });
+  }
+
   function compilePages( req, res, next ){
     gen = new SiteGen( res.locals.currentDomain.getContentPath() );
     gen.compileObject( 
@@ -96,7 +125,7 @@ module.exports = function( caminio, policies, middleware ){
                 name: 'projects'
               },
               isPublished: (req.doc.status === 'published') },
-            next);
+            next );
   }
 
   function checkParent( req, res, next ){

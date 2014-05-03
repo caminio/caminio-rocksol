@@ -3,6 +3,22 @@
   <header>
     <div class="box title-box">
       <div class="main-ctrl">
+
+        {{#if multiLangs}}
+          <div class="dropdown btn-group">
+            <button class="btn text-icon dropdown-toggle" data-toggle="dropdown">
+              {{t 'translation.title'}}:
+              <strong>{{App._curLang}}</strong>
+              <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              {{#each lang in availableLangs}}
+                <li {{action 'changeLang' lang}}><a href="#">{{lang}}</a></li>
+              {{/each}}
+            </ul>
+          </div>
+        {{/if}}
+
         <button class="btn icon-text" {{action 'promptNewWebpage'}}>
           <i class="fa fa-plus-square"></i>
           {{t webpage.new}}

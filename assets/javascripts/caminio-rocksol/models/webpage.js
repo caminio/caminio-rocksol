@@ -13,9 +13,10 @@
     parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble' ),
     usedLocales: function(){
-      var locales = this.get('translations').map(function(trans){ return trans.locale; }).join(',');
+      var locales = this.get('translations').map(function(trans){ return trans.get('locale'); });
       if( locales.length < 1 )
         return Em.I18n.t('translation.no');
+      return locales.join(',');
     }.property('translations'),
     usedPebbles: function(){
       return Em.I18n.t('pebbles.amount', { count: this.get('pebbles').content.length });

@@ -28,6 +28,14 @@
 
   window.App.WebpagesIndexController = Ember.Controller.extend({
 
+    multiLangs: function(){
+      return domainSettings.availableLangs.length > 1;
+    }.property(),
+
+    availableLangs: function(){
+      return domainSettings.availableLangs;
+    }.property(),
+
     domain: currentDomain,
 
     errors: [],
@@ -98,6 +106,10 @@
 
       'toggleContainer': function( prop ){
         this.toggleProperty( prop );
+      },
+
+      'changeLang': function( lang ){
+        App.set('_curLang',lang);
       },
 
       'promptNewWebpage': function(){

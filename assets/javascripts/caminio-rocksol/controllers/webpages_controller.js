@@ -115,6 +115,11 @@
             self.set('curSelectedItem', model);
             self.set('addedItem', model);
 
+            // fixes a strange bug where parent receives child id as parent id
+            // casuing a circular loop
+            if( model.get('parent') )
+              model.get('parent').reload();
+            
             // if parent try to initialize pebbles
             if( model.get('parent') && model.get('parent.childrenLayout')){
               notify('info', Ember.I18n.t('webpage.init_pebbles', {name: model.get('filename')}) );

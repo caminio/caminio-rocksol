@@ -5,6 +5,7 @@
  */
  
 var _                 = require('lodash');
+var join              = require('path').join;
 var normalizeFilename = require('caminio/util').normalizeFilename;
 
 module.exports = function Webpage( caminio, mongoose ){
@@ -91,8 +92,10 @@ module.exports = function Webpage( caminio, mongoose ){
   schema.virtual('curTranslation')
     .get(function(){
       if( !this._curLang )
-        return null;
-      return _.first( this.translations, { locale: this._curLang } )[0]; 
+        return this.translations[0];
+      var guess = _.find( this.translations, { locale: this._curLang } );
+      if( guess ){ return guess; }
+      return this.translations[0];
     });
 
   schema.virtual('curLang')
@@ -128,12 +131,17 @@ module.exports = function Webpage( caminio, mongoose ){
   schema.methods.url = function url(){
     
     if( this.translations.length === 1 )
-        return this._path + '/' + this.filename + '.htm';
+      return this._path + '/' + this.filename + '.htm';
     // if( lang )
     //     return this._path + '/' + this.filename + '.' + lang + '.htm';
     return this._path + '/' + this.filename + '.' + this._curLang + '.htm';
 
   };
+
+  schema.virtual('relPath')
+    .get(function(){
+      return join( (this._path || ''), this.filename );
+    });
 
   schema.methods.underscoreName = function(){
     return this.constructor.underscoreName( this.name );

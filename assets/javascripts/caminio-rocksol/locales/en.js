@@ -53,6 +53,7 @@
     'webpages.list': 'Listing webpages',
 
     'webpage.new_subpage_of': 'Enter name for new subpage of &raquo;{{name}}&laquo;',
+    'webpage.compile_all': 'Compile all',
     'webpage.new_name': 'Enter name for new webpage on root level',
 
     'blogs.title': 'Blog',

@@ -4,6 +4,11 @@
     <div class="box title-box">
       <div class="main-ctrl">
 
+        <button class="btn icon-text" {{action 'compileAll'}}>
+          <i class="fa fa-certificate"></i>
+          {{t 'webpage.compile_all'}}
+        </button>
+
         {{#if multiLangs}}
           <div class="dropdown btn-group">
             <button class="btn text-icon dropdown-toggle" data-toggle="dropdown">

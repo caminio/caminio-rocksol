@@ -7,5 +7,5 @@ module.exports.routes = {
   '/caminio/websites/users_quota': 'WebsitesController#users_quota',
   'autorest /caminio/webpages': 'Webpage',
   'autorest /caminio/pebbles': 'Pebble',  
-  '/caminio/websites/webpages/compileAll': 'WebpagesController#compileAll'
+  '/caminio/websites/compile_all': 'WebpagesController#compileAll'
 };

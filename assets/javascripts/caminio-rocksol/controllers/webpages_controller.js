@@ -110,6 +110,12 @@
         App.set('_curLang',lang);
       },
 
+      'compileAll': function(){
+        $.getJSON('/caminio/websites/compile_all').done(function(){
+          notify('info', Em.I18n.t('webpage.done_compile_all'));
+        });
+      },
+
       'promptNewWebpage': function(){
         var self = this;
         var title = Em.I18n.t('webpage.new_name');

@@ -53,6 +53,7 @@
     'webpages.list': 'Übersicht Webseiten',
 
     'webpage.new_subpage_of': 'Namen für Unterseite von &raquo;{{name}}&laquo;',
+    'webpage.compile_all': 'Alles kompilieren',
     'webpage.new_name': 'Name für Seite auf oberster Ebene',
 
     'blogs.title': 'Blog',

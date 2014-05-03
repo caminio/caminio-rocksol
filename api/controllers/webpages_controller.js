@@ -53,7 +53,10 @@ module.exports = function( caminio, policies, middleware ){
 
     'compileAll': [
       policies.ensureLogin,
-      compileAll
+      compileAll,
+      function( req, res ){
+        res.send(200);
+      }
     ],
 
 
@@ -93,27 +96,28 @@ module.exports = function( caminio, policies, middleware ){
   };
 
   function compileAll( req, res, next ){
-    console.log('THIS IS CALLED!');
-    gen = new SiteGen( res.locals.currentDomain.getContentPath() );
-    Webpage.find()
-    .exec( function( err, webpages ){
-      async.eachSeries( webpages, function( webpage, compileNext ){
+    var types = res.locals.domainSettings.compileAll || {'Webpage': {}};
+    async.eachSeries( Object.keys(types), function( type, nextType ){
 
-        req.doc = webpage;
-        res.locals.doc = webpage;
-        gen.compileObject( 
-            req.doc,
-            { locals: res.locals,
-              layout: {
-                name: 'projects'
-              },
-              isPublished: (req.doc.status === 'published') },
-            compileNext );
+      console.log( 'TTTTTTTTYPE', type, types[type] );
+      var gen = new SiteGen( res.locals.currentDomain.getContentPath(), types[type].namespace );
 
-      console.log('COMPILED: ', webpage.filename );
+      caminio.models[type].find()
+      .exec( function( err, webpages ){
+        async.eachSeries( webpages, function( webpage, compileNext ){
 
-      }, next());
-    });
+          req.doc = webpage;
+          res.locals.doc = webpage;
+          gen.compileObject( 
+              req.doc,
+              { locals: res.locals,
+                layout: types[type].layout,
+                isPublished: (req.doc.status === 'published') },
+              compileNext );
+
+        }, nextType );
+      });
+    }, next );
   }
 
   function compilePages( req, res, next ){

@@ -143,6 +143,11 @@ module.exports = function Webpage( caminio, mongoose ){
       return join( (this._path || ''), this.filename );
     });
 
+  schema.virtual('absPath')
+    .get(function(){
+      return join( '/', this.curTranslation.locale, (this._path ? this._path : ''), this.filename );
+    });
+
   schema.methods.underscoreName = function(){
     return this.constructor.underscoreName( this.name );
   };

@@ -53,7 +53,10 @@
     'webpages.list': 'Übersicht Webseiten',
 
     'webpage.new_subpage_of': 'Namen für Unterseite von &raquo;{{name}}&laquo;',
-    'webpage.compile_all': 'Alles kompilieren',
+    'webpage.compile_all': 'Alles neu kompilieren',
+    'webpage.compile_all_desc': 'Die gesamte Website wird jetzt neu kompiliert. Dieser Vorgang kann einige Minuten dauern',
+    'webpage.compiling_all': 'Die gesamte Website wird jetzt neu kompiliert. Dies kann dauern...',
+    'webpage.done_compile_all': 'Alle Webseiten wurden neu kompiliert',
     'webpage.new_name': 'Name für Seite auf oberster Ebene',
 
     'blogs.title': 'Blog',

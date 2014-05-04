@@ -54,6 +54,9 @@
 
     'webpage.new_subpage_of': 'Enter name for new subpage of &raquo;{{name}}&laquo;',
     'webpage.compile_all': 'Compile all',
+    'webpage.compiling_all': 'The whole website is about to be recompiled. This can take a while...',
+    'webpage.compile_all_desc': 'The whole website is being recompiled. This can take several minutes',
+    'webpage.done_compile_all': 'All pages have been recompiled',
     'webpage.new_name': 'Enter name for new webpage on root level',
 
     'blogs.title': 'Blog',

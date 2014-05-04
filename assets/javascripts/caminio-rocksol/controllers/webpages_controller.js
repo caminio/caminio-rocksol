@@ -111,9 +111,17 @@
       },
 
       'compileAll': function(){
-        $.getJSON('/caminio/websites/compile_all').done(function(){
-          notify('info', Em.I18n.t('webpage.done_compile_all'));
-        });
+        bootbox.confirm( Em.I18n.t('webpage.compile_all_desc'), function( result ){
+          
+          if( !result )
+            return;
+
+          notify('warn', Em.I18n.t('webpage.compiling_all'));
+          $.get('/caminio/websites/compile_all').done(function(response){
+            notify('info', Em.I18n.t('webpage.done_compile_all'));
+          });
+          
+        })
       },
 
       'promptNewWebpage': function(){

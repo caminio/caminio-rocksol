@@ -12,6 +12,9 @@
     childrenLayout: DS.attr(),
     parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble' ),
+    name: function(){
+      return this.get('curTranslation.title');
+    }.property('curTranslation.title'),
     usedLocales: function(){
       var locales = this.get('translations').map(function(trans){ return trans.get('locale'); });
       if( locales.length < 1 )

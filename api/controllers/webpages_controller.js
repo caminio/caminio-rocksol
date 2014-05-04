@@ -99,7 +99,6 @@ module.exports = function( caminio, policies, middleware ){
     var types = res.locals.domainSettings.compileAll || {'Webpage': {}};
     async.eachSeries( Object.keys(types), function( type, nextType ){
 
-      console.log( 'TTTTTTTTYPE', type, types[type] );
       var gen = new SiteGen( res.locals.currentDomain.getContentPath(), types[type].namespace );
 
       caminio.models[type].find()

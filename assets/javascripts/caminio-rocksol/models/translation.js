@@ -14,7 +14,7 @@
       return domainSettings.availableLangs;
     }.property('locale'),
     hasMultiLang: function(){
-      return domainSettings.availableLangs.length > 1;
+      return domainSettings.availableLangs && domainSettings.availableLangs.length > 1;
     }.property('locale')
   });
 

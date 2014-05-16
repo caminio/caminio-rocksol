@@ -8,10 +8,7 @@ module.exports = {
     'de'
   ],
 
-  isCaminioHosted: true,
-
   layoutCompiler: require('jade'),
-  
 
   useTransformers: []
   

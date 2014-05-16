@@ -67,14 +67,13 @@ describe( 'Webpage authentifikation API - '+URL, function(){
       });
     });
 
-    it('returns a JSON with an array of the local domain', function( done ){
+    it('login passes and returns a JSON with an array of webpages', function( done ){
       var test = this;
       test.agent
       .get(URL+'/')
       .end(function(err, res){
         expect(res.status).to.eq(200);
-        var jsonRes = JSON.parse(res.text);
-        expect(jsonRes).to.have.length(1);
+        expect(res.body).to.have.length(1);
         done();
       });
     });

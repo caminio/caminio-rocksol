@@ -1,8 +1,8 @@
-( function(){
+( function( App ){
 
   'use strict';
 
-  window.App.Router.map( function(){
+  App.Router.map( function(){
     this.route('index', { path: '/' });
     this.resource('webpages', { path: '/webpages' }, function(){
       this.route('new', { path: '/new' });
@@ -13,21 +13,27 @@
     this.resource('locations');
   });
 
-  window.App.IndexRoute = Ember.Route.extend({
+  App.IndexRoute = Ember.Route.extend({
     redirect: function() {
       this.transitionTo( 'webpages' );
     }
   });
 
-  window.App.ApplicationController = Ember.Controller.extend({
+  App.ApplicationController = Ember.Controller.extend({
     blogEnabled: domainSettings.blog,
     locationsEnabled: domainSettings.locations
   });
 
-  window.App.ApplicationRoute = Ember.Route.extend({
+  App.ApplicationRoute = Ember.Route.extend({
     setupController: function( controller, model ){
       this.store.find('user');
     }
   });
 
-}).call();
+  App.ApplicationView = Em.View.extend({
+    didInsertElement: function(){
+      setupCaminio(this.$());
+    }
+  });
+
+})( App );

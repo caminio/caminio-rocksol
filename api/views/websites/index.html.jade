@@ -60,8 +60,8 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-media/controllers/media_label_item_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-media/components/media_manager_component.js')
 
-  script(type="text/x-handlebars")
-    include hbs/app.hbs
+  script(type="text/x-handlebars" data-template-name='navbar')
+    include hbs/navbar.hbs
     
   script(type="text/x-handlebars" data-template-name="webpages/index")
     include hbs/webpages/index.hbs

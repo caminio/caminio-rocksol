@@ -1,3 +1,6 @@
+.main-view{
+  max-width: 100%;
+}
 .mini-title .close{
   float: right;
   margin: -10px -5px 0 0;
@@ -14,7 +17,7 @@
 
 .features{
   position: absolute;
-  top: 80px;
+  top: 125px;
   left: 0;
   right: 25px;
   height: 400px;

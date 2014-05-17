@@ -1,10 +1,10 @@
-<section class="plain-wrapper">
+<section class="plain-wrapper default-max">
 
   <header>
     <div class="box title-box">
       <div class="main-ctrl">
 
-        <button class="btn icon-only" {{action 'compileAll'}}
+        <button class="btn icon-only transparent borderless" {{action 'compileAll'}}
           {{translateAttr title='webpage.compile_all'}}>
           <i class="fa fa-bolt"></i>
         </button>
@@ -24,8 +24,8 @@
           </div>
         {{/if}}
 
-        <button class="btn icon-text" {{action 'promptNewWebpage'}}>
-          <i class="fa fa-plus-square"></i>
+        <button class="btn icon-text primary" {{action 'promptNewWebpage'}}>
+          <i class="fa fa-plus"></i>
           {{t webpage.new}}
         </button>
       </div>
@@ -43,9 +43,7 @@
   <div class="row span-row">
 
     <div class="col-md-6">
-      <div class="box fill-box">
-        {{partial 'webpages/tree'}}
-      </div>
+      {{partial 'webpages/tree'}}
     </div>
 
     <div class="col-md-6">

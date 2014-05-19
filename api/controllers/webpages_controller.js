@@ -48,6 +48,7 @@ module.exports = function( caminio, policies, middleware ){
     },
 
     _beforeResponse: {
+      'create': runOnCreateInLayoutFile,
       'update': compilePages
     },
 
@@ -58,7 +59,6 @@ module.exports = function( caminio, policies, middleware ){
         res.send(200);
       }
     ],
-
 
     // 'update': function updateWebpage(req, res ){
     //   var options = {
@@ -94,6 +94,23 @@ module.exports = function( caminio, policies, middleware ){
     // }
 
   };
+
+  function runOnCreateInLayoutFile( req, res, next ){
+    
+    if( !req.webpage )
+      return next();
+
+    var layoutJSFileName = join( res.locals.currentDomain.getContentPath(), 'layout', req.webpage.layout, req.webpage.layout );
+
+    if( !fs.existsSync( layoutJSFileName+'.js' ) )
+      return;
+
+    var layoutJSFile = require( layoutJSFileName );
+    
+    if( !layoutJSFile.onCreate )
+      return layoutJSFileName.onCreate( next );
+
+  }
 
   function compileAll( req, res, next ){
     var types = res.locals.domainSettings.compileAll || {'Webpage': {}};

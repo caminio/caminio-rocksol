@@ -58,6 +58,15 @@
 
   </header>
 
+  <div class="pebbles-list">
+    <ul>
+      <li>{{translation.title}}</li>
+      {{#each webpage.pebbles}}
+      <li>{{name}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
   <div id="main-editor-wrap" class="features box fill-box default-padding">
 
     <section id="editor" class="editor">

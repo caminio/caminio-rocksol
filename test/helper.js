@@ -73,7 +73,13 @@ helper.cleanup = function( caminio, done ){
 helper.getDomainAndUser = function( caminio, done ){
   caminio.models.User.create({ email: 'test@example.com', password: 'test' }, 
   function( err, u ){ 
-    caminio.models.Domain.create( { name: 'test.com', fqdn: 'test.com', owner: u, users: u }, 
+    caminio.models.Domain.create( 
+      { 
+        name: 'test.com', 
+        fqdn: 'test.com', 
+        owner: u, 
+        users: u,
+        remoteAddr: 'file://' + __dirname + '/support/upload_destination' }, 
     function( err, d ){
       u.camDomains = d;
       u.save( done( err, u, d ));

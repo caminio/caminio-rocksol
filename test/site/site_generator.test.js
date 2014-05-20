@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-05-03 20:58:20
+ * @Last Modified time: 2014-05-20 16:34:17
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -91,6 +91,36 @@ describe( 'Site Generator test', function(){
       // });
 
     });
+
+    describe('can upload files to another directory on the same server', function(){
+
+      var processor;
+      var webpage;
+      var gen;
+
+      before( function( done ){
+        webpage = new Webpage(
+          { filename: 'testpage',
+            translations: [
+              { content: 'testcontent', locale: 'en', title: 'hello' },
+              { content: 'deutsch', locale: 'de', title: 'hello' }
+            ]  });
+
+        var SiteGen = require('./../../lib/site/site_generator')( caminio );
+        gen = new SiteGen( path, 'shop' );
+        done();
+      });
+
+      it('works with a webpage', function( done ){
+          gen.compileObject( 
+            pages[names[0]], 
+            { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
+            function( err, content ){
+              done();
+          });
+        });
+
+    })
 
 
 

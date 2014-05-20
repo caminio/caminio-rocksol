@@ -21,7 +21,8 @@
     "async": "~0.2.10",
     "moment": "~2.5.1",
     "marked": "^0.3.2",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "ftp": "^0.3.6"
   },
   "devDependencies": {
     "mocha": "~1.15.1",

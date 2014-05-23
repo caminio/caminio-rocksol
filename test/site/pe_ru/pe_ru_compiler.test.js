@@ -7,7 +7,7 @@
  * @Date:   2014-04-14 01:23:59
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-25 15:06:07
+ * @Last Modified time: 2014-05-23 17:29:19
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -119,7 +119,7 @@ describe( 'Pebble - Rubble - Compiler test', function(){
             type: "pebble",
             name: "test"
           }, function( err, content){   
-            expect( content ).to.eq( "\n<h1>we are pebble</h1><p> a string as pebblecontent</p>");
+            expect( content ).to.eq( "\n<h1>we are pebble</h1><div id=markdown_"+pebble._id+"><p> a string as pebblecontent</p>\n</div>");
             expect( err ).to.be.null;
             done();
           });
@@ -134,7 +134,7 @@ describe( 'Pebble - Rubble - Compiler test', function(){
             type: "pebble",
             name: "another"
           }, function( err, content){   
-            expect( content ).to.eq( "<p> a string as pebblecontent</p>" );
+            expect( content ).to.eq( "<div id=markdown_"+pebble2._id+"><p> a string as pebblecontent</p>\n</div>" );
             expect( err ).to.be.null;
             done();
           });

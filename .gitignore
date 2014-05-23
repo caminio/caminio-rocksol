@@ -9,3 +9,4 @@ test.log
 build
 test/**/public
 test/support/upload_destination
+test/**/upload/*

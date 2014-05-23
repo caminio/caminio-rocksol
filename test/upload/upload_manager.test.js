@@ -50,7 +50,7 @@ describe('upload manager test', function() {
                 fs.readFile( old, function(err, data) {
                   fs.writeFile(file, data, function(err) {
                     fs.unlink(old, function(){
-                      if( err ) throw error('error while unlinking file: ' + err );
+                     if( err ) console.log('error while unlinking file: ' + err );
                       done();
                     });
                   }); 

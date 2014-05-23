@@ -6,6 +6,7 @@
 
   var translations = {
     
+    'apps.rocksol': 'Rocksol',
     'nav.webpages': 'Webpages',
     'nav.media': 'Media',
     'nav.blog': 'Blog',

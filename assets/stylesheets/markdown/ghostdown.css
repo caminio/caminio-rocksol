@@ -394,7 +394,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   color: #aaa9a2
 }
 .features .editor .entry-markdown.active, .features .editor .entry-preview.active {
-  z-index: 200
+  /* z-index: 200 */
 }
 .features .editor .entry-markdown.active .markdown, .features .editor .entry-markdown.active .entry-preview-content, .features .editor .entry-preview.active .markdown, .features .editor .entry-preview.active .entry-preview-content {
   height: auto;

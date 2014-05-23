@@ -27,7 +27,7 @@
           </div>
           {{#if translation.hasMultiLang}}
             <div class="dropdown btn-group">
-              <button class="btn text-icon dropdown-toggle" data-toggle="dropdown">
+              <button class="btn text-icon borderless transparent dropdown-toggle" data-toggle="dropdown">
                 {{t 'translation.title'}}:
                 <strong>{{translation.locale}}</strong>
                 <i class="fa fa-angle-down"></i>
@@ -119,9 +119,7 @@
           <header class="floatingheader">
             {{t 'preview'}}<span class="entry-word-count">0</span>
           </header>
-          <section class="entry-preview-content">
-            <div class="rendered-markdown"></div>
-          </section>
+          <iframe class="rocksol-preview" id="rocksol-preview" {{bind-attr data-url=webpage.previewUrl}}></iframe>
         </section>
       </div>
     </section>

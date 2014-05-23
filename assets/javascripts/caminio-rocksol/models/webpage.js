@@ -35,7 +35,13 @@
     }.property('status'),
     curTranslation: function(){
       return this.get('translations').findBy('locale', App._curLang);
-    }.property('translations.@each', 'App._curLang')
+    }.property('translations.@each', 'App._curLang'),
+    previewUrl: function(){
+      var url = 'http://'+currentDomain.fqdn+'/drafts/'+this.get('id');
+      if( this.get('translations').content.length > 1 )
+        url += '.htm' + (App.get('_curLang') ? '.'+App.get('_curLang') : '');
+      return url;
+    }.property('translations.@each', 'id')
 
   });
 

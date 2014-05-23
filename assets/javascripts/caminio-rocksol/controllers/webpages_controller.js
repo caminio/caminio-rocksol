@@ -190,10 +190,7 @@
 
       'previewWebpage': function( webpage ){
 
-        var url = 'http://'+currentDomain.fqdn+'/drafts/'+webpage.get('id');
-        if( webpage.get('translations').content.length > 1 )
-          url += '.htm' + (App.get('_curLang') ? '.'+App.get('_curLang') : '');
-        window.open( url );
+        window.open( webpage.get('previewUrl') );
 
       },
 

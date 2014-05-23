@@ -8,6 +8,8 @@
         converter: null,
         _create: function( options ){
 
+          loadLayoutIntoPreviewContainer();
+
             marked.setOptions({
               breaks: true,
               highlight: function (code) {
@@ -54,10 +56,10 @@
             this._updatePreview();
         },
         _updatePreview: function() {
-            var preview = this.element.find('.rendered-markdown');
+            var $preview = $('#rocksol-preview');
             this.markdown = this.editor.getValue();
             this.html = marked(this.markdown);
-            preview.html(this.html);
+            $preview.contents().find('.main-content').html(this.html);
             this._updateWordCount();
             //console.log('content', this.editor.getValue());
         },
@@ -110,4 +112,15 @@
             }
         }
     });
+
+    function loadLayoutIntoPreviewContainer(){
+      var $preview = $('#rocksol-preview');
+      $.get( $preview.attr('data-url') )
+        .done( function( html ){
+          var doc = $preview.get(0).contentWindow.document;
+          console.log(doc);
+          doc.open();
+          doc.write( html );
+        });
+    }
 }(jQuery, marked, CodeMirror));

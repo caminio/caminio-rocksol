@@ -33,23 +33,13 @@ module.exports = function( caminio, policies, middleware ){
     _before: {
       '*': policies.ensureLogin,
       'create': setupDefaultTranslation,
-      // 'update': [ 
-      //   cleanNewActivities, 
-      //   cleanNewTranslationIds, 
-      //   getWebpage,
-      //   removeFiles, 
-      //   checkLocaleExistsAndDismiss, 
-      //   autoCreatePebbles, 
-      //   getChildren,
-      //   checkParent,
-      //   saveWebpage],
       'update': [ removeFiles, checkLocaleExistsAndDismiss],
       'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
     },
 
     _beforeResponse: {
-      'create': runOnCreateInLayoutFile,
-      'update': compilePages
+      'create': runOnSaveInLayoutFile,
+      'update': [ runOnSaveInLayoutFile, compilePages ]
     },
 
     'compileAll': [
@@ -60,56 +50,24 @@ module.exports = function( caminio, policies, middleware ){
       }
     ],
 
-    // 'update': function updateWebpage(req, res ){
-    //   var options = {
-    //     locals: res.locals
-    //   };
-      
-    //   var gen = new SiteGen( res.locals.currentDomain.getContentPath() );
-
-    //   if( req.compileAll ){
-    //     options.compileChildren = true;
-    //     options.compileAncestors = true;
-    //     options.compileSiblings = true;      
-    //   }
-
-    //   if( req.webpage.status === 'published' )
-    //     options.isPublished = true;
-    //   if( req.webpage.status === 'published' || req.webpage.status === 'draft'  )
-    //     gen.compileObject( req.webpage, options, finalResponse );
-    //     // SiteGen.compilePage( res, req.webpage, options, req.webpage.layout, finalResponse );
-    //   else
-    //     finalResponse();
-      
-    //   function finalResponse( err ){
-    //     if( err )
-    //       return res.json( 500, { error: 'compile_error', details: err });
-    //     if( req.webpage.parent && typeof( req.webpage.parent) === 'object' )
-    //       req.webpage.parent = req.webpage.parent._id;
-    //     Webpage.findOne({ '_id': req.webpage._id })
-    //     .exec( function( err, webpage ){
-    //       res.json( util.transformJSON( { webpage: JSON.parse(JSON.stringify(webpage)) }, req.header('namespaced') ) );
-    //     });
-    //   }
-    // }
-
   };
 
-  function runOnCreateInLayoutFile( req, res, next ){
-    
+  function runOnSaveInLayoutFile( req, res, next ){
+  
     if( !req.webpage )
       return next();
 
-    var layoutJSFileName = join( res.locals.currentDomain.getContentPath(), 'layout', req.webpage.layout, req.webpage.layout );
+    var layoutJSFileName = join( res.locals.currentDomain.getContentPath(), 'layouts', req.webpage.layout, req.webpage.layout );
 
     if( !fs.existsSync( layoutJSFileName+'.js' ) )
-      return;
+      return next();
 
-    var layoutJSFile = require( layoutJSFileName );
+    var layoutJSFile = require( layoutJSFileName )( caminio, null );
     
-    if( !layoutJSFile.onCreate )
-      return layoutJSFileName.onCreate( next );
+    if( layoutJSFile.onSave )
+      return layoutJSFile.onSave( req, res, next );
 
+    return next();
   }
 
   function compileAll( req, res, next ){
@@ -181,18 +139,6 @@ module.exports = function( caminio, policies, middleware ){
         else
           req.removeFiles = false;
 
-      next();
-    });
-  }
-
-  function updateWebpage( req, res, next ){
-    for( var i in req.body.webpage )
-      req.webpage[i] = req.body.webpage[i];
-    req.webpage.updatedBy = res.locals.currentUser;
-    req.webpage.updatedAt = new Date();
-    req.webpage.save( function( err ){
-      if( err )
-        return res.json( 500, { error: 'server_error', details: err });
       next();
     });
   }

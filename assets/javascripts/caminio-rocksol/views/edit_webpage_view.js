@@ -16,6 +16,8 @@
       $('#editor').ghostDown();
       $('#editor').ghostDown('setValue', this.get('controller.translation.content') );
 
+      scaleViewport.call(this);
+
       var controller = this.get('controller');
       clearInterval( syncModelIval );
       syncModelIval = setInterval( function(){
@@ -45,4 +47,35 @@
 
   }
 
+  function scaleViewport(){
+
+    var $preview = $('#rocksol-preview');
+    var webpage = this.get('controller.webpage')
+    $.get( $preview.attr('data-url') )
+      .done( function( html ){
+
+        var doc = $preview.get(0).contentWindow.document;
+
+        doc.open();
+        doc.write( html );
+
+
+        setTimeout( function(){
+          console.log($('#rocksol-preview').contents().find('#markdown_' + webpage.get('id') ).height()  )
+
+          var target = $('#rocksol-preview').contents().find('#markdown_' + webpage.get('id'));
+
+          var offset = target.position();
+          var bottom = target.height() + offset.top;
+          console.log('the position',  offset)
+          $('#rocksol-preview').contents().find('body').css({position:'absolute', top: -offset.top, left: -offset.left })
+        }, 500);
+
+      });
+  }
+
+
+
 }).call();
+
+//$('#rocksol-preview').contents().find('body').css({position:'absolute', top: -100})

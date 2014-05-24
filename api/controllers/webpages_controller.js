@@ -96,6 +96,7 @@ module.exports = function( caminio, policies, middleware ){
 
   function compilePages( req, res, next ){
     gen = new SiteGen( res.locals.currentDomain.getContentPath() );
+    console.log('we are sending: ', req.doc );
     gen.compileObject( 
             req.doc,
             { locals: res.locals,

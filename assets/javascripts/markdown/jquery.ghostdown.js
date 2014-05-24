@@ -8,8 +8,6 @@
         converter: null,
         _create: function( options ){
 
-          loadLayoutIntoPreviewContainer();
-
             marked.setOptions({
               breaks: true,
               highlight: function (code) {
@@ -67,9 +65,11 @@
           this.editor.setValue( val );
         },
         getHtml: function () {
+            console.log('we are returning html: ', this.html);
             return this.html;
         },
         getMarkdown: function () {
+            console.log('we are returning markdown: ', this.markdown);
             return this.markdown;
         },
         replaceText: function( cmd ){
@@ -113,14 +113,5 @@
         }
     });
 
-    function loadLayoutIntoPreviewContainer(){
-      var $preview = $('#rocksol-preview');
-      $.get( $preview.attr('data-url') )
-        .done( function( html ){
-          var doc = $preview.get(0).contentWindow.document;
-          console.log(doc);
-          doc.open();
-          doc.write( html );
-        });
-    }
 }(jQuery, marked, CodeMirror));
+

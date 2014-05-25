@@ -5,8 +5,8 @@ new Gear({
   applications: [
     { name: 'rocksol', icon: 'fa-globe',
       i18n:{
-        en: 'Rocksol',
-        de: 'Rocksol'
+        en: 'Website',
+        de: 'Netzauftritt'
       }
     }
   ] 

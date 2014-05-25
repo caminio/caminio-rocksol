@@ -10,6 +10,11 @@
 
             marked.setOptions({
               breaks: true,
+              tables: true,
+              pedantic: false,
+              smartLists: true,
+              gfm: true,
+              smartypants: true,
               highlight: function (code) {
                 return hljs.highlightAuto(code).value;
               }
@@ -65,11 +70,9 @@
           this.editor.setValue( val );
         },
         getHtml: function () {
-            console.log('we are returning html: ', this.html);
             return this.html;
         },
         getMarkdown: function () {
-            console.log('we are returning markdown: ', this.markdown);
             return this.markdown;
         },
         replaceText: function( cmd ){

@@ -2,7 +2,7 @@
   
   'use strict';
 
-  var syncModelIval;
+  //var syncModelIval;
 
   window.App.WebpagesEditView = Em.View.extend({
     didInsertElement: function(){
@@ -16,15 +16,21 @@
       $('#editor').ghostDown();
       $('#editor').ghostDown('setValue', this.get('controller.translation.content') );
 
+      $('#editor').on('keyup', function(){
+        var tr = controller.get('webpage.translations').findBy('id', controller.get('translation').id);
+        tr.set('content', $('#editor').ghostDown('getMarkdown') );
+      });
+
       scaleViewport.call(this);
+      this.get('controller.webpage').on('didUpdate', function(){ console.log('updated'); });
 
       var controller = this.get('controller');
-      clearInterval( syncModelIval );
-      syncModelIval = setInterval( function(){
-        var tr = controller.get('webpage.translations').findBy('id', controller.get('translation').id);
-        if( tr && $('#editor').length )
-          tr.set('content', $('#editor').ghostDown('getMarkdown') );
-      }, 1000);
+      //clearInterval( syncModelIval );
+      //syncModelIval = setInterval( function(){
+      //  var tr = controller.get('webpage.translations').findBy('id', controller.get('translation').id);
+      //  if( tr && $('#editor').length )
+      //    tr.set('content', $('#editor').ghostDown('getMarkdown') );
+      //}, 1000);
 
       setupScrolls();
 
@@ -34,7 +40,8 @@
 
     willClearRender: function(){
       $('#editor').remove();
-    }
+    },
+
   });
 
 
@@ -50,7 +57,10 @@
   function scaleViewport(){
 
     var $preview = $('#rocksol-preview');
-    var webpage = this.get('controller.webpage')
+    var webpage = this.get('controller.webpage');
+
+    $preview.css({ height: $(window).height() - 220});
+
     $.get( $preview.attr('data-url') )
       .done( function( html ){
 
@@ -59,16 +69,13 @@
         doc.open();
         doc.write( html );
 
-
         setTimeout( function(){
-          console.log($('#rocksol-preview').contents().find('#markdown_' + webpage.get('id') ).height()  )
+          //console.log($('#rocksol-preview').contents().find('#markdown_' + webpage.get('id') ).height()  );
 
-          var target = $('#rocksol-preview').contents().find('#markdown_' + webpage.get('id'));
-
-          var offset = target.position();
-          var bottom = target.height() + offset.top;
-          console.log('the position',  offset)
-          $('#rocksol-preview').contents().find('body').css({position:'absolute', top: -offset.top, left: -offset.left })
+          $preview.contents().find('html').css('transform','scale(0.7)');
+          var $contentArea = $preview.contents().find('#markdown_' + webpage.get('id'));
+          //$('#rocksol-preview').contents().find('body').css({position:'absolute', top: -offset.top, left: -offset.left })
+          doc.close();
         }, 500);
 
       });

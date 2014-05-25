@@ -47,6 +47,24 @@
             </button>
           </div>
 
+          <div class="dropdown dropdown-hover as-btn">
+            <button class="btn transparent borderless icon-only"><i class="fa fa-bars"></i></button>
+            <ul class="dropdown-menu pull-right">
+              <li>
+              <a href="#" class="highlight-danger"
+                {{action 'remove' content}}>
+                {{t 'delete'}}
+              </a>
+              </li>
+              <li>
+              <a target="_blank"
+                {{bind-attr href='webpage.previewUrl'}}>
+                {{t 'preview'}}
+              </a>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
 

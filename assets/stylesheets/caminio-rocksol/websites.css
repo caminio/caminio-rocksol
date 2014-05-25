@@ -1,4 +1,4 @@
-.main-view{
+omain-view{
   max-width: 100%;
 }
 .mini-title .close{
@@ -227,5 +227,6 @@ ul.pebbles-list li .fa{
 .rocksol-preview{
   width: 100%;
   height: 400px;
+  background: #fff;
   border: none;
 }

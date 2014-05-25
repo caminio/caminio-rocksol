@@ -7,11 +7,11 @@
     requestReviewBy: DS.belongsTo('user'),
     requestReviewMsg: DS.attr(),
     status: DS.attr('string', { defaultValue: 'draft'}),
-    translations: DS.hasMany( 'translation' ),
+    translations: DS.hasMany( 'translation', { embedded: 'always' } ),
     layout: DS.attr(),
     childrenLayout: DS.attr(),
     parent: DS.belongsTo('webpage'),
-    pebbles: DS.hasMany( 'pebble' ),
+    pebbles: DS.hasMany( 'pebble', { embedded: 'always' } ),
     name: function(){
       return this.get('curTranslation.title');
     }.property('curTranslation.title'),

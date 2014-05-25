@@ -8,7 +8,7 @@
  *
 
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-04-11 13:02:31
+ * @Last Modified time: 2014-05-25 12:03:33
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -21,6 +21,8 @@
  * @class Pebble
  *
  */
+
+var _ = require('lodash');
  
 module.exports = function Pebble( caminio, mongoose ){
 
@@ -179,6 +181,21 @@ module.exports = function Pebble( caminio, mongoose ){
     updatedBy: { type: ObjectId, ref: 'User', public: true }
 
   });
+
+
+  schema.virtual('curTranslation')
+    .get(function(){
+      if( !this._curLang )
+        return this.translations[0];
+      var guess = _.find( this.translations, { locale: this._curLang } );
+      if( guess ){ return guess; }
+      return this.translations[0];
+    });
+
+  schema.virtual('curLang')
+    .set(function(lang){
+      this._curLang = lang;
+    });
 
   schema.publicAttributes = [ 'activities' ];
 

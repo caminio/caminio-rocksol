@@ -178,7 +178,9 @@ module.exports = function Pebble( caminio, mongoose ){
      * @type ObjectId
      */
     updatedAt: { type: Date, default: Date.now, public: true },
-    updatedBy: { type: ObjectId, ref: 'User', public: true }
+    updatedBy: { type: ObjectId, ref: 'User', public: true },
+
+    position: { type: Number, public: true }
 
   });
 

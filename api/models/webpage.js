@@ -138,6 +138,12 @@ module.exports = function Webpage( caminio, mongoose ){
 
   };
 
+  schema.methods.getPebbles = function getPebbles( cb ){
+    mongoose.models.Pebble.find({ webpage: this._id })
+      .order('position')
+      .exec(cb);
+  };
+
   schema.virtual('relPath')
     .get(function(){
       return join( (this._path || ''), this.filename );

@@ -141,6 +141,24 @@ ul.activities .location{
   list-style: none;
 }
 .pebbles-list li{
+  float: left;
+}
+.pebbles-list li ul{
+  margin-top: 10px;
+  margin-left: 105px;
+  position: relative;
+}
+.pebbles-list li ul:before{
+  border-left: 2px dashed #BBBBBB;
+  content: "";
+  height: 44px;
+  left: 0px;
+  position: absolute;
+  top: -10px;
+  width: 3px;
+
+}
+.pebbles-list .pebble{
   margin: 3px 0;
   padding: 20px 5px;
   border: 1px solid #ddd;
@@ -148,16 +166,25 @@ ul.activities .location{
   color: #555;
   cursor: pointer;
   text-align: center;
-  float: left;
   width: 150px;
   font-size: 1.1em;
+  margin-left: 30px;
+  position: relative;
+}
+.pebbles-list .pebble.root:before{
+  width: 0;
+  height: 0;
+}
+.pebbles-list .pebble:before{
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  content: '';
+  height: 3px;
+  width: 30px;
+  border-top: 2px dashed #bbb;
 }
 
-.pebbles-list li .fa{
-  float: left;
-  margin: 3px 5px 0 0;
-  color: #777;
-}
 .pebble-box{
   background: #fafafa;
 }

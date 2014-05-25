@@ -63,7 +63,17 @@ module.exports = function( caminio, policies, middleware ){
       return next();
 
     var layoutJSFile = require( layoutJSFileName )( caminio, null );
-    
+   
+    if( res.locals.actionName === 'create' ){
+      if( layoutJSFile.onCreate )
+        return layoutJSFile.onCreate( req, res, function(err){ 
+          if( err ){ return next(err); } 
+          if( layoutJSFile.onSave )
+            return layoutJSFile.onSave( req, res, next ); 
+          return next();
+        });
+    }
+
     if( layoutJSFile.onSave )
       return layoutJSFile.onSave( req, res, next );
 

@@ -78,10 +78,16 @@
 
   <div class="pebbles-list clearfix">
     <ul>
-      <li>{{translation.title}}</li>
-      {{#each webpage.pebbles}}
-        <li>{{name}}</li>
-      {{/each}}
+      <li>
+        <div class="root pebble" {{action 'editContent' webpage}}>{{translation.title}}</div>
+        <ul>
+          {{#each pebbles}}
+          <li>
+          <div class="pebble" {{action 'editContent' this}}>{{name}}</div>
+          </li>
+          {{/each}}
+        </ul>
+      </li>
     </ul>
   </div>
 

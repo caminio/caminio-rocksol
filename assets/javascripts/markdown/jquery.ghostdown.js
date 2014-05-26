@@ -62,7 +62,8 @@
             var $preview = $('#rocksol-preview');
             this.markdown = this.editor.getValue();
             this.html = marked(this.markdown);
-            $preview.contents().find('.main-content').html(this.html);
+            if( typeof(App._updatePreview) === 'function' )
+              App._updatePreview( this.html );
             this._updateWordCount();
             //console.log('content', this.editor.getValue());
         },

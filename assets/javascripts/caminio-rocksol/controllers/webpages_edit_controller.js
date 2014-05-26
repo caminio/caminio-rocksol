@@ -14,6 +14,9 @@
         .catch( function(err){
           notify('error',err);
         });
+        this.get('pebbles').forEach(function(pebble){
+          pebble.save();
+        });
       },
 
       'cancelEdit': function( webpage ){
@@ -61,17 +64,32 @@
 
       'insertImage': function( mediafile ){
         $('#editor').ghostDown('insertImage', mediafile);
+      },
+
+      'editContent': function( content ){
+        App.set('_curEditorContent', content);
+        $('#editor').ghostDown('setValue', content.get('curTranslation.content') );
+        $('#editor').off('keyup').on('keyup', function(){
+          content.get('curTranslation').set('content', $('#editor').ghostDown('getMarkdown') );
+        });
       }
+
+
 
     }
 
   });
+
+  window.App._updatePreview = function( html ){
+    $('#rocksol-preview').contents().find('#markdown_'+App.get('_curEditorContent.id')).html(html);
+  };
 
   window.App.WebpagesEditRoute = Ember.Route.extend({
     model: function( params ){
       return this.store.find('webpage', params.id );
     },
     setupController: function( controller, model ){
+      App.set('_curEditorContent', model);
       controller.set('webpage', model);
       controller.set('translation', model.get('translations').content[0] );
       controller.set('webpages', controller.store.find('webpage', {parent: 'null'}));

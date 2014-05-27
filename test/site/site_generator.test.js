@@ -7,7 +7,7 @@
  * @Date:   2014-04-16 00:14:37
  *
  * @Last Modified by:   David Reinisch
- * @Last Modified time: 2014-05-20 16:34:17
+ * @Last Modified time: 2014-05-27 15:51:01
  *
  * This source code is not part of the public domain
  * If server side nodejs, it is intendet to be read by
@@ -15,24 +15,21 @@
  * TASTENWERK only
  */
 
+'use strict';
+
 var helper = require('../helper'),
     async = require('async'),
-    fixtures = helper.fixtures,
     names = [ 'parent', 'sibling1', 'sibling2', 'child', 'grandchild' ],
     expect = helper.chai.expect,
     pages = {};
 
-var PeRuProcessor,
-    caminio,
+var caminio,
     Pebble,
     Webpage,
     user,
     domain;
 
-var rubbleSnippet = "{{ rubble: iAmRubble }}";
 var pebbleSnippet = "{{ pebble: test }}";
-var pebble2Snippet = "{{ pebble: test2 }}";
-var snippets2 = " {{ pebble: iAmPebble }} {{ rubble: iAmRubble }} {{ missmach: iAmMissmatch }}";
 var path = __dirname + "/../support/content/test_com";
 
 describe( 'Site Generator test', function(){
@@ -287,6 +284,44 @@ describe( 'Site Generator test', function(){
               done();
           });
         });
+      });
+
+      describe('compileLayout', function(){
+        var gen2;
+
+        before( function( done ){
+          webpage = new Webpage(
+            { filename: 'testpage',
+              translations: [
+                { content: 'testcontent', locale: 'en', title: 'hello' },
+                { content: 'deutsch', locale: 'de', title: 'hello' }
+              ]  });
+
+          var SiteGen = require('./../../lib/site/site_generator')( caminio );
+          gen2 = new SiteGen( path, 'lineup' );
+          done();
+        });
+
+        it('works with a given layout name', function( done ){
+          gen.compileLayout(
+            'test_layout',
+            { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
+            function( err, content ){
+              console.log( err, content );
+              done();
+            });
+        });
+
+        it('works with a given layout name and changed layout path', function( done ){
+          gen2.compileLayout(
+            'test_layout',
+            { locals: {  currentUser: user, currentDomain: domain }, isPublished: true },
+            function( err, content ){
+              console.log( err, content );
+              done();
+            });
+        });
+
       });
 
 

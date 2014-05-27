@@ -29,7 +29,7 @@
   window.App.WebpagesIndexController = Ember.Controller.extend({
 
     multiLangs: function(){
-      return domainSettings.availableLangs.length > 1;
+      return domainSettings && domainSettings.availableLangs.length > 1;
     }.property(),
 
     availableLangs: function(){

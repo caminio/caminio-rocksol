@@ -7,7 +7,8 @@ new Gear({
       i18n:{
         en: 'Website',
         de: 'Netzauftritt'
-      }
+      },
+      requireEditor: true
     }
   ] 
 });

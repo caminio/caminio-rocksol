@@ -7,6 +7,7 @@
     title: DS.attr(),
     subtitle: DS.attr(),
     content: DS.attr(),
+    categories: DS.attr('array'),
     metaDescription: DS.attr(),
     metaKeywords: DS.attr(),
     aside: DS.attr(),

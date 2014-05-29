@@ -47,7 +47,13 @@ module.exports = function Translation( caminio, mongoose ){
      * @property metaKeywords
      * @type String
      */
-    metaKeywords: { type: String, public: true }
+    metaKeywords: { type: String, public: true },
+
+    /**
+     * @property categories
+     * @type Array
+     */
+    categories: { type: [String], public: true }
 
   });
 

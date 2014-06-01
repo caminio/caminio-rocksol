@@ -90,7 +90,7 @@
         },
         insertImage: function( mediafile ){
           var val = this.editor.getSelection();
-          val = '!['+mediafile.get('name')+']('+mediafile.get('url')+')';
+          val = '!['+mediafile.get('name')+']('+mediafile.get('publicUrl')+')';
           this.editor.replaceSelection( val );
         },
         _syncScroll: function (e) {

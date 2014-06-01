@@ -69,9 +69,9 @@
       'editContent': function( content ){
         App.set('_curEditorContent', content);
         $('#editor').ghostDown('setValue', content.get('curTranslation.content') );
-        $('#editor').off('keyup').on('keyup', function(){
-          content.get('curTranslation').set('content', $('#editor').ghostDown('getMarkdown') );
-        });
+        //$('#editor').off('keyup').on('keyup', function(){
+        //  content.get('curTranslation').set('content', $('#editor').ghostDown('getMarkdown') );
+        //});
       }
 
 

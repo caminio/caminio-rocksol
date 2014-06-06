@@ -11,17 +11,17 @@ module.exports = function( caminio ){
   ];
 
   /**
-   * read .settings.js if existent in content directory
+   * read config/site.js if existent in content directory
    * @method setSiteConfig
    */
   function setSiteConfig( req, res, next ){
     if( !res.locals.currentDomain )
       return next();
-    var filename = res.locals.currentDomain.getContentPath()+'/.settings';
+    var filename = res.locals.currentDomain.getContentPath()+'/config/site.js';
 
     // delete cache file (so the server doesn't need a restart)
-    delete require.cache[ filename+'.js' ];
-    res.locals.domainSettings = fs.existsSync( filename +'.js' ) ? 
+    delete require.cache[ filename ];
+    res.locals.domainSettings = fs.existsSync( filename  ) ? 
                                 require( filename ) : 
                                 {};
     next();

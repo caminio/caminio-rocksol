@@ -8,25 +8,27 @@
  *
  */
 
-var fs      = require('fs');
-var join    = require('path').join;
-var mkdirp  = require('mkdirp');
-var util    = require('caminio/util');
-var normalizeFilename = util.normalizeFilename;
-var async   = require('async');
-var join    = require('path').join;
-
 /**
  *  @class WebpagesController
  *  @constructor
  */
 module.exports = function( caminio, policies, middleware ){
 
-  var SiteGen = require('./../../lib/site/site_generator')( caminio );
-  var docUtils = require('../../doc_utils')(caminio);
+  'use strict';
 
-  var Webpage = caminio.models.Webpage;
-  var Pebble  = caminio.models.Pebble;
+  var fs                = require('fs');
+  var join              = require('path').join;
+  var util              = require('caminio/util');
+  var normalizeFilename = util.normalizeFilename;
+  var async             = require('async');
+
+  var docUtils          = require('../../doc_utils')(caminio);
+  var carver            = require('carver');
+  var caminioCarver     = require('caminio-carver')(caminio, undefined, 'webpages');
+
+  var Webpage           = caminio.models.Webpage;
+  var Pebble            = caminio.models.Pebble;
+
 
   return {
 
@@ -38,8 +40,8 @@ module.exports = function( caminio, policies, middleware ){
     },
 
     _beforeResponse: {
-      'create': runOnSaveInLayoutFile,
-      'update': [ runOnSaveInLayoutFile, compilePages ]
+      'create': caminioCarver.after.create,
+      'update': [ caminioCarver.after.save, compilePages ]
     },
 
     'compileAll': [
@@ -105,15 +107,21 @@ module.exports = function( caminio, policies, middleware ){
   }
 
   function compilePages( req, res, next ){
-    gen = new SiteGen( res.locals.currentDomain.getContentPath() );
-    gen.compileObject( 
-            req.doc,
-            { locals: res.locals,
-              layout: {
-                name: 'projects'
-              },
-              isPublished: (req.doc.status === 'published') },
-            next );
+    carver()
+      .set('cwd', join(res.locals.currentDomain.getContentPath(),'webpages'))
+      .includeAll()
+      .registerEngine('jade', require('jade'))
+      .set('doc', req.webpage)
+      .set('caminio', caminio)
+      .set('debug', process.env.NODE_ENV === 'development' )
+      .write()
+      .then( function(){
+        next();
+      })
+      .catch( function(err){
+        console.log('carver caught', err.stack);
+        next(err);
+      });
   }
 
   function checkParent( req, res, next ){

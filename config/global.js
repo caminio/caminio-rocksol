@@ -21,6 +21,7 @@ module.exports = function( caminio ){
 
     // delete cache file (so the server doesn't need a restart)
     delete require.cache[ filename ];
+
     res.locals.domainSettings = fs.existsSync( filename  ) ? 
                                 require( filename ) : 
                                 {};

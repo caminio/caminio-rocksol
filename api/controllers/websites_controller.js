@@ -151,8 +151,10 @@ module.exports = function( caminio, policies, middleware ){
       mkdirp.sync( join(domainTmplPath, 'index') );
       fs.writeFileSync( join(domainTmplPath, 'index', 'index.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
     }
-    if( !fs.existsSync( join(domainTmplPath, '..', 'config/site.js') ) )
-      fs.writeFileSync( join(domainTmplPath, '..', 'config/site.js'), fs.readFileSync(__dirname+'/../../lib/templates/config/site.js', 'utf8') );
+    if( !fs.existsSync( join(domainTmplPath, '..', 'config/site.js') ) ){
+      mkdirp.sync( join(domainTmplPath,'..','config') );
+      fs.writeFileSync( join(domainTmplPath, '..', 'config/site.js'), fs.readFileSync(__dirname+'/../../lib/templates/site.js', 'utf8') );
+    }
     
     if( !fs.existsSync( join(domainTmplPath, 'default', 'default.jade') ) ){
       mkdirp.sync( join(domainTmplPath, 'default') );

@@ -36,6 +36,12 @@ module.exports = function Webpage( caminio, mongoose ){
     requestReviewMsg: { type: String, public: true },
 
     /**
+     * @property pebbles
+     * @type Array
+     */
+    pebbles: [ PebbleSchema ]
+
+    /**
      * @property initialSetupCompleted
      * @type Boolean
      */
@@ -76,21 +82,8 @@ module.exports = function Webpage( caminio, mongoose ){
     updatedBy: { type: ObjectId, ref: 'User', public: true }
 
   });
-  
 
-  // backwards compatibility
-  schema.virtual('name')
-    .get(function(){
-      return this.filename;
-    });
-
-  schema.methods.getPebbles = function getPebbles( cb ){
-    mongoose.models.Pebble.find({ webpage: this._id })
-      .order('position')
-      .exec(cb);
-  };
-
-  schema.publicAttributes = [ 'translations', 'activities', 'path', 'absoluteUrl' ];
+  schema.publicAttributes = [ 'translations', 'activities', 'path', 'absoluteUrl', 'pebbles' ];
   schema.trash = true;
   schema.plugin( CaminioCarver.langSchemaExtension, { fileSupport: true } );
 

@@ -112,6 +112,7 @@ module.exports = function( caminio, policies, middleware ){
       .includeAll()
       .registerEngine('jade', require('jade'))
       .registerHook('before.render',caminioCarver.setupLocals(res))
+      .registerHook('after.write', caminioCarver.docDependencies)
       .set('doc', req.webpage)
       .set('caminio', caminio)
       .set('debug', process.env.NODE_ENV === 'development' )

@@ -24,6 +24,8 @@ module.exports = function( caminio, policies, middleware ){
 
   var docUtils          = require('../../doc_utils')(caminio);
   var carver            = require('carver');
+  var snippetParser     = require('carver/plugins').snippetParser;
+  var markdownCompiler  = require('carver/plugins').markdownCompiler;
   var caminioCarver     = require('caminio-carver')(caminio, undefined, 'webpages');
 
   var Webpage           = caminio.models.Webpage;
@@ -109,10 +111,13 @@ module.exports = function( caminio, policies, middleware ){
   function compilePages( req, res, next ){
     carver()
       .set('cwd', join(res.locals.currentDomain.getContentPath(),'webpages'))
+      .set('snippetKeyword', 'pebble')
       .includeAll()
       .registerEngine('jade', require('jade'))
       .registerHook('before.render',caminioCarver.setupLocals(res))
       .registerHook('after.write', caminioCarver.docDependencies)
+      .registerHook('before.render', markdownCompiler)
+      .registerHook('after.render', snippetParser )
       .set('doc', req.webpage)
       .set('caminio', caminio)
       .set('debug', process.env.NODE_ENV === 'development' )

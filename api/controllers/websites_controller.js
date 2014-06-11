@@ -8,18 +8,21 @@
  *
  */
 
-var fs      = require('fs');
-var join    = require('path').join;
-var extname = require('path').extname;
-var mkdirp  = require('mkdirp');
-var util    = require('util');
-var spawn   = require('child_process').spawn;
 
 /**
  *  @class ContactsController
  *  @constructor
  */
 module.exports = function( caminio, policies, middleware ){
+
+  'use strict';
+
+  var fs      = require('fs');
+  var join    = require('path').join;
+  var extname = require('path').extname;
+  var mkdirp  = require('mkdirp');
+  var util    = require('util');
+  var spawn   = require('child_process').spawn;
 
   var User = caminio.models.User;
 
@@ -40,7 +43,7 @@ module.exports = function( caminio, policies, middleware ){
       ensureDefaultTemplates,
       function( req, res ){
 
-        var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'layouts' );
+        var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'webpages' );
 
         if( !res.locals.currentDomain )
           return res.json(403, { details: 'no_domain_found' });
@@ -50,7 +53,8 @@ module.exports = function( caminio, policies, middleware ){
         fs
           .readdirSync( domainTmplPath )
           .forEach( function( file ){
-            tmpls.push( file.split('.')[0] );
+            if( file.split('.')[1] === 'jade')
+              tmpls.push( file.split('.')[0] );
           });
 
         res.json(tmpls);

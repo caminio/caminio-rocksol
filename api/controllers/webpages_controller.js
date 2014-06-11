@@ -111,7 +111,7 @@ module.exports = function( caminio, policies, middleware ){
       .set('cwd', join(res.locals.currentDomain.getContentPath(),'webpages'))
       .includeAll()
       .registerEngine('jade', require('jade'))
-      .set('locals', caminioCarver.defaultLocals( res ) )
+      .registerHook('before.render',caminioCarver.setupLocals(res))
       .set('doc', req.webpage)
       .set('caminio', caminio)
       .set('debug', process.env.NODE_ENV === 'development' )

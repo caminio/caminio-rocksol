@@ -14,6 +14,7 @@ module.exports = function Webpage( caminio, mongoose ){
 
   var ObjectId            = mongoose.Schema.Types.ObjectId;
   var CaminioCarver       = require('caminio-carver')( caminio, mongoose );
+  var PebbleSchema        = require('./_sub/pebble')( caminio, mongoose );
 
   var schema = new mongoose.Schema({
     
@@ -39,7 +40,7 @@ module.exports = function Webpage( caminio, mongoose ){
      * @property pebbles
      * @type Array
      */
-    pebbles: [ PebbleSchema ]
+    pebbles: [ PebbleSchema ],
 
     /**
      * @property initialSetupCompleted

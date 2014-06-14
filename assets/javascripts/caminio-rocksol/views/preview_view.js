@@ -14,7 +14,10 @@
       model.set('previewHtml', renderMD(model.get('curTranslation.content') ) );
 
       scaleViewport(view, view.get('controller'));
-      model.on('didUpdate', function(){ scaleViewport(view,view.get('controller')); });
+      model.on('didUpdate', function(){ 
+        if( view.get('controller') )
+          scaleViewport(view,view.get('controller')); 
+      });
 
       App.setupCtrlS( model, Em.I18n.t('webpage.saved', {name: model.get('curTranslation.title')}) );
 
@@ -30,7 +33,7 @@
   function scaleViewport( view, controller ){
 
     var $preview = view.$();
-    var webpage = controller.get('curSelectedItem')
+    var webpage = controller.get('curSelectedItem');
 
     $.get( webpage.get('previewUrl') )
       .done( function( html ){

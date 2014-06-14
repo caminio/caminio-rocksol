@@ -104,7 +104,6 @@
       'changeLang': function( lang ){
         var curTr = this.get('curContent.curTranslation');
         var tr = this.get('curContent.translations').findBy('locale', lang);
-        console.log('found tr', tr);
         if( !tr ){
           tr = this.store.createRecord('translation', { locale: lang,
                                                         title: curTr.get('title'),

@@ -18,7 +18,6 @@
     'edit_content': 'Seite bearbeiten',
     'back_to_list': 'Zurück zur Liste',
     'edit_settings': 'Seiteneinstellungen',
-    'preview_content': 'Vorschau',
 
     'editor.heading': 'Überschrift',
     'editor.bold': 'Fett',

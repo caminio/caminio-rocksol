@@ -98,6 +98,13 @@
                 <a href="#">{{t 'webpage.revoke'}}</a>
               </li>
               {{/if}}
+              {{#unless isNew}}
+              <li>
+                <a {{bind-attr href='previewUrl'}} target="_blank">
+                  {{t 'preview'}}
+                </a>
+              </li>
+              {{/unless}}
               <li>
                 <a href="#" class="highlight-danger" {{action 'deleteWebpage'}}>
                   <i class="fa fa-warning"></i>

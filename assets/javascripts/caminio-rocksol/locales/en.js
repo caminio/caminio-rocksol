@@ -18,7 +18,6 @@
     'edit_content': 'Edit webpage',
     'back_to_list': 'back to list',
     'edit_settings': 'Webpage settings',
-    'preview_content': 'Preview',
 
     'editor.heading': 'Heading',
     'editor.bold': 'Bold',

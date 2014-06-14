@@ -14,7 +14,7 @@
       model.set('previewHtml', renderMD(model.get('curTranslation.content') ) );
 
       scaleViewport(view, view.get('controller'));
-      model.on('didUpdate', function(){ scaleViewport(view,model); });
+      model.on('didUpdate', function(){ scaleViewport(view,view.get('controller')); });
 
       App.setupCtrlS( model, Em.I18n.t('webpage.saved', {name: model.get('curTranslation.title')}) );
 

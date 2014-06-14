@@ -10,7 +10,11 @@
 
     actions: {
       'toggleEditing': function(){
-        this.get('content').set('isEditing', !this.get('content.isEditing'));
+        var content = this.get('content');
+        if( content.get('isEditing') )
+          setTimeout(function(){ content.set('isEditing', false); }, 10);
+        else
+          content.set('isEditing',true);
       },
       'remove': function(){
         this.get('parentController').get('content.pebbles').removeObject( this.get('content'));

@@ -59,8 +59,10 @@
         var pebble = this.store.createRecord('pebble', { createdBy: App.emberUser, updatedBy: App.emberUser, createdAt: new Date(), updatedAt: new Date() });
         pebble.get('translations').pushObject(tr);
         pebble.set('isEditing',true);
+        Em.run.later(function(){
+          $('.pebble-item input[type=text]:last').focus();
+        }, 100);
         this.get('content.pebbles').pushObject(pebble);
-        this.get('content').send('becomeDirty');
       },
 
       'toggleStatus': function( status ){

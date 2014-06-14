@@ -47,7 +47,7 @@
    */
   App.WebpagesNewRoute = Ember.Route.extend({
     model: function(){
-      var tr = this.store.createRecord('translation', { locale: App.get('_curLang') });
+      var tr = this.store.createRecord('translation', { locale: App.get('_curLang'), content: '', title: '' });
       var webpage = this.store.createRecord('webpage', { updatedAt: new Date() });
       webpage.get('translations').pushObject(tr);
       webpage.get('createdBy', App.emberUser);

@@ -32,8 +32,10 @@
                   <div {{bind-attr class=":pebble-item isCurContent:active"}} {{action 'togglePebble'}}>
                     <div class="title">
                       {{#if isEditing}}
-                        {{input valueBinding='name' placeholderTranslation='pebble.name'}}
-                        <i class="fa fa-check" {{action 'toggleEditing'}}></i>
+                        <form {{action 'toggleEditing' on='submit'}}>
+                          {{input valueBinding='name' placeholderTranslation='pebble.name'}}
+                          <i class="fa fa-check" {{action 'toggleEditing'}}></i>
+                        </form>
                       {{else}}
                         <i class="fa fa-pencil" {{action 'toggleEditing'}}></i>
                         {{name}}

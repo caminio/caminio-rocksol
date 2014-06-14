@@ -4,7 +4,7 @@
  *
  */
  
-module.exports = function Translation( caminio, mongoose ){
+module.exports = function Pebble( caminio, mongoose ){
 
   'use strict';
 

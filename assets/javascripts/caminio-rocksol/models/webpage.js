@@ -12,6 +12,10 @@
     childrenLayout: DS.attr(),
     parent: DS.belongsTo('webpage'),
     pebbles: DS.hasMany( 'pebble', { embedded: 'always' } ),
+    updatedBy: DS.belongsTo('user'),
+    createdBy: DS.belongsTo('user'),
+    updatedAt: DS.attr('date'),
+    createdAt: DS.attr('date'),
     name: function(){
       return this.get('curTranslation.title');
     }.property('curTranslation.title'),

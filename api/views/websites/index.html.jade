@@ -36,10 +36,13 @@ append foot
     script(type='text/javascript', src='/javascripts/caminio-rocksol/models/activity.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/webpages_edit_controller.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/controllers/pebble_item_controller.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/edit_webpage_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpage_tree_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/webpages_index_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/views/pebble_plugin_text_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/stats_visits_view.js')
+    script(type='text/javascript', src='/javascripts/caminio-rocksol/views/preview_view.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/webpage_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/meta_component.js')
     script(type='text/javascript', src='/javascripts/caminio-rocksol/components/pebbles_library_component.js')
@@ -48,7 +51,7 @@ append foot
     script(type='text/javascript', src='/javascripts/markdown/codemirror.js')
     script(type='text/javascript', src='/javascripts/markdown/marked.js')
     script(type='text/javascript', src='/javascripts/markdown/highlight.pack.js')
-    script(type='text/javascript', src='/javascripts/markdown/jquery.ghostdown.js')
+    script(type='text/javascript', src='/javascripts/markdown/renderer.js')
 
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jcrop.min.js')
     script(type='text/javascript', src='/javascripts/caminio-media/3rdparty/jquery.iframe-transport.js')
@@ -71,11 +74,11 @@ append foot
   script(type="text/x-handlebars" data-template-name="components/pebbles-library")
     include hbs/webpages/pebbles_library_component.hbs
 
-  each siteComp in siteComponents
-    each compScript in siteComp.javascripts
-      script(type='text/javascript', src='/caminio/domains/#{currentDomain.id}/javascripts/#{siteComp.name}/#{compScript}')
-    script(type="text/x-handlebars" data-template-name="components/webpage-"+siteComp.name)
-      !=siteComp.content
+  //each siteComp in siteComponents
+  //  each compScript in siteComp.javascripts
+  //    script(type='text/javascript', src='/caminio/domains/#{currentDomain.id}/javascripts/#{siteComp.name}/#{compScript}')
+  //  script(type="text/x-handlebars" data-template-name="components/webpage-"+siteComp.name)
+  //    !=siteComp.content
 
 
   script(type="text/x-handlebars" data-template-name="webpages/edit")
@@ -108,8 +111,10 @@ append foot
   // partial
   script(type="text/x-handlebars" data-template-name="webpages/tree")
     include hbs/webpages/_tree.hbs
-  script(type="text/x-handlebars" data-template-name="webpages/details")
-    include hbs/webpages/_details.hbs
+  script(type="text/x-handlebars" data-template-name="webpages/preview")
+    include hbs/webpages/_preview.hbs
+  script(type="text/x-handlebars" data-template-name="webpages/overview")
+    include hbs/webpages/_overview.hbs
   script(type="text/x-handlebars" data-template-name="_pebble_type_teaser")
     include hbs/pebbles/_pebble_type_teaser.hbs
   script(type="text/x-handlebars" data-template-name="pebble_plugins/text")

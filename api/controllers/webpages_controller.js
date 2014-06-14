@@ -37,7 +37,7 @@ module.exports = function( caminio, policies ){
     _before: {
       '*': policies.ensureLogin,
       'update': [ removeFiles ],
-      'destroy': [ getWebpage, getChildren, removeChildren, removeLocalPebbles, removeFiles ]
+      'destroy': [ getWebpage, getChildren, removeChildren, removeFiles ]
     },
 
     _beforeResponse: {
@@ -106,15 +106,6 @@ module.exports = function( caminio, policies ){
   }
 
   /**
-   *  Removes the pebbles of the current webpage
-   *  @method removeLocalPebbles
-   */
-  function removeLocalPebbles( req, res, next ){
-    req.removeFiles = true;
-    removePebbles( req.webpage._id, next );
-  }
-
-  /**
    *  Gets all children of one webpage, not only one
    *  depth
    *  @method getChildrenDeep
@@ -159,23 +150,9 @@ module.exports = function( caminio, policies ){
     function removeChild( child, nextChild ){
       child.remove( function( err ){
         res.send(500, { error: 'server error', details: err });
-        removePebbles( child._id, nextChild );   
+        nextChild();
       });   
     }
-  }
-
-  function removePebbles( webpage, next ){
-    Pebble.find({ webpage: webpage })
-    .exec( function( err, pebbles ){
-      async.each( pebbles, removePebble, next );
-
-      function removePebble( pebble, nextPebble ){
-        pebble.remove( function( err ){
-          res.send(500, { error: 'server error', details: err });
-          nextPebble();
-        });
-      }
-    });
   }
 
   function removeFiles( req, res, next ){    

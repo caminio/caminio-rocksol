@@ -1,27 +1,94 @@
-( function(){
+( function( App ){
 
   'use strict';
 
-  window.App.WebpagesEditController = Ember.Controller.extend({
+  App.WebpagesEditController = Ember.ObjectController.extend({
+
+    domain: currentDomain,
+    lastStatus: null,
+
+    saveText: function(){
+      switch(this.get('content.status') ){
+        case 'published':
+          return this.get('content.isNew') ? Em.I18n.t('webpage.create_and_publish') : 
+            ( this.get('lastStatus') !== this.get('content.status') ? Em.I18n.t('webpage.save_and_publish') : Em.I18n.t('webpage.update_publication'));
+        case 'draft':
+          return this.get('content.isNew') ? Em.I18n.t('webpage.create_draft') : Em.I18n.t('webpage.save_draft');
+      }
+    }.property('content.status'),
+
+    pebbleContent: function(){
+      return this.get('content.id') !== this.get('content.curContent.id');
+    }.property('content.curContent'),
 
     actions: {
 
       saveTranslation: function(){
-        var webpage = this.get('webpage');
+        var webpage = this.get('content');
+        var controller = this;
+        if( Em.isEmpty( webpage.get('curTranslation.title') ) ){
+          this.set('missingTitle', true);
+          $('.level2 input[type=text]:first').focus();
+          return notify('error', Em.I18n.t('webpage.enter_name'));
+        }
         webpage.save().then(function(){
           notify('info', Em.I18n.t('webpage.saved', {name: webpage.get('filename')}));
+          webpage.reload();
+          controller.transitionToRoute('webpages.edit', webpage.get('id'));
         })
         .catch( function(err){
-          notify('error',err);
+          notify.processError(err);
         });
-        this.get('pebbles').forEach(function(pebble){
-          pebble.save();
-        });
+      },
+
+      'clearCurContent': function(){
+        this.set('curContent', this.get('content'));
+      },
+
+      'showEditorReferenceModal': function(){
+        $('#editor-reference').modal();
+      },
+
+      'togglePebbleList': function(){
+        $('.editor-tools').toggleClass('show-list');
+        this.set('pebbleListVisible', $('.editor-tools').hasClass('show-list'));
+      },
+
+      'addPebble': function(){
+        var tr = this.store.createRecord('translation', { locale: App.get('_curLang') });
+        var pebble = this.store.createRecord('pebble', { createdBy: App.emberUser, updatedBy: App.emberUser, createdAt: new Date(), updatedAt: new Date() });
+        pebble.get('translations').pushObject(tr);
+        pebble.set('isEditing',true);
+        this.get('content.pebbles').pushObject(pebble);
+        this.get('content').send('becomeDirty');
+      },
+
+      'toggleStatus': function( status ){
+        this.get('content').set('status', status);
       },
 
       'cancelEdit': function( webpage ){
         webpage.rollback();
         this.transitionToRoute('webpages');
+      },
+
+      'deleteWebpage': function(){
+        var controller = this;
+        var webpage = this.get('content');
+        bootbox.confirm(Em.I18n.t('webpage.really_delete', {name: this.get('content.curTranslation.title')}), function(result){
+          if( !result )
+            return;
+          webpage.deleteRecord();
+          webpage
+            .save()
+            .then(function(){
+              notify('info', Em.I18n.t('webpage.deleted', {name: webpage.get('curTranslation.title')}));
+              controller.transitionToRoute('webpages');
+            })
+            .catch(function(err){
+              notify.processError(err);
+            });
+        });
       },
 
       'changeLayout': function( layout ){
@@ -69,9 +136,6 @@
       'editContent': function( content ){
         App.set('_curEditorContent', content);
         $('#editor').ghostDown('setValue', content.get('curTranslation.content') );
-        //$('#editor').off('keyup').on('keyup', function(){
-        //  content.get('curTranslation').set('content', $('#editor').ghostDown('getMarkdown') );
-        //});
       }
 
 
@@ -80,32 +144,6 @@
 
   });
 
-  window.App._updatePreview = function( html ){
-    $('#rocksol-preview').contents().find('#markdown_'+App.get('_curEditorContent.id')).html(html);
-  };
+  App.WebpagesNewController = App.WebpagesEditController.extend();
 
-  window.App.WebpagesEditRoute = Ember.Route.extend({
-    model: function( params ){
-      return this.store.find('webpage', params.id );
-    },
-    setupController: function( controller, model ){
-      App.set('_curEditorContent', model);
-      controller.set('webpage', model);
-      controller.set('translation', model.get('translations').content[0] );
-      controller.set('webpages', controller.store.find('webpage', {parent: 'null'}));
-      controller.set('labels', controller.store.find('label'));
-      controller.set('pebbles', controller.store.find('pebble', { webpage: model.id}));
-      controller.store.find('mediafile',{parent: model.id});
-      this.store.find('user');
-
-      if( typeof(availableWebpageLayouts) === 'undefined' )
-        $.getJSON('/caminio/website/available_layouts', function(response){
-          window.availableWebpageLayouts = response;
-          controller.set('availableLayouts', availableWebpageLayouts);
-        });
-      else
-        controller.set('availableLayouts', availableWebpageLayouts);
-    }
-  });
-
-}).call();
+})( App );

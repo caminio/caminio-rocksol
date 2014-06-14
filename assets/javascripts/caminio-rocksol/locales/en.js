@@ -15,7 +15,9 @@
     'will_be_filename': 'will become part of the document\'s url',
     'shown_in_title_not_filename': 'Title of webpage (not filename)',
 
-    'edit_content': 'Edit content',
+    'edit_content': 'Edit webpage',
+    'back_to_list': 'back to list',
+    'edit_settings': 'Webpage settings',
     'preview_content': 'Preview',
 
     'editor.heading': 'Heading',
@@ -28,7 +30,8 @@
     'editor.link': 'Link with other webpage',
 
     'pebbles.title': 'Pebbles',
-    'pebble.name': 'Name',
+    'pebble.name': 'Pebble name',
+    'pebble.delete': 'Delete this pebble',
     'pebble.description': 'Description',
     'pebble.saved': 'Pebble {{name}} has been saved',
     'pebble.teaser.drop_image_here': 'Drop your teaser image or click here to upload',
@@ -48,6 +51,7 @@
     'markdown_code': 'Markdown editor',
     'preview': 'Preview',
 
+    'website.stats': 'Stats for {{name}}',
     'website.subtitle': 'Your website',
     
     'webpages.title': 'Webpages',
@@ -72,6 +76,13 @@
     'webpage.properties_of': 'Properties of',
     'webpage.status': 'Publishing status',
     'webpage.published': 'Published',
+    'webpage.publish': 'Publish webpage',
+    'webpage.save_draft': 'Save as draft',
+    'webpage.create_draft': 'Create as draft',
+    'webpage.create_and_publish': 'Create and publish',
+    'webpage.save_and_publish': 'Save and publish',
+    'webpage.update_publication': 'Create and update publication',
+    'webpage.revoke': 'Revoke publication',
     'webpage.draft': 'Draft',
     'webpage.review': 'Review',
     'webpage.no_webpage_yet': 'There is no webpage here yet. Go ahead and',
@@ -80,9 +91,25 @@
     'webpage.request_review': 'Review request settings',
     'webpage.review_message': 'Notes for reviewer',
     'webpage.layout': 'Layout',
+    'webpage.delete': 'Delete webpage',
     'webpage.really_delete': 'Really delete {{name}}?',
     'webpage.deleted': 'Webpage {{name}} has been deleted',
     'webpage.moved_to': 'Webpage {{name}} has been moved to {{to}}',
+
+    'reference': 'Editor Reference',
+    'italic': 'Emphasize',
+    'bold': 'Bold',
+    'link': 'Link',
+    'image': 'Image',
+    'list_item': 'List item',
+    'heading1': 'Heading 1',
+    'heading2': 'Heading 2',
+    'heading3': 'Heading 3',
+    'strike-through': 'Strike-through',
+    'result': 'Result',
+    'markdown': 'Markdown',
+    'shortcut': 'Shortcut',
+
 
     'webpage.select_layout': 'Select a layout',
 
@@ -137,6 +164,8 @@
     'location.linked': 'Location {{name}} has been linked with {{at}}',
     'location.geo_coords_changed': '{{name}} Latitude: {{lat}}, Longitude: {{lng}} (unsaved)',
 
+    'stats.unique': 'Unique visitors',
+    'stats.views': 'Pages visited'
   };
 
   for( var i in translations )

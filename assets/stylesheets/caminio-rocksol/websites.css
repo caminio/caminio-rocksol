@@ -1,6 +1,11 @@
 .main-view{
   max-width: 100%;
 }
+
+.box-body.tree{
+  padding: 5px;
+}
+
 .mini-title .close{
   float: right;
   margin: -10px -5px 0 0;
@@ -267,15 +272,169 @@ ul.activities .location{
   height: 400px;
 }
 
-.rocksol-preview{
+.md-preview{
   background: #fff;
-  border: medium none;
-  height: 400px;
+  border: none;
+  height: 100%;
   width: 100%;
-  margin-top: 10px;
-  box-shadow: 2px 2px 3px #999;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px black;
+}
+
+.md-preview-wrap{
+  height: 100%;
+  padding: 60px 5px 0;
+}
+
+.md-preview-header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
 }
 
 .main-wrapper{
   position: relative;
 }
+
+.visits-chart{
+  width: 100%;
+  height: 200px;
+}
+
+body .CodeMirror{
+  font-size: 20px;
+}
+
+.tooltip-hint{
+  position: absolute;
+  top: 36px;
+  left: 200px;
+  width: 0px;
+  height: 0px;
+}
+
+.level2 .tooltip .tooltip-inner{
+  font-size: 2em;
+  max-width: 350px;
+}
+
+.level2.field-with-errors{
+  background: #d55;
+}
+
+.editor-tools{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  height: 30px;
+  background: #fafafa;
+  overflow: hidden;
+  transition: height 0.8s;
+  z-index: 1000;
+}
+
+.editor-tools .editor-ctrl{
+  opacity: 0.5;
+  padding: 5px;
+}
+
+.editor-tools .editor-ctrl a.actn{
+  padding: 3px 7px;
+  color: #333;
+}
+
+.editor-tools:hover .editor-ctrl{
+  opacity: 1;
+}
+
+#editor-reference pre{
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  border: none;
+  background: none !important;
+}
+
+.pebbles-list{
+  margin-top: 20px;
+}
+
+.editor-tools.show-list{
+  height: 100%;
+  transition: height 0.8s;
+}
+
+.pebble-item{
+  height: 70px;
+  background: #eee;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.pebble-item.active{
+  box-shadow: 0 0 5px #8ad;
+}
+
+.pebble-item .info{
+  font-size: 0.7em;
+  color: #777;
+}
+
+.pebble-item .title{
+  font-size: 1.1em;
+  color: #555;
+  height: 1.5em;
+}
+
+.pebble-item .title input{
+  display: block;
+  font-size: 1.1em;
+  padding: 0 20px 0 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+}
+
+.pebble-item .fa{
+  color: #ccc;
+  position: absolute;
+  top: 3px;
+  right: 5px;
+}
+
+.pebble-item .title .fa-pencil{
+  font-size: 0.8em;
+}
+
+.pebble-item .fa-trash-o{
+  top: auto;
+  bottom: 5px;
+  right: 5px;
+}
+
+.pebble-item:hover{
+  box-shadow: 0 0 3px #fc0;
+  cursor: pointer;
+}
+
+.new-pebble-item{
+  text-align: center;
+}
+
+.new-pebble-item .fa{
+  position: relative;
+  top: auto;
+  right: auto;
+  font-size: 30px;
+  color: #999;
+  margin-top: 12px;
+  display: block;
+}
+

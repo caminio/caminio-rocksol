@@ -1,32 +1,20 @@
-( function(){
+( function( App ){
 
   'use strict';
+  /* global domainSettings */
 
-  var webpages;
+  App.WebpagesIndexRoute = Ember.Route.extend({
 
-  window.App.WebpagesIndexRoute = Ember.Route.extend({
+    setupController: function( controller ){
 
-    setupController: function( controller, model ){
-
-      if( webpages )
-        return;
-      
       controller.set('webpages', this.store.find('webpage', { parent: 'null' }));
-
-      if( typeof(availableWebpageLayouts) === 'undefined' )
-        $.getJSON('/caminio/website/available_layouts', function(response){
-          window.availableWebpageLayouts = response;
-          controller.set('availableLayouts', availableWebpageLayouts);
-        });
-      else
-        controller.set('availableLayouts', availableWebpageLayouts);
 
     }
   });
 
-  window.App._curLang = currentDomain.lang;
+  App._curLang = currentDomain.lang;
 
-  window.App.WebpagesIndexController = Ember.Controller.extend({
+  App.WebpagesIndexController = Ember.Controller.extend({
 
     multiLangs: function(){
       return domainSettings && domainSettings.availableLangs.length > 1;
@@ -39,8 +27,6 @@
     domain: currentDomain,
 
     errors: [],
-
-    siteComponents: window.siteComponents,
 
     filenameError: function(){
       return ('filename' in this.get('errors'));
@@ -124,43 +110,6 @@
         })
       },
 
-      'promptNewWebpage': function(){
-        var self = this;
-        var title = Em.I18n.t('webpage.new_name');
-        if( this.get('curSelectedItem') )
-          title = Em.I18n.t('webpage.new_subpage_of', {name: this.get('curSelectedItem.name')});
-        bootbox.prompt( title, function(result) { 
-          if( !result || result.length < 1 )
-            return;
-          var model = self.store.createRecord('webpage', { filename: result });
-          model.set('parent', self.get('curSelectedItem') );
-          model.save().then( function(){
-            notify('info', Ember.I18n.t('webpage.created', {name: model.get('filename')}) );
-            self.set('curSelectedItem', model);
-            self.set('addedItem', model);
-
-            // fixes a strange bug where parent receives child id as parent id
-            // casuing a circular loop
-            if( model.get('parent') )
-              model.get('parent').reload();
-            
-            // if parent try to initialize pebbles
-            if( model.get('parent') && model.get('parent.childrenLayout')){
-              notify('info', Ember.I18n.t('webpage.init_pebbles', {name: model.get('filename')}) );
-              model.set('layout', model.get('parent.childrenLayout') );
-              model.save().then(function(){
-                notify('info', Ember.I18n.t('webpage.init_pebbles_done', {name: model.get('filename')}) );
-              });
-            }
-
-          }).catch(function(err){
-            console.error( err );
-            notify.processError( err.responseJSON );
-          });
-        });
-
-      },
-
       'treeItemSelected': function( webpage, select ){
         if( this.get('curSelectedItem.id') === webpage.get('id') && !select )
           return this.set('curSelectedItem',null);
@@ -234,4 +183,4 @@
 
   }
 
-}).call();
+})( App );

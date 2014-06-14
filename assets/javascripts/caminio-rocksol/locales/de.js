@@ -15,7 +15,9 @@
     'will_be_filename': 'wird Teil der URL dieser Webseite',
     'shown_in_title_not_filename': 'Titel der Webseite (nicht Dateiname)',
 
-    'edit_content': 'bearbeiten',
+    'edit_content': 'Seite bearbeiten',
+    'back_to_list': 'Zurück zur Liste',
+    'edit_settings': 'Seiteneinstellungen',
     'preview_content': 'Vorschau',
 
     'editor.heading': 'Überschrift',
@@ -28,7 +30,8 @@
     'editor.link': 'Mit anderer Seite verlinken',
 
     'pebbles.title': 'Pebbles',
-    'pebble.name': 'Name',
+    'pebble.name': 'Pebble Name',
+    'pebble.delete': 'Dieses Pebble entfernen',
     'pebble.description': 'Beschreibung',
     'pebble.saved': 'Pebble {{name}} wurde gespeichert',
     'pebble.teaser.drop_image_here': 'Bild hochladen',
@@ -48,6 +51,7 @@
     'markdown_code': 'Markdown Editor',
     'preview': 'Vorschau',
 
+    'website.stats': 'Statistiken von {{name}}',
     'website.subtitle': 'Webseite',
     
     'webpages.title': 'Webseite',
@@ -72,7 +76,14 @@
     'webpage.properties_of': 'Einstellungen von',
     'webpage.status': 'Veröffentlichungsstatus',
     'webpage.published': 'Öffentlich',
-    'webpage.draft': 'Vorlage',
+    'webpage.publish': 'Seite veröffentlichen',
+    'webpage.save_draft': 'Als Entwurf speichern',
+    'webpage.create_draft': 'Erstellen als Entwurf',
+    'webpage.create_and_publish': 'Erstellen und veröffentlichen',
+    'webpage.save_and_publish': 'Speichern und veröffentlichen',
+    'webpage.update_publication': 'Speichern und Veröffentlichung aktualisieren',
+    'webpage.revoke': 'Veröffentlichung zurückziehen',
+    'webpage.draft': 'Entwurf',
     'webpage.review': 'Zur Revision',
     'webpage.no_webpage_yet': 'Es gibt noch keine Webseite.',
     'webpage.create_new': 'Neue Webseite erstellen',
@@ -80,9 +91,24 @@
     'webpage.request_review': 'Revisionseinstellungen',
     'webpage.review_message': 'Notiz',
     'webpage.layout': 'Layout',
+    'webpage.delete': 'Seite löschen',
     'webpage.really_delete': '{{name}} und Unterseiten wirklich löschen?',
     'webpage.deleted': '{{name}} mit allen Unterseiten wurde gelöscht',
     'webpage.moved_to': '{{name}} wurde verschoben nach {{to}}',
+
+    'reference': 'Befehlsreferenz',
+    'italic': 'Kursiv',
+    'bold': 'Fett',
+    'link': 'Link',
+    'image': 'Bild',
+    'list_item': 'Listeneintrag',
+    'heading1': 'Überschrift 1',
+    'heading2': 'Überschrift 2',
+    'heading3': 'Überschrift 3',
+    'strike-through': 'Durchgestrichen',
+    'result': 'Ergebnis',
+    'markdown': 'Markdown',
+    'shortcut': 'Tastenkürzel',
 
     'webpage.select_layout': 'Layout auswählen',
 
@@ -136,6 +162,9 @@
 
     'location.linked': 'Spielort {{name}} wurde mit {{at}} verlinkt',
     'location.geo_coords_changed': '{{name}}: Breite: {{lat}}, Länge: {{lng}} (ungespeichert)',
+
+    'stats.unique': 'Eindeutige Besucher',
+    'stats.views': 'Besuchte Seiten',
 
   };
 

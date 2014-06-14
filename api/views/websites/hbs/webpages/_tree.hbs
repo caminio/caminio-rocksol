@@ -1,3 +1,17 @@
-<div class="box-title">{{t 'webpages.list'}}</div>
+<div class="box-header">
+  <div class="ctrl">
+    {{#link-to 'webpages.new' class="btn primary"}}
+    <i class="fa fa-plus"></i>
+    {{/link-to}}
+  </div>
+  <div class="box-title">
+    {{domain.name}}
+  </div>
+</div>
 
-{{view App.WebpageTreeView content=webpages adaptHeightElem='.webpage-details-box'}}
+<div class="box-body tree">
+  {{view App.WebpageTreeView 
+        content=webpages 
+        doubleClickAction='editWebpage'
+        adaptHeightElem='.webpage-details-box'}}
+</div>

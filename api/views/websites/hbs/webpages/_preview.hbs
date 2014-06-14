@@ -1,0 +1,52 @@
+<div class="box-header md-preview-header">
+  <div class="ctrl">
+
+    <button class="btn borderless transparent" {{action 'editPreferences' curSelectedItem}} {{translateAttr title='edit_settings'}}>
+      <i class="fa fa-gear"></i>
+    </button>
+
+    {{#unless model.filename}}
+    {{#link-to 'webpages.edit' curSelectedItem.id class="btn borderless transparent" titleTranslation='edit_content'}}
+      <i class="fa fa-pencil"></i>
+    {{/link-to}}
+    {{/unless}}
+
+    <div class="dropdown btn-group pull-right">
+      <button class="btn borderless transparent text-icon dropdown-toggle" data-toggle="dropdown">
+        {{t 'webpage.layout'}}:
+        <strong>{{curSelectedItem.layout}}</strong>
+        <i class="fa fa-angle-down"></i>
+      </button>
+      <ul class="dropdown-menu pull-right">
+        {{#each layout in App._availableLayouts}}
+          <li {{action 'changeLayout' layout}}><a href="#">{{layout}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+    {{#if curTranslation.hasMultiLang}}
+      <div class="dropdown btn-group pull-right">
+        <button class="btn text-icon borderless transparent dropdown-toggle" data-toggle="dropdown">
+          {{t 'translation.title'}}:
+          <strong>{{curSelectedItem.curTranslation.locale}}</strong>
+          <i class="fa fa-angle-down"></i>
+        </button>
+        <ul class="dropdown-menu pull-right">
+          {{#each lang in curSelectedItem.curTranslation.availableLangs}}
+            <li {{action 'changeLang' lang}}><a href="#">{{lang}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+  </div>
+  <div class="box-title">
+    {{curSelectedItem.curTranslation.title}}<br>
+    <small>{{curSelectedItem.updatedBy.name}} | {{smartDate curSelectedItem.updatedAt}}</small>
+  </div>
+</div>
+
+<div class="md-preview-wrap">
+  {{#unless curSelectedItem.isNew}}
+    {{view 'preview'}}
+  {{/unless}}
+</div>

@@ -1,6 +1,7 @@
 ( function( App ){
 
   'use strict';
+  /* global setupCaminio */
 
   App.Router.map( function(){
     this.route('index', { path: '/' });
@@ -19,14 +20,57 @@
     }
   });
 
-  App.ApplicationController = Ember.Controller.extend({
-    blogEnabled: domainSettings.blog,
-    locationsEnabled: domainSettings.locations
+  /**
+   * webpages/edit
+   */
+  App.WebpagesEditRoute = Ember.Route.extend({
+    model: function( params ){
+      var router = this;
+      return router.store
+              .find('webpage', params.id )
+              .then( function( model ){
+                router.store
+                  .find('mediafile',{parent: params.id});
+                return model;
+              });
+    },
+    setupController: function( controller, model ){
+      this._super( controller, model );
+      controller.set('lastStatus', model.get('status'));
+      controller.set('curSelectedItem', model);
+      controller.set('curContent',model)
+    }
   });
 
-  App.ApplicationRoute = Ember.Route.extend({
+  /**
+   * webpages/new
+   */
+  App.WebpagesNewRoute = Ember.Route.extend({
+    model: function(){
+      var tr = this.store.createRecord('translation', { locale: App.get('_curLang') });
+      var webpage = this.store.createRecord('webpage', { updatedAt: new Date() });
+      webpage.get('translations').pushObject(tr);
+      webpage.get('createdBy', App.emberUser);
+      webpage.get('updatedBy', App.emberUser);
+      return webpage;
+    },
     setupController: function( controller, model ){
-      this.store.find('user');
+      this._super( controller, model );
+      controller.set('curSelectedItem', model);
+      controller.set('curContent',model)
+    }
+  });
+
+
+  /**
+   * APPLICATION GLOBAL STUFF
+   */
+  App.ApplicationRoute = Ember.Route.extend({
+    beforeModel: function(){
+      $.getJSON('/caminio/website/available_layouts', function(response){
+        App._availableLayouts = response;
+      });
+      return this.store.find('user');
     }
   });
 

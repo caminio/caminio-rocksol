@@ -24,8 +24,8 @@ module.exports = function(grunt) {
   uglifyFiles['build/javascripts/caminio-markdown.min.js'] = [
     'assets/javascripts/markdown/codemirror.js',
     'assets/javascripts/markdown/marked.js',
-    'assets/javascripts/markdown/highlight.pack.js',
-    'assets/javascripts/markdown/jquery.ghostdown.js'
+    'assets/javascripts/markdown/renderer.js',
+    'assets/javascripts/markdown/highlight.pack.js'
     ];
 
   // Project configuration.

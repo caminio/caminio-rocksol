@@ -1,57 +1,55 @@
-<section class="plain-wrapper default-max">
+<section class="main-wrapper with-footer">
 
-  <header>
-    <div class="box title-box">
-      <div class="main-ctrl">
+  <div class="row span-row fill-height">
 
-        <button class="btn icon-only transparent borderless" {{action 'compileAll'}}
-          {{translateAttr title='webpage.compile_all'}}>
-          <i class="fa fa-bolt"></i>
-        </button>
-
-        {{#if multiLangs}}
-          <div class="dropdown btn-group">
-            <button class="btn text-icon borderless transparent dropdown-toggle" data-toggle="dropdown">
-              {{t 'translation.title'}}:
-              <strong>{{App._curLang}}</strong>
-              <i class="fa fa-angle-down"></i>
-            </button>
-            <ul class="dropdown-menu pull-right">
-              {{#each lang in availableLangs}}
-                <li {{action 'changeLang' lang}}><a href="#">{{lang}}</a></li>
-              {{/each}}
-            </ul>
-          </div>
-        {{/if}}
-
-        <button class="btn icon-text primary" {{action 'promptNewWebpage'}}>
-          <i class="fa fa-plus"></i>
-          {{t webpage.new}}
-        </button>
-      </div>
-      <h1>
-        {{domain.name}}
-        {{#if domain.contentDirPkgVersion}}
-          <small class="desc">{{domain.contentDirPkgVersion}}</small>
-        {{/if}}
-      </h1>
-
-    </div>
-
-  </header>
-
-  <div class="row span-row">
-
-    <div class="col-md-6">
-      {{partial 'webpages/tree'}}
-    </div>
-
-    <div class="col-md-6">
-      <div class="box fill-box webpage-details-box">
-        {{partial 'webpages/details'}}
+    <div class="col-md-6 fill-height">
+      <div class="box bright-box fill-height">
+        {{partial 'webpages/tree'}}
       </div>
     </div>
+
+    {{#unless curSelectedItem}}
+
+    <div class="col-md-6 fill-height">
+      <div class="box bright-box fill-height">
+        {{partial 'webpages/overview'}}
+      </div>
+    </div>
+
+    {{else}}
+
+    <div class="col-md-6 fill-height">
+      <div class="box bright-box fill-height">
+        {{partial 'webpages/preview'}}
+      </div>
+    </div>
+
+    {{/unless}}
 
   </div>
 
+  <div class="push-footer"></div>
+
 </section>
+
+<footer class="main-footer">
+
+  <div class="pull-left">
+    <small class="desc">
+    {{domain.name}}
+    {{#if domain.contentDirPkgVersion}}
+    {{domain.contentDirPkgVersion}}
+    {{/if}}
+    |
+    site v{{App.siteVersion}}
+    |
+    caminio v{{App.caminioVersion}}
+  </small>
+  </div>
+
+  <div class="pull-right">
+  </div>
+
+</footer>
+
+

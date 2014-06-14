@@ -84,6 +84,11 @@ module.exports = function Webpage( caminio, mongoose ){
 
   });
 
+  schema.methods.findPebble = function(opts){
+    opts = typeof(opts) === 'string' ? { name: opts } : opts;
+    return _.find( this.pebbles, opts); 
+  };
+
   schema.publicAttributes = [ 'translations', 'activities', 'path', 'absoluteUrl', 'pebbles' ];
   schema.trash = true;
   schema.plugin( CaminioCarver.langSchemaExtension, { fileSupport: true } );

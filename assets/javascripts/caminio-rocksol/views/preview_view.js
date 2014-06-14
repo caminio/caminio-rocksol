@@ -13,7 +13,7 @@
 
       model.set('previewHtml', renderMD(model.get('curTranslation.content') ) );
 
-      scaleViewport(view, model);
+      scaleViewport(view, view.get('controller'));
       model.on('didUpdate', function(){ scaleViewport(view,model); });
 
       App.setupCtrlS( model, Em.I18n.t('webpage.saved', {name: model.get('curTranslation.title')}) );
@@ -22,14 +22,15 @@
 
     curSelectedItemObserver: function(){
       this.rerender();
-    }.observes('controller.curSelectedItem')
+    }.observes('controller.curContent')
 
   });
 
 
-  function scaleViewport( view, webpage ){
+  function scaleViewport( view, controller ){
 
     var $preview = view.$();
+    var webpage = controller.get('curSelectedItem')
 
     $.get( webpage.get('previewUrl') )
       .done( function( html ){
@@ -40,7 +41,7 @@
         doc.open();
         doc.onreadystatechange = function(){
           $preview.contents().find('html').css('transform','scale(0.8)');
-          $preview.contents().find('#markdown_' + webpage.get('id'));
+          $preview.contents().find('#markdown_' + controller.get('curContent.id'));
         };
         doc.write( html );
         doc.close();
@@ -49,11 +50,10 @@
         // sync scroll
         $('.CodeMirror-vscrollbar').on('scroll', syncScroll);
         function syncScroll(e){
-          console.log('scroll');
           var $codeViewport = $(e.target),
           $previewViewport = $($preview.get(0).contentWindow),
           $codeContent = $('.CodeMirror-sizer'),
-          $previewContent = $(doc).find('.main-content'),
+          $previewContent = $(doc).find('#markdown_'+controller.get('curContent.id')),
           // calc position
           //
           codeHeight = $codeContent.height() - $codeViewport.height() + $codeContent.offset().top,
@@ -70,7 +70,7 @@
 
         // sync typing
         $('.md-editor-wrap').on('keyup', function(){
-          $(doc).find('.main-content').html( renderMD( webpage.get('curTranslation.content') ) );
+          $(doc).find('#markdown_'+controller.get('curContent.id')).html( renderMD( controller.get('curContent.curTranslation.content') ) );
         });
 
       });

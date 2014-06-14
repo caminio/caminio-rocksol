@@ -114,6 +114,7 @@
         if( this.get('curSelectedItem.id') === webpage.get('id') && !select )
           return this.set('curSelectedItem',null);
         this.set('curSelectedItem', webpage);
+        this.set('curContent', webpage);
       },
 
       'setState': function( state ){

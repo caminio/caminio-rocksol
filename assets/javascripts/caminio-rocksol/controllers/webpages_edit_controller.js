@@ -92,28 +92,26 @@
       },
 
       'changeLayout': function( layout ){
-        this.get('webpage').set('layout', layout);
-        var webpage = this.get('webpage');
+        var webpage = this.get('content');
+        webpage.set('layout', layout);
         webpage.save().then(function(){
           notify('info', Em.I18n.t('webpage.layout_changed', {name: webpage.get('filename'), layout: webpage.get('layout')}));
         });
       },
 
       'changeLang': function( lang ){
-        var webpage = this.get('webpage');
-        var curTr = this.get('translation');
-        var tr = webpage.get('translations').find( function( tr ){
-          return tr.get('locale') === lang;
-        });
+        var curTr = this.get('curContent.curTranslation');
+        var tr = this.get('curContent.translations').findBy('locale', lang);
+        console.log('found tr', tr);
         if( !tr ){
           tr = this.store.createRecord('translation', { locale: lang,
                                                         title: curTr.get('title'),
                                                         subtitle: curTr.get('subtitle'),
                                                         content: curTr.get('content') });
-          webpage.get('translations').pushObject( tr );
+          this.get('curContent.translations').pushObject( tr );
         }
-        this.set('translation', tr );
-        $('#editor').ghostDown('setValue', this.get('translation.content') );
+        App.set('_curLang',lang);
+        Ember.View.views[ $('.md-editor.ember-view').attr('id') ].swapVal( this.get('curContent.curTranslation.content'));
       },
 
       // ---------------------------------------- EDITOR COMMANDS

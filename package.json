@@ -31,6 +31,7 @@
     "grunt-mocha": "~0.4.9",
     "grunt-contrib-yuidoc": "~0.5.0",
     "grunt-mocha-test": "~0.8.2",
+    "caminio-auth": "~0.0.7",
     "chai": "~1.8.1",
     "superagent": "~0.15.7",
     "caminio-fixtures": "~0.2.0",

@@ -22,14 +22,12 @@ module.exports = function( caminio, policies ){
   var normalizeFilename = util.normalizeFilename;
   var async             = require('async');
 
-  var docUtils          = require('../../doc_utils')(caminio);
   var carver            = require('carver');
   var snippetParser     = require('carver/plugins').snippetParser;
   var markdownCompiler  = require('carver/plugins').markdownCompiler;
   var caminioCarver     = require('caminio-carver')(caminio, undefined, 'webpages');
 
   var Webpage           = caminio.models.Webpage;
-  var Pebble            = caminio.models.Pebble;
 
 
   return {
@@ -115,27 +113,27 @@ module.exports = function( caminio, policies ){
    *              children are found
    */ 
   function getChildrenDeep( webpage, arr, done){
-    docUtils.getChildrenOfWebpage( webpage._id, function( err, children ){
-      if( !( children && children.length ) ){
-        return done( null, arr );
-      }
+    Webpage.find({ parent: webpage._id })
+      .exec( function( err, children ){
+        if( !( children && children.length ) ){
+          return done( null, arr );
+        }
 
-      arr = arr.concat( children );
+        arr = arr.concat( children );
 
-      async.each( children, findChildren, end );
+        async.each( children, findChildren, end );
 
-      function findChildren( child, nextChild ){
-        getChildrenDeep( child, arr, function( err, children ){
-          arr = children;
-          nextChild();
-        });
-      }
+        function findChildren( child, nextChild ){
+          getChildrenDeep( child, arr, function( err, children ){
+            arr = children;
+            nextChild();
+          });
+        }
 
-      function end(){
-        done( null, arr );        
-      }
-
-    });
+        function end(){
+          done( null, arr );        
+        }
+      });
   }
 
   /**
@@ -155,20 +153,8 @@ module.exports = function( caminio, policies ){
     }
   }
 
-  function removeFiles( req, res, next ){    
-    if( req.removeFiles ){
-      docUtils.getAncestorsOfWebpage( req.webpage, [], function( err, ancestors ){
-        var path = join( res.locals.currentDomain.getContentPath(), 'public');
-        ancestors.reverse().forEach( function( ancestor ){
-            path =  join( path, normalizeFilename( ancestor.filename ) );
-        }); 
-        path = join( path, normalizeFilename( req.webpage.filename ) );
-        deleteFolder( path+'/' );
-        deleteFile( path+'.htm' );
-        return next();
-      });
-    } else
-      next();
+  function removeFiles( req, res, next ){
+    next();
   } 
 
   function deleteFolder( path ) {

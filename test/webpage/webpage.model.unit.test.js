@@ -8,13 +8,17 @@
  *
  */
 
+describe( 'Webpage', function(){
+  /* jshint -W024 */
+  /* jshint expr:true */
+  'use strict';
+
 var helper = require('../helper'),
     fixtures = helper.fixtures,
     expect = helper.chai.expect,
     caminio,
     Webpage;
 
-describe( 'Webpage', function(){
 
   before( function(done){
     helper.initApp( this, function(){ 
@@ -73,6 +77,29 @@ describe( 'Webpage', function(){
 
       it('.layout', function(){
         expect( this.webpage.layout ).to.eq( 'default' );
+      });
+
+      describe('.pebbles', function(){
+
+        it('is an array', function( done ){
+          this.webpage.pebbles.push({ name: 'newPebble' });
+          var page = this.webpage;
+          this.webpage.save( function( err ){
+            console.log('THERE', page, err );
+            expect( err ).to.be.null;
+            done();
+          });
+        });
+
+        it('gets an error for already used names', function( done ){
+          this.webpage.pebbles.push({ name: 'newPebble' });
+          var page = this.webpage;
+          this.webpage.save( function( err ){
+            console.log('THERE', page, err );
+            expect( err ).to.be.null;
+            done();
+          });
+        });
       });
 
     });

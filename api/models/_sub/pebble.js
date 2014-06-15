@@ -12,9 +12,13 @@ module.exports = function Pebble( caminio, mongoose ){
   var CaminioCarver       = require('caminio-carver')( caminio, mongoose );
   var Mixed = mongoose.Schema.Types.Mixed;
 
+
   var schema = new mongoose.Schema({
 
-    name: { type: String, public: true },
+    name: { type: String, 
+            public: true,
+            validate: [PebbleNameValidator,'ERROR'] 
+    },
     description: { type: String, public: true },
     type: { type: String, public: true },
     preferences: { type: Mixed, default: {} },
@@ -26,6 +30,25 @@ module.exports = function Pebble( caminio, mongoose ){
   });
 
   schema.plugin( CaminioCarver.langSchemaExtension );
+
+  function PebbleNameValidator( curName ){
+    var parent = this.parent();
+    var id = this._id;
+    parent.pebbles.forEach( function( pebble ){
+      if( id !== pebble._id )
+        if( replaceSpace(curName).match( replaceSpace(pebble.name) ) !== null ){
+          console.log('returns false');
+          return false;
+        }
+    });
+    console.log('return true');
+    return true;
+  }
+
+  function replaceSpace( string ){
+    return string.replace(/\s/g, '');
+  }
+
 
   return schema;
 

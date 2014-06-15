@@ -15,10 +15,7 @@ module.exports = function Pebble( caminio, mongoose ){
 
   var schema = new mongoose.Schema({
 
-    name: { type: String, 
-            public: true,
-            validate: [PebbleNameValidator,'ERROR'] 
-    },
+    name: { type: String },
     description: { type: String, public: true },
     type: { type: String, public: true },
     preferences: { type: Mixed, default: {} },
@@ -30,6 +27,8 @@ module.exports = function Pebble( caminio, mongoose ){
   });
 
   schema.plugin( CaminioCarver.langSchemaExtension );
+  schema.publicAttributes = ['name'];
+
 
   function PebbleNameValidator( curName ){
     var parent = this.parent();

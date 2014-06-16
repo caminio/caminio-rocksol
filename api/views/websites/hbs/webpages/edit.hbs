@@ -121,6 +121,14 @@
                 {{action 'saveTranslation'}}>
           {{saveText}}
         </button>
+
+        <div class="parent">
+          {{#each ancestors}}
+            <span> / </span>{{filename}}
+          {{/each}}
+          <span> / </span>{{filename}}
+        </div>
+
       </div>
 
     </div>

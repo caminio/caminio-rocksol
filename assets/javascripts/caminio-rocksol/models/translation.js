@@ -2,6 +2,8 @@
 
   'use strict';
 
+  /* global domainSettings */
+
   window.App.Translation = DS.Model.extend({
     locale: DS.attr(),
     title: DS.attr(),
@@ -11,6 +13,8 @@
     metaDescription: DS.attr(),
     metaKeywords: DS.attr(),
     aside: DS.attr(),
+    aside2: DS.attr(),
+    aside3: DS.attr(),
     availableLangs: function(){
       return domainSettings.availableLangs;
     }.property('locale'),

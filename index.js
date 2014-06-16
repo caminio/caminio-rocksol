@@ -5,8 +5,8 @@ new Gear({
   applications: [
     { name: 'rocksol', icon: 'fa-globe',
       i18n:{
-        en: 'Website',
-        de: 'Netzauftritt'
+        en: 'WWW',
+        de: 'WWW'
       },
       requireEditor: true
     }

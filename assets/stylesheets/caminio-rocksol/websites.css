@@ -438,3 +438,7 @@ body .CodeMirror{
   display: block;
 }
 
+.parent{
+  float: right;
+  margin: 7px 20px;
+}

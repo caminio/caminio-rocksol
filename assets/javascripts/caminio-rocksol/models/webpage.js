@@ -25,9 +25,6 @@
         return Em.I18n.t('translation.no');
       return locales.join(',');
     }.property('translations'),
-    usedPebbles: function(){
-      return Em.I18n.t('pebbles.amount', { count: this.get('pebbles').content.length });
-    }.property('pebbles'),
     isPublished: function(){
       return this.get('status') === 'published';
     }.property('status'),
@@ -41,12 +38,25 @@
       return this.get('translations').findBy('locale', App._curLang);
     }.property('translations.@each', 'App._curLang'),
     previewUrl: function(){
+      if( this.get('isNew') )
+        return '';
       var url = 'http://'+currentDomain.fqdn+'/drafts/'+this.get('id');
       if( this.get('translations').content.length > 1 )
         url += '.htm' + (App.get('_curLang') ? '.'+App.get('_curLang') : '');
       return url;
-    }.property('translations.@each', 'id')
+    }.property('translations.@each', 'id'),
+    ancestors: function(){
+      return getAncestors(Em.A(), this.get('parent'));
+    }.property('parent')
 
   });
+
+  function getAncestors( ancs, webpage ){
+    if( webpage && webpage.get('id') ){
+      ancs.pushObject( webpage );
+      return getAncestors( ancs, webpage.get('parent') );
+    }
+    return ancs;
+  }
 
 }).call();

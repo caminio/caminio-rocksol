@@ -38,7 +38,7 @@
       this._super( controller, model );
       controller.set('lastStatus', model.get('status'));
       controller.set('curSelectedItem', model);
-      controller.set('curContent',model)
+      controller.set('curContent',model);
     }
   });
 
@@ -49,9 +49,11 @@
     model: function(){
       var tr = this.store.createRecord('translation', { locale: App.get('_curLang'), content: '', title: '' });
       var webpage = this.store.createRecord('webpage', { updatedAt: new Date() });
+      if( $('.tree .selected:first')  )
+        webpage.set( 'parent', this.store.getById('webpage', $('.tree .selected:first').attr('data-id') ) );
       webpage.get('translations').pushObject(tr);
-      webpage.get('createdBy', App.emberUser);
-      webpage.get('updatedBy', App.emberUser);
+      webpage.set('createdBy', App.emberUser);
+      webpage.set('updatedBy', App.emberUser);
       return webpage;
     },
     setupController: function( controller, model ){

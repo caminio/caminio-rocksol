@@ -21,6 +21,7 @@ module.exports = function( caminio, policies ){
   var util              = require('caminio/util');
   var normalizeFilename = util.normalizeFilename;
   var async             = require('async');
+  var _                 = require('lodash');
 
   var carver            = require('carver');
   var snippetParser     = require('carver/plugins').snippetParser;
@@ -54,6 +55,7 @@ module.exports = function( caminio, policies ){
     carver()
       .set('cwd', join(res.locals.currentDomain.getContentPath(),'webpages'))
       .set('snippetKeyword', 'pebble')
+      .set('langExtension', _.size(res.locals.domainSettings.availableLangs) > 0 )
       .includeAll()
       .registerEngine('jade', require('jade'))
       .registerHook('before.render',caminioCarver.setupLocals(res))
@@ -147,7 +149,7 @@ module.exports = function( caminio, policies ){
 
     function removeChild( child, nextChild ){
       child.remove( function( err ){
-        res.send(500, { error: 'server error', details: err });
+        if( err ){ res.send(500, { error: 'server error', details: err }); }
         nextChild();
       });   
     }

@@ -53,8 +53,9 @@ module.exports = function( caminio, policies, middleware ){
         fs
           .readdirSync( domainTmplPath )
           .forEach( function( file ){
-            if( file.split('.')[1] === 'jade')
-              tmpls.push( file.split('.')[0] );
+            var filename = file.replace( extname(file), '');
+            if( file !== 'config' && extname(file) !== '.js' && tmpls.indexOf(filename) < 0 )
+              tmpls.push( filename );
           });
 
         res.json(tmpls);

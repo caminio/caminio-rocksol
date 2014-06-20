@@ -147,7 +147,7 @@ module.exports = function( caminio, policies, middleware ){
 
   function ensureDefaultTemplates( req, res, next ){
 
-    var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'layouts' );
+    var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'webpages' );
 
     if( !fs.existsSync( domainTmplPath ) )
       mkdirp.sync( domainTmplPath );

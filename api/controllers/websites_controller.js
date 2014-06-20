@@ -149,22 +149,21 @@ module.exports = function( caminio, policies, middleware ){
 
     var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'webpages' );
 
-    if( !fs.existsSync( domainTmplPath ) )
-      mkdirp.sync( domainTmplPath );
+    if( fs.existsSync( domainTmplPath ) )
+      return next();
 
-    if( !fs.existsSync( join(domainTmplPath, 'index', 'index.jade') ) ){
-      mkdirp.sync( join(domainTmplPath, 'index') );
-      fs.writeFileSync( join(domainTmplPath, 'index', 'index.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
-    }
+    mkdirp.sync( domainTmplPath );
+
+    if( !fs.existsSync( join(domainTmplPath, 'index', 'index.jade') ) )
+      fs.writeFileSync( join(domainTmplPath, 'index.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
+
     if( !fs.existsSync( join(domainTmplPath, '..', 'config/site.js') ) ){
       mkdirp.sync( join(domainTmplPath,'..','config') );
       fs.writeFileSync( join(domainTmplPath, '..', 'config/site.js'), fs.readFileSync(__dirname+'/../../lib/templates/site.js', 'utf8') );
     }
     
-    if( !fs.existsSync( join(domainTmplPath, 'default', 'default.jade') ) ){
-      mkdirp.sync( join(domainTmplPath, 'default') );
-      fs.writeFileSync( join(domainTmplPath, 'default', 'default.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
-    }
+    if( !fs.existsSync( join(domainTmplPath, 'default.jade') ) )
+      fs.writeFileSync( join(domainTmplPath, 'default.jade'), fs.readFileSync(__dirname+'/../../lib/templates/index.jade', 'utf8') );
 
     next();
 

@@ -34,7 +34,7 @@ module.exports = function( caminio, policies, middleware ){
 
     'index': [
       ensureDefaultTemplates,
-      insertSiteComponents,
+      // insertSiteComponents,
       function( req, res ){
         res.caminio.render();
       }],
@@ -108,42 +108,42 @@ module.exports = function( caminio, policies, middleware ){
   }
 
 
-  /**
-   * inserts site components
-   * for this very domain located in
-   * content/domain_fqdn/layouts/<layout_name>/<layout_name>_component.hbs
-   */
-  function insertSiteComponents( req, res, next ){
-
-    var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'layouts' );
-
-    res.locals.siteComponents = [];
-
-    fs
-      .readdirSync( domainTmplPath )
-      .forEach( function( dirname ){
-        
-        if( !fs.existsSync( join( domainTmplPath, dirname, 'javascripts' ) ) )
-          return;
-
-        var componentFilename = join( domainTmplPath, dirname, 'javascripts', 'component', dirname+'_component.hbs' );
-        var comp = { name: dirname, 
-          content: fs.readFileSync( componentFilename, 'utf8' ),
-          javascripts: []
-           };
-        
-        
-        readCompDirectory( domainTmplPath, comp, dirname, 'models' );
-        readCompDirectory( domainTmplPath, comp, dirname, 'views' );
-        readCompDirectory( domainTmplPath, comp, dirname, 'component' );
-
-        if( fs.existsSync( componentFilename ) )
-          res.locals.siteComponents.push( comp );
-      });
-
-    next();
-
-  }
+  // /**
+  //  * inserts site components
+  //  * for this very domain located in
+  //  * content/domain_fqdn/layouts/<layout_name>/<layout_name>_component.hbs
+  //  */
+  // function insertSiteComponents( req, res, next ){
+  //
+  //   var domainTmplPath = join( res.locals.currentDomain.getContentPath(), 'layouts' );
+  //
+  //   res.locals.siteComponents = [];
+  //
+  //   fs
+  //     .readdirSync( domainTmplPath )
+  //     .forEach( function( dirname ){
+  //       
+  //       if( !fs.existsSync( join( domainTmplPath, dirname, 'javascripts' ) ) )
+  //         return;
+  //
+  //       var componentFilename = join( domainTmplPath, dirname, 'javascripts', 'component', dirname+'_component.hbs' );
+  //       var comp = { name: dirname, 
+  //         content: fs.readFileSync( componentFilename, 'utf8' ),
+  //         javascripts: []
+  //          };
+  //       
+  //       
+  //       readCompDirectory( domainTmplPath, comp, dirname, 'models' );
+  //       readCompDirectory( domainTmplPath, comp, dirname, 'views' );
+  //       readCompDirectory( domainTmplPath, comp, dirname, 'component' );
+  //
+  //       if( fs.existsSync( componentFilename ) )
+  //         res.locals.siteComponents.push( comp );
+  //     });
+  //
+  //   next();
+  //
+  // }
 
   function ensureDefaultTemplates( req, res, next ){
 

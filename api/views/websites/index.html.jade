@@ -16,11 +16,11 @@ append head
 
 append foot
 
-  script(type='text/javascript').
-    var siteComponents = [];
-  each siteComp in siteComponents
-    script(type='text/javascript').
-      siteComponents.push( { name: '!{siteComp.name}' } );
+  // script(type='text/javascript').
+  //   var siteComponents = [];
+  // each siteComp in siteComponents
+  //   script(type='text/javascript').
+  //     siteComponents.push( { name: '!{siteComp.name}' } );
 
   if env === 'production'
     script(type='text/javascript', src='/javascripts/caminio-rocksol.min.js')

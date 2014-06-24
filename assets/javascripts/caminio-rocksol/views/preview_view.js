@@ -39,8 +39,8 @@
       .done( function( html ){
 
         html = html
-                .replace(/\/assets\//g, 'http://'+view.get('controller.domain.fqdn')+'/assets/')
-                .replace(/\/files\//g, 'http://'+view.get('controller.domain.fqdn')+'/files/');
+                .replace(/\/assets\//g, 'https://'+view.get('controller.domain.fqdn')+'/assets/')
+                .replace(/\/files\//g, 'https://'+view.get('controller.domain.fqdn')+'/files/');
 
         var doc = $preview.get(0).contentWindow.document;
         doc.open();

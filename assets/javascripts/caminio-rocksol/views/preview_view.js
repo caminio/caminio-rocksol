@@ -38,9 +38,11 @@
     $.get( webpage.get('previewUrl') )
       .done( function( html ){
 
+        var protocol = location.href.match(/http[s]*\:\/\//);
+
         html = html
-                .replace(/\/assets\//g, 'https://'+view.get('controller.domain.fqdn')+'/assets/')
-                .replace(/\/files\//g, 'https://'+view.get('controller.domain.fqdn')+'/files/');
+                .replace(/\/assets\//g, protocol+view.get('controller.domain.fqdn')+'/assets/')
+                .replace(/\/files\//g, protocol+view.get('controller.domain.fqdn')+'/files/');
 
         var doc = $preview.get(0).contentWindow.document;
         doc.open();

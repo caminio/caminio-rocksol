@@ -40,7 +40,8 @@
     previewUrl: function(){
       if( this.get('isNew') )
         return '';
-      var url = 'https://'+currentDomain.fqdn+'/drafts/'+this.get('id');
+      var protocol = location.href.match(/http[s]*\:\/\//);
+      var url = protocol+currentDomain.fqdn+'/drafts/'+this.get('id');
       if( this.get('translations').content.length > 1 )
         url += '.htm' + (App.get('_curLang') ? '.'+App.get('_curLang') : '');
       return url;

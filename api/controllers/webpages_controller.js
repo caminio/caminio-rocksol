@@ -58,7 +58,7 @@ module.exports = function( caminio, policies ){
       .set('langExtension', _.size(res.locals.domainSettings.availableLangs) > 0 )
       .includeAll()
       .registerEngine('jade', require('jade'))
-      .registerHook('before.render',caminioCarver.setupLocals(res))
+      .registerHook('before.render',caminioCarver.setupLocals(req,res))
       .registerHook('after.write', caminioCarver.docDependencies)
       .registerHook('before.render', markdownCompiler)
       .registerHook('after.render', snippetParser )

@@ -56,6 +56,7 @@ module.exports = function( caminio, policies ){
       .set('cwd', join(res.locals.currentDomain.getContentPath(),'webpages'))
       .set('snippetKeyword', 'pebble')
       .set('langExtension', _.size(res.locals.domainSettings.availableLangs) > 0 )
+      .set('publishingStatusKey', 'status')
       .includeAll()
       .registerEngine('jade', require('jade'))
       .registerHook('before.render',caminioCarver.setupLocals(req,res))

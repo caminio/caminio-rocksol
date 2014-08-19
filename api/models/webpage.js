@@ -9,13 +9,10 @@ module.exports = function Webpage( caminio, mongoose ){
   'use strict';
 
   var _                   = require('lodash');
-  var join                = require('path').join;
-  var normalizeFilename   = require('caminio/util').normalizeFilename;
 
   var ObjectId            = mongoose.Schema.Types.ObjectId;
   var CaminioCarver       = require('caminio-carver')( caminio, mongoose );
   var PebbleSchema        = require('./_sub/pebble')( caminio, mongoose );
-  var Pebble              = function(){ return PebbleSchema; };
 
   var schema = new mongoose.Schema({
     
